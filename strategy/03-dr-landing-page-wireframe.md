@@ -24,6 +24,9 @@ For Meta / TikTok / influencer / affiliate / email traffic. Maps to `shopify-the
 │ PRESS STRIP (sections/press-mentions.liquid) — ships empty;    │
 │  only add a real outlet once an actual feature/mention exists   │
 ├───────────────────────────────────────────────────────────┤
+│ BENEFITS LIST (sections/benefits-list.liquid) — Black,          │
+│  gradient-bordered panel, icon+title+subtitle rows                │
+├───────────────────────────────────────────────────────────┤
 │ INGREDIENT CARDS (sections/ingredient-education.liquid)         │
 │  Texture-photo cards (CSS gradient placeholders standing in for  │
 │  real macro photography) with dosage pill showing CONFIRMED       │
@@ -35,6 +38,10 @@ For Meta / TikTok / influencer / affiliate / email traffic. Maps to `shopify-the
 │  unsubstantiated] — highest legal-risk element in this package,     │
 │  see 01-brand-application-guide.md §7                                │
 ├───────────────────────────────────────────────────────────┤
+│ HOW IT WORKS / TIMELINE (sections/how-it-works.liquid)             │
+│  Week 1 / Week 4 / Week 12 milestone timeline — routine/habit       │
+│  copy only, subjective-effect bullets marked [PLACEHOLDER]           │
+├───────────────────────────────────────────────────────────┤
 │ PRODUCT PROOF STACK (sections/dr-proof-stack.liquid)          │
 │  Formula transparency / manufacturing standard / sourcing —   │
 │  all placeholder-labeled pending real documentation            │
@@ -43,6 +50,12 @@ For Meta / TikTok / influencer / affiliate / email traffic. Maps to `shopify-the
 │ CERTIFICATIONS ROW (sections/certifications.liquid)             │
 │  Made in the EU · GMP Standard (cert. on request) · Fast          │
 │  Shipping · [PLACEHOLDER — Third-Party Tested]                      │
+├───────────────────────────────────────────────────────────┤
+│ EXPERTS TRUST (sections/experts-trust.liquid) — ships EMPTY;      │
+│  only add once a real, documented endorsement exists                │
+├───────────────────────────────────────────────────────────┤
+│ GUARANTEE (sections/guarantee.liquid) — circular badge banner,     │
+│  satisfaction/refund guarantee only, never an outcome guarantee     │
 ├───────────────────────────────────────────────────────────┤
 │ OFFER STACK / PRICING (sections/dr-offer-stack.liquid)        │
 │  Same purchase-module.liquid snippet as homepage — bundle      │
@@ -53,6 +66,9 @@ For Meta / TikTok / influencer / affiliate / email traffic. Maps to `shopify-the
 │  "What if it doesn't work for me?" (guarantee) → "How does      │
 │  the subscription work?" — each answered directly, in order,    │
 │  ending on a CTA                                                 │
+├───────────────────────────────────────────────────────────┤
+│ FAQ (sections/faq.liquid) — rounded accordion cards, chevron     │
+│  rotates open (matches the reference's FAQ styling)                │
 ├───────────────────────────────────────────────────────────┤
 │ FINAL CTA (sections/dr-final-cta.liquid) — full-width red      │
 │  block, single button, no distractions                          │

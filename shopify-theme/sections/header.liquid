@@ -3,6 +3,12 @@
   (per the brief: those two surfaces should drop full nav to remove
   distractions after the buy decision). Falls back to the manual
   section setting on any other template.
+
+  Includes a real mobile nav drawer (hamburger → slide-in panel with
+  collapsible groups for two-level menus) — the theme previously had no
+  mobile navigation at all below 860px, just a hidden nav with no
+  replacement. Pattern inspired by the competitor reference at the user's
+  request; see strategy/01-brand-application-guide.md §7.
 {%- endcomment -%}
 {%- liquid
   assign is_focused_template = false
@@ -16,6 +22,14 @@
 -%}
 <header class="bf-header {% if minimal %}bf-header--minimal{% endif %}">
   <div class="bf-header__inner">
+    {%- unless minimal -%}
+      <button type="button" class="bf-hamburger" data-bf-hamburger aria-expanded="false" aria-controls="bf-nav-drawer" aria-label="Open menu">
+        <span class="bf-hamburger__bar"></span>
+        <span class="bf-hamburger__bar"></span>
+        <span class="bf-hamburger__bar"></span>
+      </button>
+    {%- endunless -%}
+
     <a href="/" aria-label="BullRush home">
       {% render 'logo-wordmark', background: 'dark', layout: 'horizontal' %}
     </a>
@@ -38,6 +52,30 @@
   </div>
 </header>
 
+{%- unless minimal -%}
+  <div class="bf-nav-drawer__backdrop" data-bf-nav-drawer-backdrop></div>
+  <nav id="bf-nav-drawer" class="bf-nav-drawer" data-bf-nav-drawer aria-label="Mobile">
+    <button type="button" class="bf-nav-drawer__close" data-bf-nav-drawer-close aria-label="Close menu">✕</button>
+    {%- for link in section.settings.main_menu.links -%}
+      {%- if link.links.size > 0 -%}
+        <div class="bf-nav-drawer__group">
+          <button type="button" class="bf-nav-drawer__group-trigger" data-bf-drawer-group-trigger aria-expanded="false">
+            {{ link.title }}
+            <span class="bf-nav-drawer__chevron">▾</span>
+          </button>
+          <ul class="bf-nav-drawer__sublist" data-open="false">
+            {%- for sublink in link.links -%}
+              <li><a href="{{ sublink.url }}">{{ sublink.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- else -%}
+        <a href="{{ link.url }}" class="bf-nav-drawer__link">{{ link.title }}</a>
+      {%- endif -%}
+    {%- endfor -%}
+  </nav>
+{%- endunless -%}
+
 {% schema %}
 {
   "name": "Header",
@@ -46,6 +84,7 @@
       "type": "link_list",
       "id": "main_menu",
       "label": "Main menu",
+      "info": "Add sub-links to a menu item in Navigation settings to turn it into a collapsible group in the mobile drawer.",
       "default": "main-menu"
     },
     {

@@ -422,3 +422,124 @@ p { line-height: 1.6; margin: 0 0 16px; color: inherit; }
 .bf-chart-legend__swatch--placeholder { background: var(--bf-red); border-top: 2px dashed var(--bf-red); height: 0; }
 .bf-chart svg { width: 100%; height: auto; display: block; }
 .bf-chart-caption { text-align: center; font-size: 0.72rem; color: var(--bf-muted-grey); margin-top: 10px; }
+
+/* =========================================================================
+   Round 2: interactivity + brightness pass — mobile nav drawer, benefits
+   list, milestone timeline, expert-trust cards, guarantee badge banner,
+   plus hover/motion polish across existing components. See
+   strategy/01-brand-application-guide.md §7 addendum.
+   ========================================================================= */
+
+/* ---------- Hamburger + mobile nav drawer (fixes a real gap: there was no mobile menu at all) ---------- */
+.bf-hamburger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 26px; height: 22px; background: none; border: none; cursor: pointer; padding: 0;
+}
+.bf-hamburger__bar { display: block; width: 100%; height: 2px; background: var(--bf-white); transition: transform .25s ease, opacity .2s ease; }
+.bf-hamburger[aria-expanded="true"] .bf-hamburger__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.bf-hamburger[aria-expanded="true"] .bf-hamburger__bar:nth-child(2) { opacity: 0; }
+.bf-hamburger[aria-expanded="true"] .bf-hamburger__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 860px){ .bf-hamburger { display: flex; } }
+
+.bf-nav-drawer__backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 700;
+  opacity: 0; pointer-events: none; transition: opacity .25s ease;
+}
+.bf-nav-drawer__backdrop.is-open { opacity: 1; pointer-events: auto; }
+.bf-nav-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0; width: min(320px, 84vw); z-index: 701;
+  background: var(--bf-black); color: var(--bf-white);
+  transform: translateX(-100%); transition: transform .3s ease;
+  overflow-y: auto; padding: 20px;
+}
+.bf-nav-drawer.is-open { transform: translateX(0); }
+.bf-nav-drawer__close { background: none; border: none; color: var(--bf-white); font-size: 1.4rem; cursor: pointer; margin-bottom: 12px; }
+.bf-nav-drawer__group { border-bottom: 1px solid var(--bf-dark-surface); }
+.bf-nav-drawer__group-trigger {
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  background: none; border: none; color: var(--bf-white); cursor: pointer;
+  font-family: var(--bf-font-display); text-transform: uppercase; letter-spacing: 0.03em;
+  font-size: 1rem; padding: 16px 0;
+}
+.bf-nav-drawer__chevron { transition: transform .2s ease; color: var(--bf-red); }
+.bf-nav-drawer__group-trigger[aria-expanded="true"] .bf-nav-drawer__chevron { transform: rotate(180deg); }
+.bf-nav-drawer__sublist { list-style: none; margin: 0; padding: 0 0 14px; display: none; }
+.bf-nav-drawer__sublist[data-open="true"] { display: block; }
+.bf-nav-drawer__sublist li { margin-bottom: 12px; }
+.bf-nav-drawer__sublist a { text-decoration: none; color: var(--bf-muted-grey); font-size: 0.9rem; }
+.bf-nav-drawer__sublist a:hover { color: var(--bf-white); }
+.bf-nav-drawer__link { display: block; padding: 16px 0; text-decoration: none; color: var(--bf-white); font-family: var(--bf-font-display); text-transform: uppercase; font-size: 1rem; border-bottom: 1px solid var(--bf-dark-surface); }
+
+/* ---------- Benefits icon list ---------- */
+.bf-benefits-panel {
+  border: 1px solid var(--bf-dark-surface); border-radius: 14px; padding: clamp(20px, 4vw, 36px);
+  background: linear-gradient(180deg, var(--bf-black) 0%, var(--bf-graphite) 60%, #241010 100%);
+}
+.bf-benefit-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--bf-dark-surface); }
+.bf-benefit-item:last-child { border-bottom: none; }
+.bf-benefit-item__icon {
+  width: 30px; height: 30px; flex-shrink: 0; color: var(--bf-red);
+  display: flex; align-items: center; justify-content: center;
+}
+.bf-benefit-item__icon svg { width: 100%; height: 100%; }
+.bf-benefit-item__title { font-family: var(--bf-font-display); font-size: 1rem; text-transform: uppercase; margin: 0 0 4px; letter-spacing: 0.02em; }
+.bf-benefit-item__sub { font-size: 0.85rem; color: var(--bf-red); margin: 0; }
+
+/* ---------- Milestone timeline ---------- */
+.bf-timeline { position: relative; padding-left: 28px; }
+.bf-timeline::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 2px; background: var(--bf-dark-surface); }
+.bf-milestone { position: relative; margin-bottom: 32px; }
+.bf-milestone:last-child { margin-bottom: 0; }
+.bf-milestone::before {
+  content: ""; position: absolute; left: -28px; top: 6px; width: 12px; height: 12px;
+  border-radius: 50%; background: var(--bf-red); box-shadow: 0 0 0 4px rgba(217,9,18,0.18);
+}
+.bf-milestone__head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; flex-wrap: wrap; }
+.bf-milestone__pill {
+  border: 1.5px solid var(--bf-red); border-radius: 6px; padding: 6px 14px;
+  font-family: var(--bf-font-display); font-size: 0.85rem; letter-spacing: 0.03em;
+}
+.bf-milestone__name { font-family: var(--bf-font-display); color: var(--bf-red); font-size: 1.1rem; text-transform: uppercase; }
+.bf-milestone ul { margin: 0; padding-left: 18px; }
+.bf-milestone li { margin-bottom: 6px; color: var(--bf-muted-grey); }
+
+/* ---------- Expert / authority trust cards ---------- */
+.bf-expert-card { text-align: left; }
+.bf-expert-card__photo {
+  aspect-ratio: 4/5; border-radius: 10px; overflow: hidden; background: var(--bf-graphite);
+  margin-bottom: 12px; display: flex; align-items: center; justify-content: center;
+}
+.bf-expert-card__name { font-family: var(--bf-font-display); font-size: 1rem; text-transform: uppercase; margin-bottom: 2px; }
+.bf-expert-card__title { font-size: 0.8rem; color: var(--bf-muted-grey); }
+
+/* ---------- Guarantee badge banner ---------- */
+.bf-guarantee-banner {
+  display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap;
+  padding: 40px; border-radius: 16px;
+  background: radial-gradient(circle at 30% 30%, var(--bf-deep-red), var(--bf-black) 75%);
+}
+.bf-guarantee-banner__badge { width: 120px; height: 120px; flex-shrink: 0; color: var(--bf-white); }
+.bf-guarantee-banner__badge svg { width: 100%; height: 100%; }
+.bf-guarantee-banner__content { max-width: 480px; }
+
+/* ---------- Hover / motion polish (the "interactive" pass) ---------- */
+.bf-card, .bf-ingredient-card, .bf-review-card, .bf-expert-card__photo {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.bf-card:hover, .bf-ingredient-card:hover, .bf-review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+}
+.bf-tier { transition: transform .15s ease, border-color .15s ease, background-color .15s ease; }
+.bf-tier:hover { transform: translateY(-2px); border-color: var(--bf-muted-grey); }
+.bf-tier[aria-pressed="true"]:hover { border-color: var(--bf-red); }
+.bf-btn { transition: background-color .15s ease, color .15s ease, transform .15s ease, box-shadow .15s ease; }
+.bf-btn--primary:hover { box-shadow: 0 8px 22px rgba(240,24,35,0.35); transform: translateY(-2px); }
+.bf-accordion__trigger { transition: color .15s ease; }
+.bf-accordion__icon { display: inline-block; transition: transform .2s ease; }
+.bf-accordion__trigger[aria-expanded="true"] .bf-accordion__icon { transform: rotate(45deg); }
+.bf-header__nav a, .bf-footer a { transition: color .15s ease; }
+
+/* Scroll-reveal (progressive enhancement — content is visible by default; JS only upgrades it) */
+.bf-reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+.bf-reveal.is-visible { opacity: 1; transform: translateY(0); }

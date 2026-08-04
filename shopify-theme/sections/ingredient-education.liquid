@@ -14,7 +14,7 @@
     {%- if section.settings.subheading != blank -%}
       <p class="bf-accent" style="font-family:var(--bf-font-display);text-transform:uppercase;letter-spacing:0.04em;font-size:0.95rem;">{{ section.settings.subheading }}</p>
     {%- endif -%}
-    <div class="bf-grid-4 bf-mt-32">
+    <div class="bf-grid-4 bf-mt-32 bf-reveal">
       {%- for block in section.blocks -%}
         <div class="bf-ingredient-card">
           <div class="bf-ingredient-card__texture bf-texture-{{ forloop.index | modulo: 6 | plus: 1 }}"></div>

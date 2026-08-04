@@ -1,0 +1,54 @@
+{% comment %}
+  "Trusted by experts" cards — layout pattern adapted from the competitor
+  reference at the user's request. IMPORTANT: using a real person's name,
+  photo, or credentials here without their actual, current, documented
+  endorsement is a false-endorsement claim (and in some jurisdictions a
+  regulatory violation for supplement marketing). Ships with zero blocks —
+  do not populate with a placeholder "Dr. Smith" or similar; only add a
+  real expert once a genuine, documented relationship exists. See
+  strategy/14-facts-placeholders-legal.md.
+{% endcomment %}
+{%- if section.blocks.size > 0 -%}
+<section class="bf-section bf-bg-black bf-text-center">
+  <div class="bf-container">
+    <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2 class="bf-max-640" style="margin-left:auto;margin-right:auto;">{{ section.settings.heading }}</h2>
+    <div class="bf-grid-3 bf-mt-32 bf-reveal" style="text-align:left;">
+      {%- for block in section.blocks -%}
+        <div class="bf-expert-card">
+          <div class="bf-expert-card__photo">
+            {%- if block.settings.photo != blank -%}
+              <img src="{{ block.settings.photo | image_url: width: 400 }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="bf-expert-card__name">{{ block.settings.name }}</div>
+          <div class="bf-expert-card__title">{{ block.settings.title }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Experts trust",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Trust" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Trusted By Real Experts" }
+  ],
+  "blocks": [
+    {
+      "type": "expert",
+      "name": "Expert (only add with a real, documented endorsement)",
+      "settings": [
+        { "type": "image_picker", "id": "photo", "label": "Photo" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "title", "label": "Title / credentials" },
+        { "type": "url", "id": "proof_url", "label": "Link to documented proof of endorsement" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Experts trust", "blocks": [] }]
+}
+{% endschema %}

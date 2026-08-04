@@ -152,4 +152,55 @@
 
     if (mainPurchase) updateStickyCta(mainPurchase);
   }
+
+  // ---------- Mobile nav drawer ----------
+  var hamburger = document.querySelector('[data-bf-hamburger]');
+  var drawer = document.querySelector('[data-bf-nav-drawer]');
+  var backdrop = document.querySelector('[data-bf-nav-drawer-backdrop]');
+  function setDrawer(open) {
+    if (!drawer) return;
+    drawer.classList.toggle('is-open', open);
+    if (backdrop) backdrop.classList.toggle('is-open', open);
+    if (hamburger) hamburger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  if (hamburger) {
+    hamburger.addEventListener('click', function () {
+      setDrawer(hamburger.getAttribute('aria-expanded') !== 'true');
+    });
+  }
+  if (backdrop) backdrop.addEventListener('click', function () { setDrawer(false); });
+  document.addEventListener('click', function (e) {
+    var closeBtn = e.target.closest('[data-bf-nav-drawer-close]');
+    if (closeBtn) setDrawer(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setDrawer(false);
+  });
+
+  // ---------- Nav drawer collapsible groups ----------
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest('[data-bf-drawer-group-trigger]');
+    if (!trigger) return;
+    var sublist = trigger.nextElementSibling;
+    var isOpen = trigger.getAttribute('aria-expanded') === 'true';
+    trigger.setAttribute('aria-expanded', String(!isOpen));
+    if (sublist) sublist.setAttribute('data-open', String(!isOpen));
+  });
+
+  // ---------- Scroll-reveal (progressive enhancement only) ----------
+  if ('IntersectionObserver' in window) {
+    var revealEls = document.querySelectorAll('.bf-reveal');
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function (el) { observer.observe(el); });
+  } else {
+    document.querySelectorAll('.bf-reveal').forEach(function (el) { el.classList.add('is-visible'); });
+  }
 })();

@@ -10,6 +10,9 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 ├───────────────────────────────────────────────────────────┤
 │ HEADER (sections/header.liquid)                            │
 │ Logo (horizontal) · About · Ingredients · Reviews · Cart   │
+│ Mobile (<860px): hamburger → slide-in nav drawer with        │
+│ collapsible two-level groups (real functionality, not just     │
+│ a hidden nav — see 01-brand-application-guide.md §8)            │
 ├───────────────────────────────────────────────────────────┤
 │ HERO (sections/hero-brand.liquid) — Bull Black bg, centered  │
 │  Tagline eyebrow: FUEL YOUR POWER                            │
@@ -31,6 +34,11 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 │  (Made in a GMP-audited facility* / Third-party tested* /   │
 │   Transparent formula) *pending verified facility docs      │
 ├───────────────────────────────────────────────────────────┤
+│ BENEFITS LIST (sections/benefits-list.liquid) — Black,        │
+│  gradient-bordered panel, icon+title+subtitle rows (Energy /  │
+│  Vitality / Focus / Drive / Recovery*) *recovery claim pending │
+│  substantiation                                                │
+├───────────────────────────────────────────────────────────┤
 │ PRODUCT INTRO (sections/product-intro.liquid) — Off-white   │
 │  "Meet BullRush Male Vitality Gummies"                       │
 │  3-up: What it is / Who it's for / How it fits your day     │
@@ -44,9 +52,11 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 │  men (source-linked, editable citation field per stat)        │
 │  Framed as context, NOT as a BullRush outcome claim            │
 ├───────────────────────────────────────────────────────────┤
-│ HOW IT WORKS (sections/how-it-works.liquid) — White         │
-│  Step 1 Take daily → Step 2 Build consistency → Step 3 Feel  │
-│  the difference over [PLACEHOLDER timeframe pending data]    │
+│ HOW IT WORKS / TIMELINE (sections/how-it-works.liquid) — White│
+│  Milestone timeline (Week 1 Getting Started → Week 4 Building  │
+│  Consistency → Week 12 Full Routine), connecting-line visual —  │
+│  routine/habit copy only; every subjective-effect bullet marked  │
+│  [PLACEHOLDER — pending real customer survey data]                │
 ├───────────────────────────────────────────────────────────┤
 │ INGREDIENT EDUCATION (sections/ingredient-education.liquid) │
 │  Graphite bg — texture-photo card per ingredient (CSS gradient│
@@ -64,6 +74,10 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 │  Icon row: Made in the EU · GMP Standard (cert. on request) ·  │
 │  Fast Shipping · [PLACEHOLDER — Third-Party Tested]             │
 ├───────────────────────────────────────────────────────────┤
+│ EXPERTS TRUST (sections/experts-trust.liquid) — ships EMPTY;   │
+│  only add a real expert once a genuine, documented endorsement  │
+│  relationship exists — never a placeholder "Dr. Smith"           │
+├───────────────────────────────────────────────────────────┤
 │ REVIEWS / UGC (sections/reviews-ugc.liquid) — Off-white       │
 │  Verified-rating badge placeholder + review cards placeholder │
 │  + UGC video grid placeholder                                 │
@@ -76,7 +90,8 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 │  First subscription order offer, value shown, terms disclosed │
 ├───────────────────────────────────────────────────────────┤
 │ GUARANTEE (sections/guarantee.liquid) — White                │
-│  Refund/guarantee terms, shipping note                        │
+│  Circular badge banner (red/black gradient) — satisfaction/     │
+│  refund guarantee only, never an outcome-specific guarantee      │
 ├───────────────────────────────────────────────────────────┤
 │ FAQ (sections/faq.liquid) — Off-white                         │
 │  Accordion: subscription terms, ingredients, shipping, safety │
@@ -90,3 +105,5 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 ```
 
 Every section above is a real, independent Shopify section with its own schema — a merchant can reorder, hide, or duplicate any of them in the theme editor without touching code.
+
+**Interactivity/motion (added 2026-08-04):** cards, ingredient tiles, pricing tiers, and buttons lift/glow on hover; below-fold sections fade in on scroll (`.bf-reveal`, progressive enhancement — fully visible without JS); the FAQ accordion icon rotates on open. See `01-brand-application-guide.md` §8.
