@@ -7,7 +7,7 @@
         <div class="bf-card">
           <h3>{{ block.settings.name }}</h3>
           <p class="bf-muted" style="font-size:0.85rem;">{{ block.settings.role }}</p>
-          <p class="bf-badge-placeholder" style="margin-top:10px;">{{ block.settings.amount_placeholder }}</p>
+          <p class="bf-badge-amount" style="margin-top:10px;">{{ block.settings.amount_placeholder }} / serving</p>
         </div>
       {%- endfor -%}
     </div>
@@ -26,7 +26,7 @@
       "type": "textarea",
       "id": "footnote",
       "label": "Footnote",
-      "default": "Exact amounts per serving are pending the final, regulator-reviewed Supplement Facts panel — do not publish specific mg/mcg amounts until confirmed."
+      "default": "Amounts per serving are confirmed from the formula specification. Gummies-per-serving and total supply duration are pending the final Nutrition/Supplement Facts panel — do not publish a supply-duration claim until that's confirmed."
     }
   ],
   "blocks": [
@@ -36,16 +36,16 @@
       "settings": [
         { "type": "text", "id": "name", "label": "Ingredient name" },
         { "type": "textarea", "id": "role", "label": "Role / why it's included" },
-        { "type": "text", "id": "amount_placeholder", "label": "Amount (placeholder until confirmed)", "default": "[PLACEHOLDER amount]" }
+        { "type": "text", "id": "amount_placeholder", "label": "Amount per serving", "default": "[PLACEHOLDER amount]" }
       ]
     }
   ],
   "default": {
     "blocks": [
-      { "type": "ingredient", "settings": { "name": "Saffron", "role": "Included for its role in everyday mood and wellbeing support." } },
-      { "type": "ingredient", "settings": { "name": "Panax Ginseng", "role": "A traditionally used adaptogen included for energy and vitality support." } },
-      { "type": "ingredient", "settings": { "name": "Maca", "role": "Included for its traditional association with stamina and vitality." } },
-      { "type": "ingredient", "settings": { "name": "Vitamin B6", "role": "Supports normal energy-yielding metabolism." } }
+      { "type": "ingredient", "settings": { "name": "Saffron Extract", "role": "Included for its role in everyday mood and wellbeing support.", "amount_placeholder": "30 mg" } },
+      { "type": "ingredient", "settings": { "name": "Panax Ginseng Extract", "role": "A traditionally used adaptogen included for energy and vitality support.", "amount_placeholder": "100 mg" } },
+      { "type": "ingredient", "settings": { "name": "Maca Root Extract", "role": "Included for its traditional association with stamina and vitality.", "amount_placeholder": "300 mg" } },
+      { "type": "ingredient", "settings": { "name": "Vitamin B6 (Pyridoxine HCl)", "role": "Supports normal energy-yielding metabolism.", "amount_placeholder": "2 mg" } }
     ]
   },
   "presets": [{ "name": "Ingredient education" }]

@@ -6,19 +6,35 @@ Read this before showing this site to anyone outside the team, and definitely be
 - Brand name: BULLFUEL
 - Tagline: FUEL YOUR EDGE
 - Flagship product name: BullFuel Male Vitality Gummies
-- Core ingredients direction: saffron, Panax ginseng, maca, vitamin B6
 - Color palette hex values (as specified)
 - The three-funnel structure (homepage / DR landing page / product offer page) and the AG1/Grüns strategic principles as described in the brief
 
+## Verified facts — confirmed 2026-08-04 from the DAT Supply "Male Libido Gummies" private-label spec page (screenshots reviewed directly; this is the manufacturer BullFuel's formula is sourced from)
+- Format: pectin-based gummy, Men's Health product family, 60 gummies per pack, 4 active ingredients.
+- Per-serving actives (confirmed): **Saffron Extract 30 mg, Panax Ginseng Extract 100 mg, Maca Root Extract 300 mg, Pyridoxine Hydrochloride (Vitamin B6) 2 mg.** These can now replace the `[PLACEHOLDER amount]` values in `shopify-theme/sections/ingredient-education.liquid` — done in this update.
+- Manufactured in Europe under EU food supplement directives; EU GMP certification and a batch-specific Certificate of Analysis are stated as **available on request**, not automatically issued — these still need to be actively requested from the supplier before they can be published as live proof (see `07-proof-acquisition-plan.md`).
+- A gated documentation set exists per order stage (Product Specification, Nutrition/Supplement Facts panel, Artwork Checklist, Batch/Release Documents, Compliance Dossier referencing EU Reg. 1924/2006 and 432/2012, Certificate of Analysis) — each requires starting/progressing an order in the supplier's client portal to unlock; none of it is a public download.
+- Gummy flavour, colour, and shape are customizable under the supplier's "Make It Yours" program — this **confirms the red/dark-red gummy colour called for in the brand mockups is achievable**, not just an aspiration.
+- Standard MOQ: 1,000 units for a PET/HDPE jar, or 2,500 units for a doypack — useful input for the first production-run economics in `05-pricing-framework.md`.
+- Regulatory responsibility note (direct from the supplier page): **the brand owner is the Food Business Operator of record and is responsible for final filings** — the supplier supplies supporting documentation, it does not substitute for BullFuel's own regulatory review.
+
+## Still unresolved — genuinely unknown, do not guess
+- **Gummies per serving** (i.e., is 1 serving = 1 gummy or 2 gummies?). This is the one number that determines supply-duration and per-day pricing claims, and it was not visible on the pages reviewed — it lives in the gated Nutrition/Supplement Facts document. Do not publish a "60-day supply" or "30-day supply" claim, and do not finalize per-day pricing, until this is confirmed from that document.
+- Landed cost per unit / COGS (pricing on the supplier site requires a logged-in client account; not visible in what was reviewed).
+- The actual GMP certificate and batch COA documents themselves (confirmed to exist/be available on request — not yet requested or in hand).
+
 ## Explicit placeholders — must be replaced before launch, all clearly marked `[PLACEHOLDER]` in the theme
 - The logo file itself (temporary wordmark + placeholder bull-symbol SVG in use)
-- All pricing figures in `05-pricing-framework.md` (pending confirmed COGS)
-- Bottle count / serving size / supply-duration claims (pending confirmed formula & label)
+- All pricing figures in `05-pricing-framework.md` (pending confirmed COGS/landed cost)
+- Gummies-per-serving and supply-duration claims (pending the gated Nutrition/Supplement Facts document — see above)
 - All review counts, star ratings, review content, UGC content
-- All manufacturing/testing/certification claims (GMP status, COA, sourcing statements)
+- The actual GMP certificate and Certificate of Analysis documents (confirmed obtainable, not yet requested)
 - All "problem proof" statistics (need a real, cited source before publishing — none are included pre-sourced in this build)
 - Welcome-offer bonus item values (travel case, digital guide) pending real sourcing/production cost
 - Expert commentary/endorsement content
+
+## Claims-risk flag from the supplier's own material
+The supplier's generic listing mockup uses the label line "Enhances libido, stamina, and hormonal balance" and the tagline "Fuel the drive within." This is the **supplier's boilerplate marketing copy for their generic catalogue listing** — it is not reviewed or approved language for BullFuel, and "enhances libido / hormonal balance" is a materially stronger, more specific efficacy claim than anything used in this package's copy so far. Do not adopt that phrasing. Keep BullFuel's own copy in the "support" framing already used throughout this package, and treat any claim of this kind as requiring the same legal/regulatory sign-off as everything else in the section below.
 
 ## Claims requiring legal/regulatory review before publishing (even once "real" data exists)
 - Any statement implying the product treats, cures, prevents, or diagnoses a medical condition (not permitted for a dietary supplement in most jurisdictions) — current copy avoids this by design (e.g., "support," not "cure" or "fix"), but every future edit should be checked against this line.

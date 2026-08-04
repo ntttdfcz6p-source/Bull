@@ -1,9 +1,9 @@
 # Subscription & Bundle Pricing Framework
 
-**Every dollar figure and supply-duration figure below is a PLACEHOLDER.** Replace once (a) landed COGS per bottle is confirmed, and (b) the final label's recommended daily serving size is confirmed by the formulator/regulatory reviewer. Do not publish supply-duration or per-day pricing claims until (b) is locked — the brief is explicit that 60 gummies cannot be claimed to equal a specific number of days until serving size is final.
+**Every dollar figure and supply-duration figure below is a PLACEHOLDER.** Replace once (a) landed COGS per bottle is confirmed, and (b) gummies-per-serving is confirmed. (a) is still open. (b) is now narrowed: the manufacturer (DAT Supply)'s spec page confirms **60 gummies per bottle** and the per-serving actives are locked (Saffron 30 mg / Panax Ginseng 100 mg / Maca 300 mg / B6 2 mg per serving) — but the actual **gummies-per-serving count sits in their gated Nutrition/Supplement Facts document**, unlocked only by progressing an order in their portal. Do not publish supply-duration or per-day pricing claims until that document confirms it — the brief is explicit that 60 gummies cannot be claimed to equal a specific number of days until serving size is final.
 
 ## Reference architecture
-Bottle count is a placeholder (60 gummies/bottle) pending confirmed serving size. All "per day" math below assumes an illustrative 30-day supply per bottle — **flagged as placeholder** and must be recalculated from the real serving size before launch.
+Bottle count is now confirmed at 60 gummies/bottle (per the manufacturer spec), but the illustrative "30-day supply" used below still assumes a 2-gummies-per-serving, 1-serving-per-day pattern that has **not been confirmed** — recalculate every "per day" figure below the moment the real serving size comes back from the gated Supplement Facts document.
 
 | Tier | Identity name | Bottles | One-Time Price | Price / bottle | Price / day* | Subscribe Price | Subscribe price/bottle | Subscribe price/day* | Savings vs. 1-bottle one-time reference |
 |---|---|---|---|---|---|---|---|---|---|
@@ -23,7 +23,8 @@ Bottle count is a placeholder (60 gummies/bottle) pending confirmed serving size
 ## Bottle economics placeholder (fill in once COGS is known)
 | Input | Placeholder | Status |
 |---|---|---|
-| Landed cost per bottle (COGS + packaging + fulfillment) | `$[X.XX]` | Pending manufacturer quote |
+| Landed cost per bottle (COGS + packaging + fulfillment) | `$[X.XX]` | Pending manufacturer quote — DAT Supply pricing requires a logged-in client account, not visible in the spec page reviewed |
+| Minimum order quantity | 1,000 units (PET/HDPE jar) or 2,500 units (doypack) | Confirmed from manufacturer spec — plan first production-run cash outlay against whichever packaging format is chosen |
 | Target gross margin at 1-bottle one-time price | `~[XX]%` | Pending COGS |
 | Target gross margin at 6-bottle subscribe price | `~[XX]%` | Pending COGS |
 | Blended CAC ceiling to remain profitable by order 2 (subscription) | `$[XX]` | Pending COGS + retention curve (see `09-ltv-framework.md`) |

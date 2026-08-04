@@ -4,6 +4,8 @@ These are image-generation / mockup-design prompts to produce **temporary** pack
 
 **Logo note:** because the real BullFuel logo file wasn't available in this session, every prompt below instructs the compositing of the *actual supplied bull-head mark and wordmark* once available — do not let an image tool invent a new bull illustration; the placeholder SVG in `shopify-theme/assets/bull-symbol-placeholder.svg` should be swapped for the real vector before any of these renders are finalized.
 
+**Gummy colour note (confirmed 2026-08-04):** the manufacturer's private-label program (DAT Supply) explicitly allows customizing gummy flavour, colour, and shape ("Make It Yours") on this formula. The red/dark-red gummy direction below is therefore a real, orderable choice, not just an aspiration — request that customization when placing the formula order, and update these mockups with the actual gummy colour once a sample is received.
+
 ## Prompt 1 — Hero product bottle (studio render)
 "Studio product photograph of a matte-black PET supplement jar with a black lid, centered on a dark charcoal gradient background. Front label is minimal: a bold red-and-black geometric bull-head mark centered near the top, the wordmark BULLFUEL in bold masculine sans-serif below it, the tagline FUEL YOUR EDGE in a smaller red condensed font beneath that, and small text reading MALE VITALITY GUMMIES — DAILY MEN'S WELLNESS FORMULA. Strong single-source studio key light from upper left, subtle red rim light from the right, high contrast, premium performance-brand aesthetic, no other text, no competitor branding, no medical claims on-label. TEMPORARY MOCKUP — NOT FINAL LABEL COPY."
 

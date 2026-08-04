@@ -103,6 +103,16 @@ p { line-height: 1.6; margin: 0 0 16px; color: inherit; }
   padding: 6px 10px;
   border-radius: 3px;
 }
+.bf-badge-amount {
+  display: inline-block;
+  background: rgba(217,9,18,0.12);
+  color: var(--bf-red);
+  font-family: var(--bf-font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  padding: 4px 9px;
+  border-radius: 3px;
+}
 .bf-badge-placeholder {
   display: inline-block;
   border: 1px dashed var(--bf-muted-grey);
