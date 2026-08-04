@@ -2,8 +2,8 @@
 
 - `homepage-desktop-1920x1080.png` — desktop viewport, above-the-fold, 1920×1080
 - `homepage-mobile-390x844.png` — mobile viewport, above-the-fold, 390×844 (iPhone 12/13/14-class)
-- `homepage-full-desktop.png` — desktop, full page scroll (1920 wide × 10317 tall)
-- `homepage-full-mobile.png` — mobile, full page scroll (390 wide × 13311 tall)
+- `homepage-full-desktop.png` — desktop, full page scroll, retina 2x (3840 × 20612)
+- `homepage-full-mobile.png` — mobile, full page scroll, retina 2x (780 × 26604)
 
 ## How these were generated
 
