@@ -1,0 +1,39 @@
+{% comment %}
+  "As seen in" press strip. IMPORTANT: only ever list a publication here once
+  a real feature/mention exists — using real outlet names/logos with no
+  actual mention is a false-endorsement claim. Ships with no default blocks
+  for that reason; add real ones as they happen (see
+  strategy/14-facts-placeholders-legal.md).
+{% endcomment %}
+{%- if section.blocks.size > 0 -%}
+<section class="bf-section bf-bg-black" style="padding-top:32px;padding-bottom:32px;">
+  <div class="bf-container">
+    <p class="bf-eyebrow bf-text-center" style="display:block;">{{ section.settings.heading }}</p>
+    <div class="bf-press-strip">
+      {%- for block in section.blocks -%}
+        <span class="bf-press-strip__logo">{{ block.settings.name }}</span>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Press mentions",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "As Featured In" }
+  ],
+  "blocks": [
+    {
+      "type": "outlet",
+      "name": "Outlet (only add once a real mention exists)",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Publication name" },
+        { "type": "url", "id": "url", "label": "Link to the actual feature/mention" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Press mentions", "blocks": [] }]
+}
+{% endschema %}

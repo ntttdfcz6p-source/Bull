@@ -1,34 +1,48 @@
 # Direct-Response Landing Page Wireframe
 
-For Meta / TikTok / influencer / affiliate / email traffic. Maps to `shopify-theme/templates/page.landing-page.json`. Minimal nav, one offer, repeated CTAs, sticky mobile bar.
+For Meta / TikTok / influencer / affiliate / email traffic. Maps to `shopify-theme/templates/page.landing-page.json`. Minimal nav, one offer, repeated CTAs, sticky mobile bar. Several components below borrow layout patterns from a competitor reference (mengotomars.com) at the user's request — see `01-brand-application-guide.md` §7 for exactly what was adapted vs. deliberately left out.
 
 ```
 ┌───────────────────────────────────────────────────────────┐
+│ PROMO BAR (sections/promo-bar.liquid) — off by default      │
+│  Only shows a countdown for a real, merchant-set end date;   │
+│  no fake/permanent urgency                                    │
+├───────────────────────────────────────────────────────────┤
 │ STRIPPED HEADER — logo only + cart icon, no nav links       │
 ├───────────────────────────────────────────────────────────┤
-│ DR HERO (sections/dr-hero.liquid) — Black bg                │
-│  Eyebrow: FUEL YOUR POWER                                     │
-│  H1 (test-able): "YOUR DAILY POWER." / "DRIVE DOESN'T COME    │
-│  FROM NOWHERE."                                               │
-│  Sub: Premium male vitality support in a daily gummy format   │
-│  Primary CTA: [ CHOOSE YOUR SUPPLY ] → jumps to offer stack   │
-│  Rating placeholder badge under CTA                           │
+│ DR HERO (sections/dr-hero.liquid) — Black bg, centered        │
+│  Eyebrow: FUEL YOUR POWER                                       │
+│  H1 (word-highlight capable): "YOUR DAILY <accent>POWER</accent>."│
+│  Hero visual (snippets/hero-visual.liquid): photo-collage grid +│
+│  centered product image + optional bracket stat callouts       │
+│  (blank until real numbers exist) + optional offer seal (off    │
+│  unless a real, active promotion exists)                        │
+│  Sub: Premium male vitality support in a daily gummy format      │
+│  Rating placeholder → Primary CTA: [ CHOOSE YOUR SUPPLY → ]      │
+│  → jumps to offer stack                                          │
 ├───────────────────────────────────────────────────────────┤
-│ MICRO PROOF STRIP — 3 short credibility lines (placeholders) │
+│ PRESS STRIP (sections/press-mentions.liquid) — ships empty;    │
+│  only add a real outlet once an actual feature/mention exists   │
 ├───────────────────────────────────────────────────────────┤
-│ PRODUCT EDUCATION (condensed) — what it is / core ingredients│
-│  in one scannable block, CTA repeated at the end              │
+│ INGREDIENT CARDS (sections/ingredient-education.liquid)         │
+│  Texture-photo cards (CSS gradient placeholders standing in for  │
+│  real macro photography) with dosage pill showing CONFIRMED       │
+│  amounts: Saffron 30mg, Panax Ginseng 100mg, Maca 300mg, B6 2mg    │
 ├───────────────────────────────────────────────────────────┤
-│ PROBLEM PROOF — cited stat(s) on male energy/stress/fatigue   │
-│  framed as context, not as a guaranteed BullRush outcome       │
+│ PROBLEM PROOF / DECLINE CHART (sections/problem-proof.liquid)     │
+│  "General population" line (needs real citation) vs. a dashed     │
+│  "With BullRush" line explicitly marked [PLACEHOLDER,               │
+│  unsubstantiated] — highest legal-risk element in this package,     │
+│  see 01-brand-application-guide.md §7                                │
 ├───────────────────────────────────────────────────────────┤
 │ PRODUCT PROOF STACK (sections/dr-proof-stack.liquid)          │
 │  Formula transparency / manufacturing standard / sourcing —   │
 │  all placeholder-labeled pending real documentation            │
 │  CTA repeated                                                  │
 ├───────────────────────────────────────────────────────────┤
-│ REVIEW / UGC STRIP — placeholder review cards + UGC placeholder│
-│  CTA repeated                                                  │
+│ CERTIFICATIONS ROW (sections/certifications.liquid)             │
+│  Made in the EU · GMP Standard (cert. on request) · Fast          │
+│  Shipping · [PLACEHOLDER — Third-Party Tested]                      │
 ├───────────────────────────────────────────────────────────┤
 │ OFFER STACK / PRICING (sections/dr-offer-stack.liquid)        │
 │  Same purchase-module.liquid snippet as homepage — bundle      │
@@ -51,3 +65,5 @@ For Meta / TikTok / influencer / affiliate / email traffic. Maps to `shopify-the
 ```
 
 **Distraction audit for this template:** no header nav, no footer collection links, no blog links, no related-products module, no exit-intent popups to other products. Only exit points are legal/policy links and the cart icon.
+
+**Reviews/UGC note:** unlike the homepage, this template does not include a dedicated reviews/UGC section by default (the reference site leans on rating badges within the hero/proof stack instead) — add `sections/reviews-ugc.liquid` back into `page.landing-page.json` once verified reviews exist and you want it in this funnel too.

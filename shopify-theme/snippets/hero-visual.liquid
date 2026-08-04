@@ -1,0 +1,59 @@
+{% comment %}
+  Collage + stat-callout + offer-seal hero visual (layout pattern adapted
+  from a competitor reference at the user's request — see
+  strategy/01-brand-application-guide.md §7). All numbers here are
+  merchant-editable and default to explicit [PLACEHOLDER] text — never
+  hardcode a real-looking stat.
+
+  Params:
+    product_image        — image object (optional; falls back to the bull symbol)
+    stat_1_number / stat_1_label   — optional top-left bracket callout
+    stat_2_number / stat_2_label   — optional top-right bracket callout
+    show_seal (bool), seal_percent, seal_label_top, seal_label_bottom — optional circular offer seal
+{% endcomment %}
+<div class="bf-collage">
+  {%- for i in (1..9) -%}
+    <div class="bf-collage__tile{% cycle '', '', ' bf-collage__tile--alt', '', ' bf-collage__tile--alt', '', ' bf-collage__tile--alt', '', '' %}"></div>
+  {%- endfor -%}
+
+  {%- if product_image != blank -%}
+    <img class="bf-collage__product" src="{{ product_image | image_url: width: 600 }}" alt="BullRush Male Vitality Gummies">
+  {%- else -%}
+    <div class="bf-collage__product" style="opacity:.9;">{% render 'icon-bull', size: 200 %}</div>
+  {%- endif -%}
+
+  {%- if stat_1_number != blank -%}
+    <div class="bf-stat-callout bf-stat-callout--top-left">
+      <span class="bf-stat-callout__number">{{ stat_1_number }}</span>
+      <span class="bf-stat-callout__label">{{ stat_1_label }}</span>
+    </div>
+  {%- endif -%}
+
+  {%- if stat_2_number != blank -%}
+    <div class="bf-stat-callout bf-stat-callout--top-right">
+      <span class="bf-stat-callout__number">{{ stat_2_number }}</span>
+      <span class="bf-stat-callout__label">{{ stat_2_label }}</span>
+    </div>
+  {%- endif -%}
+
+  {%- if show_seal -%}
+    <div class="bf-offer-seal">
+      <svg viewBox="0 0 200 200">
+        <defs>
+          <path id="bf-seal-arc-top-{{ section.id }}" d="M 30,100 A 70,70 0 0 1 170,100" fill="none"/>
+          <path id="bf-seal-arc-bottom-{{ section.id }}" d="M 170,100 A 70,70 0 0 1 30,100" fill="none"/>
+        </defs>
+        <circle cx="100" cy="100" r="92" fill="none" stroke="{{ settings.color_bullrush_red }}" stroke-width="3"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="{{ settings.color_bullrush_red }}" stroke-width="1"/>
+        <text font-family="{{ settings.font_display.family }}" font-size="11" fill="{{ settings.color_white }}" letter-spacing="2">
+          <textPath href="#bf-seal-arc-top-{{ section.id }}" startOffset="50%" text-anchor="middle">{{ seal_label_top }}</textPath>
+        </text>
+        <text font-family="{{ settings.font_display.family }}" font-size="11" fill="{{ settings.color_muted_grey }}" letter-spacing="2">
+          <textPath href="#bf-seal-arc-bottom-{{ section.id }}" startOffset="50%" text-anchor="middle">{{ seal_label_bottom }}</textPath>
+        </text>
+        <text x="100" y="95" text-anchor="middle" class="bf-offer-seal__pct" font-family="{{ settings.font_display.family }}">{{ seal_percent }}%</text>
+        <text x="100" y="118" text-anchor="middle" class="bf-offer-seal__off">OFF</text>
+      </svg>
+    </div>
+  {%- endif -%}
+</div>

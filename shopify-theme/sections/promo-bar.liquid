@@ -1,0 +1,41 @@
+{% comment %}
+  Sticky urgency bar (pattern borrowed from the competitor reference). Unlike
+  a fabricated countdown, this reads a real merchant-set end date/time —
+  if none is set, or it's in the past, the bar shows the message with no
+  countdown rather than faking urgency. Never hardcode a countdown here.
+{% endcomment %}
+{%- if section.settings.enable_bar -%}
+  <div class="bf-promo-bar" data-bf-promo-bar {% if section.settings.end_datetime != blank %}data-end="{{ section.settings.end_datetime }}"{% endif %}>
+    <div class="bf-promo-bar__message">
+      <span>{{ section.settings.message }}</span>
+      {%- if section.settings.pill_text != blank -%}
+        <span class="bf-promo-bar__pill">{{ section.settings.pill_text }}</span>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.end_datetime != blank -%}
+      <div class="bf-countdown" data-bf-countdown>
+        <div class="bf-countdown__unit"><span class="bf-countdown__unit-value" data-unit="hours">00</span><span class="bf-countdown__unit-label">Hrs</span></div>
+        <div class="bf-countdown__unit"><span class="bf-countdown__unit-value" data-unit="minutes">00</span><span class="bf-countdown__unit-label">Min</span></div>
+        <div class="bf-countdown__unit"><span class="bf-countdown__unit-value" data-unit="seconds">00</span><span class="bf-countdown__unit-label">Sec</span></div>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Promo bar",
+  "settings": [
+    { "type": "checkbox", "id": "enable_bar", "label": "Enable promo bar", "default": false },
+    { "type": "text", "id": "message", "label": "Message", "default": "LAUNCH OFFER" },
+    { "type": "text", "id": "pill_text", "label": "Pill text (e.g. discount)", "default": "SAVE ON YOUR FIRST ORDER" },
+    {
+      "type": "text",
+      "id": "end_datetime",
+      "label": "Real promotion end date/time (ISO 8601, e.g. 2026-08-31T23:59:00)",
+      "info": "Must be a genuine end time for an actual promotion. Leave blank to show the message with no countdown — never fill this with a fake or recurring date."
+    }
+  ],
+  "presets": [{ "name": "Promo bar" }]
+}
+{% endschema %}

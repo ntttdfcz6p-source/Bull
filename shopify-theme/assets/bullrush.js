@@ -2,6 +2,33 @@
 (function () {
   'use strict';
 
+  // ---------- Promo bar countdown (real end date only, never fabricated) ----------
+  var promoBar = document.querySelector('[data-bf-promo-bar]');
+  if (promoBar && promoBar.dataset.end) {
+    var endTime = new Date(promoBar.dataset.end).getTime();
+    var countdownEl = promoBar.querySelector('[data-bf-countdown]');
+    if (!isNaN(endTime) && countdownEl) {
+      var tick = function () {
+        var remaining = endTime - Date.now();
+        if (remaining <= 0) {
+          promoBar.remove();
+          return;
+        }
+        var hours = Math.floor(remaining / 3600000);
+        var minutes = Math.floor((remaining % 3600000) / 60000);
+        var seconds = Math.floor((remaining % 60000) / 1000);
+        var pad = function (n) { return String(n).padStart(2, '0'); };
+        countdownEl.querySelector('[data-unit="hours"]').textContent = pad(hours);
+        countdownEl.querySelector('[data-unit="minutes"]').textContent = pad(minutes);
+        countdownEl.querySelector('[data-unit="seconds"]').textContent = pad(seconds);
+      };
+      tick();
+      setInterval(tick, 1000);
+    } else if (isNaN(endTime)) {
+      promoBar.remove();
+    }
+  }
+
   // ---------- Accordion (FAQ, objections) ----------
   document.addEventListener('click', function (e) {
     var trigger = e.target.closest('[data-bf-accordion-trigger]');

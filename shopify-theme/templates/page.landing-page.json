@@ -1,14 +1,24 @@
 {
   "sections": {
+    "promo_bar": { "type": "promo-bar" },
     "dr_hero": { "type": "dr-hero" },
+    "press": { "type": "press-mentions" },
+    "ingredients": { "type": "ingredient-education" },
+    "problem_proof": { "type": "problem-proof" },
     "dr_proof": { "type": "dr-proof-stack" },
+    "certifications": { "type": "certifications" },
     "dr_offer": { "type": "dr-offer-stack" },
     "dr_objections": { "type": "dr-objections" },
     "dr_final_cta": { "type": "dr-final-cta" }
   },
   "order": [
+    "promo_bar",
     "dr_hero",
+    "press",
+    "ingredients",
+    "problem_proof",
     "dr_proof",
+    "certifications",
     "dr_offer",
     "dr_objections",
     "dr_final_cta"

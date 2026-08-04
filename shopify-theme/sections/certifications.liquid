@@ -1,0 +1,62 @@
+{% comment %}
+  Trust/certification icon row. Defaults only include claims already
+  confirmed in strategy/14-facts-placeholders-legal.md (EU manufacturing,
+  GMP available on request) — anything else (e.g. "Non-GMO", "Third-Party
+  Tested") must not be turned on until the underlying document is actually
+  in hand, not just requested.
+{% endcomment %}
+<div class="bf-cert-row {% if section.settings.dark %}bf-bg-black{% else %}bf-bg-white{% endif %}">
+  {%- for block in section.blocks -%}
+    <div class="bf-cert-row__item">
+      <span class="bf-cert-row__icon">
+        {%- case block.settings.icon -%}
+          {%- when 'shield' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M8.5 12l2.3 2.3L16 9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          {%- when 'flask' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 2h6M10 2v7l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          {%- when 'truck' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h11v9H2z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.5"/><circle cx="17.5" cy="18" r="1.5"/></svg>
+          {%- when 'leaf' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 20c8 0 14-6 14-14V4h-2C9 4 5 10 5 18v2z"/></svg>
+          {%- else -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/></svg>
+        {%- endcase -%}
+      </span>
+      <span>{{ block.settings.label }}</span>
+    </div>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Certifications row",
+  "settings": [
+    { "type": "checkbox", "id": "dark", "label": "Dark background", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "cert",
+      "name": "Certification",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+            { "value": "shield", "label": "Shield / guarantee" },
+            { "value": "flask", "label": "Flask / testing" },
+            { "value": "truck", "label": "Shipping" },
+            { "value": "leaf", "label": "Natural" },
+            { "value": "circle", "label": "Generic" }
+          ], "default": "shield" },
+        { "type": "text", "id": "label", "label": "Label" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "cert", "settings": { "icon": "leaf", "label": "Made in the EU" } },
+      { "type": "cert", "settings": { "icon": "shield", "label": "GMP Standard (cert. on request)" } },
+      { "type": "cert", "settings": { "icon": "truck", "label": "Fast, Discreet Shipping" } },
+      { "type": "cert", "settings": { "icon": "flask", "label": "[PLACEHOLDER — Third-Party Tested, pending COA]" } }
+    ]
+  },
+  "presets": [{ "name": "Certifications row" }]
+}
+{% endschema %}

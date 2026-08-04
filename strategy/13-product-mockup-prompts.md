@@ -21,5 +21,13 @@ These are image-generation / mockup-design prompts to produce **temporary** pack
 ## Prompt 5 — Welcome Kit flat-lay
 "Flat-lay photograph of the BullRush jar next to a small matte-black branded travel case (same bull-head mark embossed subtly on the lid) and a folded printed insert card reading MEN'S DAILY PERFORMANCE GUIDE, arranged on a dark surface with soft top lighting. Clean, premium unboxing aesthetic. TEMPORARY MOCKUP — travel case and guide are conceptual pending final sourcing."
 
+## Prompt 6 — Ingredient macro photography (replaces the CSS gradient placeholders)
+`shopify-theme/sections/ingredient-education.liquid` currently uses CSS gradient "textures" as stand-ins for real photography behind each ingredient card (see `01-brand-application-guide.md` §7). Replace each with a macro photograph once available:
+- **Saffron Extract:** close-up of dried saffron threads, warm red-orange tones, shallow depth of field.
+- **Panax Ginseng Extract:** close-up of ginseng root, warm neutral tones, visible root texture.
+- **Maca Root Extract:** close-up of maca root slices or powder, warm golden-brown tones.
+- **Vitamin B6 (Pyridoxine HCl):** abstract macro shot suggesting the vitamin (e.g. fine crystalline powder or a subtle amber-lit texture) — this one doesn't have an obvious "whole food" reference shot, so keep it abstract rather than inventing a fake source-food image.
+All four: consistent lighting/color grade across the set, cropped for a 4:5 card, dark vignette toward the bottom third so the overlaid ingredient name/dose stay legible — matching the existing card's gradient scrim.
+
 ## Favicon (already shipped)
 No prompt needed — `shopify-theme/assets/bullrush-symbol-light.png` (the real cropped bull-head mark, transparent background) is wired in as the theme's default favicon (`shopify-theme/layout/theme.liquid`), and is legible down to the 16–32px range. Replace it in Theme settings → Logo → "Symbol only" if a designer produces a hand-tuned favicon-specific crop.

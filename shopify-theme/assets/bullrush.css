@@ -287,3 +287,138 @@ p { line-height: 1.6; margin: 0 0 16px; color: inherit; }
 .bf-mt-32 { margin-top: 32px; }
 .bf-cta-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
 @media (max-width: 900px){ .bf-cta-row { justify-content: center; } }
+
+/* =========================================================================
+   Direct-response components — layout patterns adapted from a competitor
+   reference (mengotomars.com) at the user's request: urgency bar, bracket
+   stat callouts, offer seal, press strip, texture ingredient cards,
+   certification row, decline chart, headline word-highlighting, colored
+   lead-in copy. Palette stays BullRush red/black throughout — only the
+   structural patterns were borrowed, not the competitor's colors, claims,
+   or copy. See strategy/01-brand-application-guide.md §7.
+   ========================================================================= */
+
+/* ---------- Headline word-highlight + lead-in copy ---------- */
+.bf-accent { color: var(--bf-red); }
+.bf-lead-in { color: var(--bf-red); font-weight: 700; }
+
+/* ---------- Arrow CTA button ---------- */
+.bf-btn--arrow { gap: 10px; padding: 18px 28px; font-size: 1rem; }
+.bf-btn--arrow .bf-btn__arrow { transition: transform .15s ease; }
+.bf-btn--arrow:hover .bf-btn__arrow { transform: translateX(4px); }
+
+/* ---------- Promo / urgency bar ---------- */
+.bf-promo-bar {
+  background: var(--bf-black); color: var(--bf-white);
+  padding: 10px 20px;
+  display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap;
+  font-family: var(--bf-font-display); text-transform: uppercase; letter-spacing: 0.03em;
+  font-size: 0.8rem; text-align: center;
+}
+.bf-promo-bar__message { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.bf-promo-bar__pill {
+  background: var(--bf-action-red); color: var(--bf-white);
+  padding: 5px 12px; border-radius: 4px; font-size: 0.75rem;
+}
+.bf-countdown { display: flex; gap: 8px; }
+.bf-countdown__unit {
+  background: var(--bf-white); color: var(--bf-black);
+  border-radius: 4px; padding: 4px 8px; min-width: 44px; text-align: center;
+}
+.bf-countdown__unit-value { font-size: 0.95rem; line-height: 1; }
+.bf-countdown__unit-label { display: block; font-size: 0.55rem; color: #666; letter-spacing: 0.05em; }
+
+/* ---------- Hero collage + stat callouts + offer seal ---------- */
+.bf-collage {
+  position: relative;
+  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+  gap: 6px; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden;
+}
+.bf-collage__tile { background: var(--bf-graphite); }
+.bf-collage__tile--alt { background: var(--bf-dark-surface); }
+.bf-collage__product {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 42%; z-index: 3; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+}
+.bf-stat-callout {
+  position: absolute; z-index: 4;
+  border: 1.5px solid var(--bf-white); border-radius: 2px;
+  padding: 8px 12px; background: rgba(8,8,8,0.55); backdrop-filter: blur(2px);
+  color: var(--bf-white); text-align: center;
+}
+.bf-stat-callout__number {
+  display: block; font-family: var(--bf-font-display); font-size: 1.2rem; color: var(--bf-white);
+}
+.bf-stat-callout__label { display: block; font-size: 0.62rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--bf-muted-grey); }
+.bf-stat-callout--top-left { top: 6%; left: 4%; }
+.bf-stat-callout--top-right { top: 6%; right: 4%; }
+
+.bf-offer-seal {
+  position: absolute; z-index: 5; width: 30%; aspect-ratio: 1/1;
+  right: 2%; top: 38%;
+}
+.bf-offer-seal svg { width: 100%; height: 100%; }
+.bf-offer-seal__pct {
+  font-family: var(--bf-font-display); font-size: 1.6rem; fill: var(--bf-white);
+}
+.bf-offer-seal__off { font-size: 0.6rem; fill: var(--bf-muted-grey); letter-spacing: 0.05em; }
+
+@media (max-width: 900px){
+  .bf-stat-callout { padding: 6px 9px; }
+  .bf-stat-callout__number { font-size: 1rem; }
+}
+
+/* ---------- Press / "as seen in" strip ---------- */
+.bf-press-strip { display: flex; align-items: center; justify-content: center; gap: clamp(24px, 5vw, 56px); flex-wrap: wrap; }
+.bf-press-strip__logo {
+  font-family: var(--bf-font-display); font-size: 1.1rem; letter-spacing: 0.02em;
+  color: var(--bf-muted-grey); opacity: 0.7; filter: grayscale(1);
+}
+
+/* ---------- Ingredient photo cards ---------- */
+.bf-ingredient-card {
+  position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 4/5;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 18px;
+  color: var(--bf-white);
+}
+.bf-ingredient-card::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(8,8,8,0) 30%, rgba(8,8,8,0.92) 100%);
+  z-index: 1;
+}
+.bf-ingredient-card__texture { position: absolute; inset: 0; z-index: 0; }
+.bf-ingredient-card__content { position: relative; z-index: 2; }
+.bf-ingredient-card__dose {
+  display: inline-block; background: var(--bf-white); color: var(--bf-black);
+  font-family: var(--bf-font-display); font-size: 0.72rem;
+  padding: 5px 10px; border-radius: 20px; margin-bottom: 10px;
+}
+.bf-ingredient-card__name { font-family: var(--bf-font-display); font-size: 1.1rem; margin-bottom: 6px; text-transform: uppercase; }
+.bf-ingredient-card__role { font-size: 0.8rem; color: #e5e3df; margin: 0; }
+
+/* Placeholder "texture" gradients standing in for real macro ingredient photography — see strategy/13-product-mockup-prompts.md */
+.bf-texture-1 { background: radial-gradient(circle at 30% 20%, #4a3418, #1c140a 70%); }
+.bf-texture-2 { background: radial-gradient(circle at 70% 30%, #3a3a3a, #0d0d0d 70%); }
+.bf-texture-3 { background: radial-gradient(circle at 40% 60%, var(--bf-deep-red), #1a0505 75%); }
+.bf-texture-4 { background: radial-gradient(circle at 60% 40%, #5c4210, #191305 75%); }
+.bf-texture-5 { background: radial-gradient(circle at 50% 50%, #2b2b2b, #050505 75%); }
+.bf-texture-6 { background: radial-gradient(circle at 35% 65%, #6b1414, #120303 75%); }
+
+/* ---------- Certification / trust row ---------- */
+.bf-cert-row {
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
+  gap: clamp(18px, 4vw, 40px); padding: 20px 0;
+}
+.bf-cert-row__item { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; letter-spacing: 0.03em; text-transform: uppercase; }
+.bf-cert-row__icon { width: 26px; height: 26px; flex-shrink: 0; color: var(--bf-red); }
+.bf-cert-row__icon svg { width: 100%; height: 100%; }
+
+/* ---------- Decline / proof chart ---------- */
+.bf-chart-wrap { max-width: 720px; margin: 32px auto 0; }
+.bf-chart-legend { display: flex; gap: 24px; justify-content: center; margin-bottom: 12px; font-size: 0.78rem; flex-wrap: wrap; }
+.bf-chart-legend__item { display: flex; align-items: center; gap: 8px; }
+.bf-chart-legend__swatch { width: 18px; height: 3px; display: inline-block; }
+.bf-chart-legend__swatch--population { background: var(--bf-muted-grey); }
+.bf-chart-legend__swatch--placeholder { background: var(--bf-red); border-top: 2px dashed var(--bf-red); height: 0; }
+.bf-chart svg { width: 100%; height: auto; display: block; }
+.bf-chart-caption { text-align: center; font-size: 0.72rem; color: var(--bf-muted-grey); margin-top: 10px; }

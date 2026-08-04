@@ -1,12 +1,15 @@
 {
   "sections": {
+    "promo_bar": { "type": "promo-bar" },
     "hero": { "type": "hero-brand" },
+    "press": { "type": "press-mentions" },
     "positioning": { "type": "positioning-statement" },
     "product_intro": { "type": "product-intro" },
     "problem_proof": { "type": "problem-proof" },
     "how_it_works": { "type": "how-it-works" },
     "ingredients": { "type": "ingredient-education" },
     "product_proof": { "type": "product-proof" },
+    "certifications": { "type": "certifications" },
     "reviews": { "type": "reviews-ugc" },
     "pricing": { "type": "pricing-bundles" },
     "welcome_offer": { "type": "welcome-offer" },
@@ -15,13 +18,16 @@
     "final_cta": { "type": "final-cta" }
   },
   "order": [
+    "promo_bar",
     "hero",
+    "press",
     "positioning",
     "product_intro",
     "problem_proof",
     "how_it_works",
     "ingredients",
     "product_proof",
+    "certifications",
     "reviews",
     "pricing",
     "welcome_offer",

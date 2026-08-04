@@ -4,15 +4,27 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 
 ```
 ┌───────────────────────────────────────────────────────────┐
+│ PROMO BAR (sections/promo-bar.liquid) — off by default      │
+│  Only shows a countdown for a real, merchant-set end date;  │
+│  disappears with no fake urgency if none is set              │
+├───────────────────────────────────────────────────────────┤
 │ HEADER (sections/header.liquid)                            │
 │ Logo (horizontal) · About · Ingredients · Reviews · Cart   │
 ├───────────────────────────────────────────────────────────┤
-│ HERO (sections/hero-brand.liquid) — Bull Black bg          │
+│ HERO (sections/hero-brand.liquid) — Bull Black bg, centered  │
 │  Tagline eyebrow: FUEL YOUR POWER                            │
-│  H1: "BRING BACK YOUR DRIVE." (editable per settings)       │
-│  Sub: Premium male vitality support in a daily gummy format │
-│  CTA: [ CHOOSE YOUR SUPPLY ] (red, scrolls to pricing)      │
-│  Product bottle render, right/center                        │
+│  H1: "BRING BACK YOUR <accent>DRIVE</accent>." (word-highlight│
+│  supported via settings)                                      │
+│  Sub: Premium male vitality support in a daily gummy format  │
+│  Hero visual (snippets/hero-visual.liquid): photo-collage      │
+│  grid + centered product image + optional bracket stat        │
+│  callouts (blank until real numbers exist) + optional offer    │
+│  seal (off unless a real promotion is active)                  │
+│  Rating placeholder → CTA row: [ CHOOSE YOUR SUPPLY → ] +      │
+│  [ Learn the Formula ]                                          │
+├───────────────────────────────────────────────────────────┤
+│ PRESS STRIP (sections/press-mentions.liquid) — ships empty;   │
+│  only add a real outlet once an actual feature/mention exists  │
 ├───────────────────────────────────────────────────────────┤
 │ POSITIONING STRIP (sections/positioning-statement.liquid)  │
 │  White bg — one-line category framing + 3 trust icons       │
@@ -24,23 +36,33 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 │  3-up: What it is / Who it's for / How it fits your day     │
 ├───────────────────────────────────────────────────────────┤
 │ PROBLEM PROOF (sections/problem-proof.liquid) — Black       │
-│  Cited stat block on stress/fatigue/energy decline in adult  │
-│  men (source-linked, editable citation field per stat)       │
-│  Framed as context, NOT as a BullRush outcome claim          │
+│  Decline-chart graphic: "general population" line (needs a   │
+│  real citation) vs. a dashed "With BullRush" line explicitly  │
+│  marked [PLACEHOLDER, unsubstantiated] — see                  │
+│  01-brand-application-guide.md §7 before touching this        │
+│  Cited stat block on stress/fatigue/energy decline in adult   │
+│  men (source-linked, editable citation field per stat)        │
+│  Framed as context, NOT as a BullRush outcome claim            │
 ├───────────────────────────────────────────────────────────┤
 │ HOW IT WORKS (sections/how-it-works.liquid) — White         │
 │  Step 1 Take daily → Step 2 Build consistency → Step 3 Feel  │
 │  the difference over [PLACEHOLDER timeframe pending data]    │
 ├───────────────────────────────────────────────────────────┤
 │ INGREDIENT EDUCATION (sections/ingredient-education.liquid) │
-│  Graphite bg — card per ingredient: Saffron, Panax Ginseng,  │
-│  Maca, Vitamin B6 — role + [PLACEHOLDER amount/serving]       │
-│  Link out to full Supplement Facts panel                     │
+│  Graphite bg — texture-photo card per ingredient (CSS gradient│
+│  placeholders standing in for real macro photography) with a  │
+│  dosage pill showing the CONFIRMED amount: Saffron 30mg,       │
+│  Panax Ginseng 100mg, Maca 300mg, B6 2mg                        │
+│  Link out to full Supplement Facts panel                        │
 ├───────────────────────────────────────────────────────────┤
 │ PRODUCT PROOF (sections/product-proof.liquid) — White        │
 │  Manufacturing standard, ingredient sourcing, testing —       │
 │  all fields render "[PLACEHOLDER — pending verified doc]"     │
 │  until real certificates/docs are supplied                    │
+├───────────────────────────────────────────────────────────┤
+│ CERTIFICATIONS ROW (sections/certifications.liquid) — Black   │
+│  Icon row: Made in the EU · GMP Standard (cert. on request) ·  │
+│  Fast Shipping · [PLACEHOLDER — Third-Party Tested]             │
 ├───────────────────────────────────────────────────────────┤
 │ REVIEWS / UGC (sections/reviews-ugc.liquid) — Off-white       │
 │  Verified-rating badge placeholder + review cards placeholder │

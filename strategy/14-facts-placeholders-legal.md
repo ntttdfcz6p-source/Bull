@@ -24,7 +24,6 @@ Read this before showing this site to anyone outside the team, and definitely be
 - The actual GMP certificate and batch COA documents themselves (confirmed to exist/be available on request — not yet requested or in hand).
 
 ## Explicit placeholders — must be replaced before launch, all clearly marked `[PLACEHOLDER]` in the theme
-- The logo file itself (temporary wordmark + placeholder bull-symbol SVG in use)
 - All pricing figures in `05-pricing-framework.md` (pending confirmed COGS/landed cost)
 - Gummies-per-serving and supply-duration claims (pending the gated Nutrition/Supplement Facts document — see above)
 - All review counts, star ratings, review content, UGC content
@@ -32,6 +31,15 @@ Read this before showing this site to anyone outside the team, and definitely be
 - All "problem proof" statistics (need a real, cited source before publishing — none are included pre-sourced in this build)
 - Welcome-offer bonus item values (travel case, digital guide) pending real sourcing/production cost
 - Expert commentary/endorsement content
+- **(Added 2026-08-04)** Hero stat callouts (`snippets/hero-visual.liquid`, e.g. "X+ bottles sold") — ship blank; do not fill in an invented number.
+- **(Added 2026-08-04)** The offer seal ("X% OFF") — ships disabled (`show_seal: false`); only enable for a real, currently-active promotion, never as permanent decoration.
+- **(Added 2026-08-04)** The promo bar's countdown end date (`sections/promo-bar.liquid`) — ships disabled; if enabled, the end date/time must be a genuine promotion deadline, never a fake or recurring one (the bar auto-removes itself once the date passes or if left blank).
+- **(Added 2026-08-04)** Press mentions (`sections/press-mentions.liquid`) — ships with zero logos/outlets; only add a real publication once an actual feature exists. Never reuse the reference site's GQ/Men's Health/Forbes logos.
+- **(Added 2026-08-04)** Certification row items beyond the two confirmed ones (EU manufacturing, GMP available on request) — e.g. "Third-Party Tested" ships explicitly marked `[PLACEHOLDER]` and must not be turned on until the COA is actually in hand.
+- **(Added 2026-08-04)** Ingredient card "texture" backgrounds (`sections/ingredient-education.liquid`) are CSS gradient placeholders, not real macro photography — see `13-product-mockup-prompts.md`.
+
+## Highest-risk item in this package: the "With BullRush" decline-chart line
+`sections/problem-proof.liquid` renders a chart with two lines: a "general population" line (needs a real citation before publishing) and a dashed **"With BullRush"** line, added at explicit user instruction as a placeholder. This second line is a graphed, specific efficacy claim with **zero clinical data behind it today**. It ships labeled `[PLACEHOLDER, unsubstantiated]` in the legend and caption — do not remove that label, make the line solid, or let this section go live without real clinical substantiation and legal/regulatory sign-off. If that substantiation never materializes, the correct fix is to delete the second line entirely, not to quietly stop labeling it as a placeholder.
 
 ## Claims-risk flag from the supplier's own material
 The supplier's generic listing mockup uses the label line "Enhances libido, stamina, and hormonal balance" and the tagline "Fuel the drive within." This is the **supplier's boilerplate marketing copy for their generic catalogue listing** — it is not reviewed or approved language for BullRush, and "enhances libido / hormonal balance" is a materially stronger, more specific efficacy claim than anything used in this package's copy so far. Do not adopt that phrasing. Keep BullRush's own copy in the "support" framing already used throughout this package, and treat any claim of this kind as requiring the same legal/regulatory sign-off as everything else in the section below.

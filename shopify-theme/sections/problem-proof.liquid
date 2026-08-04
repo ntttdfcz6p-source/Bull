@@ -1,9 +1,51 @@
+{% comment %}
+  Decline-chart proof section — chart layout adapted from the competitor
+  reference at the user's request. Two lines are rendered:
+    1. "General population" — must be backed by a real, cited statistic
+       before publishing (the axis/curve here is illustrative until then).
+    2. "With BullRush" — per explicit instruction, included but rendered
+       dashed and labeled [PLACEHOLDER] — this is a specific efficacy claim
+       with ZERO clinical backing right now. Do NOT remove the placeholder
+       label or make this line solid/uncaveated without real clinical
+       substantiation and legal sign-off. See
+       strategy/14-facts-placeholders-legal.md.
+{% endcomment %}
 <section class="bf-section bf-bg-black">
   <div class="bf-container">
-    <span class="bf-eyebrow">Context</span>
+    <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
     <h2>{{ section.settings.heading }}</h2>
-    <p class="bf-muted bf-max-640" style="margin-bottom:32px;">{{ section.settings.framing_note }}</p>
-    <div class="bf-grid-3">
+    <p class="bf-muted bf-max-640" style="margin-bottom:12px;">{{ section.settings.framing_note }}</p>
+
+    <div class="bf-chart-wrap">
+      <div class="bf-chart-legend">
+        <span class="bf-chart-legend__item"><span class="bf-chart-legend__swatch bf-chart-legend__swatch--population"></span> {{ section.settings.population_legend }}</span>
+        <span class="bf-chart-legend__item"><span class="bf-chart-legend__swatch bf-chart-legend__swatch--placeholder"></span> {{ section.settings.product_legend }} — [PLACEHOLDER, unsubstantiated]</span>
+      </div>
+      <div class="bf-chart">
+        <svg viewBox="0 0 600 320" preserveAspectRatio="xMidYMid meet">
+          <!-- axes -->
+          <line x1="50" y1="20" x2="50" y2="270" stroke="{{ settings.color_muted_grey }}" stroke-width="1"/>
+          <line x1="50" y1="270" x2="580" y2="270" stroke="{{ settings.color_muted_grey }}" stroke-width="1"/>
+          {%- for i in (0..4) -%}
+            <line x1="50" y1="{{ i | times: 62.5 | plus: 20 }}" x2="580" y2="{{ i | times: 62.5 | plus: 20 }}" stroke="{{ settings.color_dark_surface }}" stroke-width="1"/>
+          {%- endfor -%}
+
+          <!-- general population line (real curve pending citation) -->
+          <polyline points="70,90 180,110 290,150 400,190 510,225" fill="none" stroke="{{ settings.color_muted_grey }}" stroke-width="2.5"/>
+
+          <!-- with BullRush — placeholder, dashed, unsubstantiated -->
+          <polyline points="70,90 180,85 290,82 400,80 510,78" fill="none" stroke="{{ settings.color_bullrush_red }}" stroke-width="2.5" stroke-dasharray="6 5"/>
+
+          <!-- axis labels -->
+          <text x="50" y="285" font-size="10" fill="{{ settings.color_muted_grey }}">{{ section.settings.x_axis_start }}</text>
+          <text x="565" y="285" font-size="10" fill="{{ settings.color_muted_grey }}" text-anchor="end">{{ section.settings.x_axis_end }}</text>
+          <text x="20" y="24" font-size="10" fill="{{ settings.color_muted_grey }}">{{ section.settings.y_axis_label }}</text>
+        </svg>
+      </div>
+      <p class="bf-chart-caption">{{ section.settings.chart_caption }}</p>
+    </div>
+
+    <div class="bf-grid-3 bf-mt-32">
       {%- for block in section.blocks -%}
         <div class="bf-proof-item">
           <span class="bf-proof-item__mark">—</span>
@@ -21,12 +63,24 @@
 {
   "name": "Problem proof",
   "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Reality" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "The everyday reality for a lot of men" },
     {
       "type": "textarea",
       "id": "framing_note",
       "label": "Framing note (keeps this separate from BullRush outcome claims — do not remove)",
       "default": "These are general population statistics, not a claim about what BullRush itself produces for any individual."
+    },
+    { "type": "text", "id": "population_legend", "label": "Population line legend", "default": "General population" },
+    { "type": "text", "id": "product_legend", "label": "Product line legend", "default": "With BullRush" },
+    { "type": "text", "id": "x_axis_start", "label": "X-axis start label", "default": "20s" },
+    { "type": "text", "id": "x_axis_end", "label": "X-axis end label", "default": "60s" },
+    { "type": "text", "id": "y_axis_label", "label": "Y-axis label", "default": "[PLACEHOLDER METRIC — pending cited statistic]" },
+    {
+      "type": "textarea",
+      "id": "chart_caption",
+      "label": "Chart caption",
+      "default": "Illustrative chart. The general-population curve requires a cited source before publishing; the \"With BullRush\" line is a placeholder and must not be shown as fact without clinical substantiation and legal review."
     }
   ],
   "blocks": [

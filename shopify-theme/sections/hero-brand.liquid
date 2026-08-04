@@ -1,23 +1,30 @@
-<section class="bf-section bf-bg-black bf-hero" data-bf-hero>
-  <div class="bf-container bf-hero__grid">
-    <div>
-      <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
-      <h1>{{ section.settings.headline }}</h1>
-      <p style="max-width:520px;">{{ section.settings.subheadline }}</p>
-      <div class="bf-cta-row">
-        <a href="#bf-purchase" class="bf-btn bf-btn--primary">{{ section.settings.cta_label }}</a>
-        <a href="{{ section.settings.secondary_url }}" class="bf-btn bf-btn--outline-dark">{{ section.settings.secondary_label }}</a>
-      </div>
-      <div class="bf-hero__rating">
-        <span class="bf-badge-placeholder">★★★★★ — reviews pending launch</span>
-      </div>
+<section class="bf-section bf-bg-black bf-hero bf-text-center" data-bf-hero>
+  <div class="bf-container">
+    <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h1 class="bf-max-640" style="margin-left:auto;margin-right:auto;">{{ section.settings.headline }}</h1>
+    <p class="bf-max-640" style="margin:0 auto 32px;">{{ section.settings.subheadline }}</p>
+
+    <div style="max-width:520px;margin:0 auto;">
+      {%- render 'hero-visual',
+        product_image: section.settings.hero_image,
+        stat_1_number: section.settings.stat_1_number,
+        stat_1_label: section.settings.stat_1_label,
+        stat_2_number: section.settings.stat_2_number,
+        stat_2_label: section.settings.stat_2_label,
+        show_seal: section.settings.show_seal,
+        seal_percent: section.settings.seal_percent,
+        seal_label_top: section.settings.seal_label_top,
+        seal_label_bottom: section.settings.seal_label_bottom
+      -%}
     </div>
-    <div class="bf-hero__media">
-      {%- if section.settings.hero_image != blank -%}
-        <img src="{{ section.settings.hero_image | image_url: width: 900 }}" alt="BullRush Male Vitality Gummies" loading="eager">
-      {%- else -%}
-        {% render 'icon-bull', size: 240 %}
-      {%- endif -%}
+
+    <div class="bf-hero__rating bf-text-center" style="justify-content:center;">
+      <span class="bf-badge-placeholder">★★★★★ — reviews pending launch</span>
+    </div>
+
+    <div class="bf-cta-row" style="justify-content:center;">
+      <a href="#bf-purchase" class="bf-btn bf-btn--primary bf-btn--arrow">{{ section.settings.cta_label }} <span class="bf-btn__arrow">→</span></a>
+      <a href="{{ section.settings.secondary_url }}" class="bf-btn bf-btn--outline-dark">{{ section.settings.secondary_label }}</a>
     </div>
   </div>
 </section>
@@ -27,12 +34,28 @@
   "name": "Hero — Brand",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FUEL YOUR POWER" },
-    { "type": "text", "id": "headline", "label": "Headline", "default": "BRING BACK YOUR DRIVE." },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "info": "Wrap a word in <span class=\"bf-accent\">word</span> to highlight it in red, like the reference site's style.",
+      "default": "BRING BACK YOUR <span class=\"bf-accent\">DRIVE</span>."
+    },
     { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Premium daily gummies with saffron, Panax ginseng, maca, and vitamin B6, developed to support male vitality, energy, and everyday performance." },
     { "type": "text", "id": "cta_label", "label": "Primary CTA label", "default": "Choose Your Supply" },
     { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "Learn the Formula" },
     { "type": "url", "id": "secondary_url", "label": "Secondary CTA link" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero product image (temporary mockup until real photography exists)" }
+    { "type": "image_picker", "id": "hero_image", "label": "Hero product image (temporary mockup until real photography exists)" },
+    { "type": "header", "content": "Stat callouts (leave blank until real numbers exist)" },
+    { "type": "text", "id": "stat_1_number", "label": "Stat 1 number" },
+    { "type": "text", "id": "stat_1_label", "label": "Stat 1 label" },
+    { "type": "text", "id": "stat_2_number", "label": "Stat 2 number" },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 label" },
+    { "type": "header", "content": "Offer seal (only enable for a real, active promotion)" },
+    { "type": "checkbox", "id": "show_seal", "label": "Show offer seal", "default": false },
+    { "type": "text", "id": "seal_percent", "label": "Seal percentage", "default": "15" },
+    { "type": "text", "id": "seal_label_top", "label": "Seal top arc text", "default": "LAUNCH OFFER" },
+    { "type": "text", "id": "seal_label_bottom", "label": "Seal bottom arc text", "default": "SPECIAL OFFER" }
   ],
   "presets": [{ "name": "Hero — Brand" }]
 }
