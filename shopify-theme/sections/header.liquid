@@ -1,0 +1,60 @@
+{%- comment -%}
+  Auto-minimal on the DR landing page and the product offer page templates
+  (per the brief: those two surfaces should drop full nav to remove
+  distractions after the buy decision). Falls back to the manual
+  section setting on any other template.
+{%- endcomment -%}
+{%- liquid
+  assign is_focused_template = false
+  if template.suffix == 'landing-page' or template.suffix == 'offer'
+    assign is_focused_template = true
+  endif
+  assign minimal = section.settings.minimal_nav
+  if is_focused_template
+    assign minimal = true
+  endif
+-%}
+<header class="bf-header {% if minimal %}bf-header--minimal{% endif %}">
+  <div class="bf-header__inner">
+    <a href="/" aria-label="BullFuel home">
+      {% render 'logo-wordmark', background: 'dark', layout: 'horizontal' %}
+    </a>
+
+    {%- unless minimal -%}
+      <nav aria-label="Main">
+        <ul class="bf-header__nav">
+          {%- for link in section.settings.main_menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endunless -%}
+
+    <div class="bf-header__cart">
+      <a href="/cart" aria-label="Cart" class="bf-header__cart-icon">
+        {% render 'icon-bull', size: 0 %}
+        Cart <span data-bf-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "minimal_nav",
+      "label": "Minimal header (no nav links) — use on DR landing / offer pages",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

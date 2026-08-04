@@ -1,0 +1,22 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_bull_black": "#080808",
+      "color_graphite": "#151515",
+      "color_dark_surface": "#202020",
+      "color_bullfuel_red": "#D90912",
+      "color_action_red": "#F01823",
+      "color_deep_red": "#8D0B11",
+      "color_white": "#FFFFFF",
+      "color_off_white": "#F5F4F1",
+      "color_muted_grey": "#A5A5A5",
+      "font_display": "archivo_black_n4",
+      "font_body": "inter_n4",
+      "enable_sticky_cta": true,
+      "guarantee_text": "30-day satisfaction guarantee",
+      "shipping_note": "Free shipping on Subscribe & Save orders",
+      "logo_width": 160
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{% comment %}
+  Renders the BullFuel symbol. Uses a real uploaded logo image if present,
+  falls back to the temporary placeholder SVG otherwise.
+  Params: size (px, default 40), color (css color, default currentColor)
+{% endcomment %}
+{%- liquid
+  assign icon_size = size | default: 40
+  assign icon_color = color | default: 'currentColor'
+-%}
+{%- if settings.logo_symbol_only != blank -%}
+  <img
+    src="{{ settings.logo_symbol_only | image_url: width: icon_size | times: 2 }}"
+    width="{{ icon_size }}"
+    height="{{ icon_size }}"
+    alt="BullFuel"
+    loading="lazy"
+    class="bf-icon-bull"
+  >
+{%- else -%}
+  <span class="bf-icon-bull bf-icon-bull--placeholder" style="width:{{ icon_size }}px;height:{{ icon_size }}px;color:{{ icon_color }};">
+    {{ 'bull-symbol-placeholder.svg' | inline_asset_content }}
+  </span>
+{%- endif -%}

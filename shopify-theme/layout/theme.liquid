@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>
+    {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+  {%- comment -%} Favicon: derived from the symbol-only mark; falls back to a generated placeholder until the real logo is uploaded. {%- endcomment -%}
+  {%- if settings.logo_symbol_only != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.logo_symbol_only | image_url: width: 32 }}">
+  {%- endif -%}
+
+  {{ content_for_header }}
+
+  <style>
+    :root{
+      --bf-black: {{ settings.color_bull_black }};
+      --bf-graphite: {{ settings.color_graphite }};
+      --bf-dark-surface: {{ settings.color_dark_surface }};
+      --bf-red: {{ settings.color_bullfuel_red }};
+      --bf-action-red: {{ settings.color_action_red }};
+      --bf-deep-red: {{ settings.color_deep_red }};
+      --bf-white: {{ settings.color_white }};
+      --bf-off-white: {{ settings.color_off_white }};
+      --bf-muted-grey: {{ settings.color_muted_grey }};
+      --bf-font-display: {{ settings.font_display.family }}, {{ settings.font_display.fallback_families }};
+      --bf-font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+    }
+  </style>
+  {{ settings.font_display | font_face: font_display: 'swap' }}
+  {{ settings.font_body | font_face: font_display: 'swap' }}
+
+  {{ 'bullfuel.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="template-{{ request.page_type }}">
+  <a class="bf-skip-link" href="#MainContent">Skip to content</a>
+
+  {% section 'header' %}
+
+  <main id="MainContent" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  {% if settings.enable_sticky_cta %}
+    {% section 'sticky-mobile-cta' %}
+  {% endif %}
+
+  <script src="{{ 'bullfuel.js' | asset_url }}" defer></script>
+</body>
+</html>

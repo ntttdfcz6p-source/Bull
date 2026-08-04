@@ -1,0 +1,25 @@
+<section class="bf-section bf-bg-black" id="bf-purchase">
+  <div class="bf-container" style="max-width:820px;">
+    <div class="bf-text-center" style="margin-bottom:32px;">
+      <span class="bf-eyebrow">Choose Your Supply</span>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    {%- if section.settings.product != blank -%}
+      {%- render 'purchase-module', product: section.settings.product, heading_override: section.settings.product_name -%}
+    {%- else -%}
+      <p class="bf-placeholder-note bf-text-center">[PLACEHOLDER — select the BullFuel Male Vitality Gummies product in this section's settings to render live pricing]</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pricing & purchase module",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One product. One decision." },
+    { "type": "product", "id": "product", "label": "Flagship product (BullFuel Male Vitality Gummies)" },
+    { "type": "text", "id": "product_name", "label": "Product name override" }
+  ],
+  "presets": [{ "name": "Pricing & purchase module" }]
+}
+{% endschema %}

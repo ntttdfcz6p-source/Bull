@@ -1,0 +1,52 @@
+<section class="bf-section" style="background:linear-gradient(180deg,var(--bf-black),var(--bf-deep-red));color:var(--bf-white);">
+  <div class="bf-container bf-text-center">
+    <span class="bf-eyebrow">New Subscribers</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <p class="bf-max-640" style="margin:0 auto 24px;">{{ section.settings.body }}</p>
+    <div class="bf-grid-3 bf-max-640" style="margin:0 auto 24px;">
+      {%- for block in section.blocks -%}
+        <div class="bf-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);">
+          <p style="margin:0;font-weight:700;">{{ block.settings.item }}</p>
+          <p class="bf-muted" style="margin:6px 0 0;font-size:0.8rem;">{{ block.settings.value_note }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+    <a href="#bf-purchase" class="bf-btn bf-btn--primary">{{ section.settings.cta_label }}</a>
+    <p class="bf-muted" style="font-size:0.72rem;max-width:560px;margin:16px auto 0;">{{ section.settings.terms_note }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Welcome offer",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The BullFuel Start Kit" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "New Subscribe & Save orders start with the Start Kit — real value, clearly disclosed." },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Start Your Routine" },
+    {
+      "type": "textarea",
+      "id": "terms_note",
+      "label": "Terms note",
+      "default": "Available on a new Subscribe & Save order only, one per customer. After the first shipment, your subscription renews at the recurring price shown at checkout. Skip, pause, or cancel anytime."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Included item",
+      "settings": [
+        { "type": "text", "id": "item", "label": "Item" },
+        { "type": "text", "id": "value_note", "label": "Value note" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "item", "settings": { "item": "Intro subscriber price on your first shipment", "value_note": "See pricing above" } },
+      { "type": "item", "settings": { "item": "Free branded travel case", "value_note": "[PLACEHOLDER value — pending sourcing]" } },
+      { "type": "item", "settings": { "item": "Bonus digital Men's Daily Performance Guide", "value_note": "[PLACEHOLDER value]" } }
+    ]
+  },
+  "presets": [{ "name": "Welcome offer" }]
+}
+{% endschema %}

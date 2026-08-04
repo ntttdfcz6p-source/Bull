@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "main_offer": { "type": "main-product-offer" },
+    "ingredients": {
+      "type": "ingredient-education",
+      "settings": { "heading": "What's in your bottle" }
+    },
+    "product_proof": { "type": "product-proof" },
+    "faq": {
+      "type": "faq",
+      "settings": { "heading": "Subscription & product questions" }
+    }
+  },
+  "order": [
+    "main_offer",
+    "ingredients",
+    "product_proof",
+    "faq"
+  ]
+}

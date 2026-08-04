@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="BullFuel bull symbol (temporary placeholder)">
+  <!-- TEMPORARY PLACEHOLDER MARK — swap for the real BullFuel logo vector when supplied. Geometric, minimal, built to the brief's spec: power/control/forward-movement, not aggression. -->
+  <g fill="currentColor">
+    <!-- horns -->
+    <path d="M14 30 L34 46 L28 54 L6 40 Z" />
+    <path d="M106 30 L86 46 L92 54 L114 40 Z" />
+    <!-- head -->
+    <path d="M60 34
+             C78 34 92 46 92 64
+             C92 82 78 94 60 94
+             C42 94 28 82 28 64
+             C28 46 42 34 60 34 Z" />
+  </g>
+  <g fill="#F5F4F1">
+    <!-- muzzle notch to keep the mark from reading as a solid blob at small sizes -->
+    <path d="M60 70 C67 70 73 75 73 82 C73 88 67 92 60 92 C53 92 47 88 47 82 C47 75 53 70 60 70 Z" />
+  </g>
+  <g fill="currentColor">
+    <circle cx="49" cy="80" r="3" />
+    <circle cx="71" cy="80" r="3" />
+  </g>
+</svg>

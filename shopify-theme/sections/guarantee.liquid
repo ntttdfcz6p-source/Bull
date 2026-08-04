@@ -1,0 +1,17 @@
+<section class="bf-section bf-bg-white bf-text-center">
+  <div class="bf-container bf-max-640">
+    <h2>{{ section.settings.heading }}</h2>
+    <p class="bf-muted">{{ section.settings.body }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Guarantee",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "30-Day Guarantee" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "If BullFuel isn't right for you, contact us within 30 days of delivery for a refund on your first order. Full terms at /pages/guarantee." }
+  ],
+  "presets": [{ "name": "Guarantee" }]
+}
+{% endschema %}

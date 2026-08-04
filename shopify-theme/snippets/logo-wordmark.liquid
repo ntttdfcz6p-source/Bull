@@ -1,0 +1,39 @@
+{% comment %}
+  Renders the BullFuel wordmark lockup. Uses a real uploaded logo image if
+  present for the requested background/orientation, otherwise falls back to
+  a temporary text + placeholder-symbol lockup.
+  Params:
+    background: "dark" | "light" (default "dark")
+    layout: "horizontal" | "stacked" (default "horizontal")
+{% endcomment %}
+{%- liquid
+  assign bg = background | default: 'dark'
+  assign lay = layout | default: 'horizontal'
+  if bg == 'light'
+    if lay == 'stacked'
+      assign logo_image = settings.logo_stacked_light_bg
+    else
+      assign logo_image = settings.logo_horizontal_light_bg
+    endif
+  else
+    if lay == 'stacked'
+      assign logo_image = settings.logo_stacked_dark_bg
+    else
+      assign logo_image = settings.logo_horizontal_dark_bg
+    endif
+  endif
+-%}
+{%- if logo_image != blank -%}
+  <img
+    src="{{ logo_image | image_url: width: settings.logo_width | times: 2 }}"
+    width="{{ settings.logo_width }}"
+    alt="BullFuel"
+    loading="eager"
+    class="bf-logo bf-logo--{{ lay }}"
+  >
+{%- else -%}
+  <span class="bf-logo bf-logo--placeholder bf-logo--{{ lay }} bf-logo--{{ bg }}">
+    {% render 'icon-bull', size: 32 %}
+    <span class="bf-logo__wordmark">BULLFUEL</span>
+  </span>
+{%- endif -%}

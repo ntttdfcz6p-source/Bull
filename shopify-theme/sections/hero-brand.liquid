@@ -1,0 +1,39 @@
+<section class="bf-section bf-bg-black bf-hero" data-bf-hero>
+  <div class="bf-container bf-hero__grid">
+    <div>
+      <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1>{{ section.settings.headline }}</h1>
+      <p style="max-width:520px;">{{ section.settings.subheadline }}</p>
+      <div class="bf-cta-row">
+        <a href="#bf-purchase" class="bf-btn bf-btn--primary">{{ section.settings.cta_label }}</a>
+        <a href="{{ section.settings.secondary_url }}" class="bf-btn bf-btn--outline-dark">{{ section.settings.secondary_label }}</a>
+      </div>
+      <div class="bf-hero__rating">
+        <span class="bf-badge-placeholder">★★★★★ — reviews pending launch</span>
+      </div>
+    </div>
+    <div class="bf-hero__media">
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 900 }}" alt="BullFuel Male Vitality Gummies" loading="eager">
+      {%- else -%}
+        {% render 'icon-bull', size: 240, color: '#D90912' %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero — Brand",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FUEL YOUR EDGE" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "BRING BACK YOUR DRIVE." },
+    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Premium daily gummies with saffron, Panax ginseng, maca, and vitamin B6, developed to support male vitality, energy, and everyday performance." },
+    { "type": "text", "id": "cta_label", "label": "Primary CTA label", "default": "Choose Your Supply" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "Learn the Formula" },
+    { "type": "url", "id": "secondary_url", "label": "Secondary CTA link" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero product image (temporary mockup until real photography exists)" }
+  ],
+  "presets": [{ "name": "Hero — Brand" }]
+}
+{% endschema %}

@@ -1,0 +1,169 @@
+{% comment %}
+  BullFuel purchase module — shared across the homepage, the DR landing page,
+  and the product offer page so pricing logic only lives in one place.
+
+  Expects `product` (the BullFuel Male Vitality Gummies product object) with:
+    - Variants using Option 1 = "Bundle" with values "1 Bottle" / "3 Bottles" / "6 Bottles"
+    - A selling plan group (native Shopify Subscriptions or an app like Recharge)
+      named "Subscribe & Save" attached to each variant, so
+      variant.selling_plan_allocations exists for the subscribe tab.
+  If selling plans aren't configured yet, the Subscribe tab still renders using
+  the variant's own price so the page never breaks — swap in real selling
+  plan pricing once subscriptions are configured in the admin.
+
+  Param: heading_override (optional string)
+{% endcomment %}
+
+{%- liquid
+  assign one_time_variants = product.variants
+  assign reference_variant = product.variants.first
+  assign reference_price = reference_variant.price
+-%}
+
+<div class="bf-purchase" data-bf-purchase>
+  <div class="bf-purchase__head">
+    <div>
+      <h3>{{ heading_override | default: product.title | default: 'BullFuel Male Vitality Gummies' }}</h3>
+      <p class="bf-muted" style="margin:0;font-size:0.85rem;">Premium male vitality support in a daily gummy format.</p>
+    </div>
+    <div class="bf-purchase__rating">
+      {% comment %} [PLACEHOLDER — awaiting verified reviews at launch] {% endcomment %}
+      <span class="bf-badge-placeholder">★★★★★ — reviews pending launch</span>
+    </div>
+  </div>
+
+  <div class="bf-purchase__tabs" role="tablist">
+    <button type="button" class="bf-tab" role="tab" data-bf-tab="one-time" aria-selected="true">One-Time Purchase</button>
+    <button type="button" class="bf-tab" role="tab" data-bf-tab="subscribe" aria-selected="false">Subscribe &amp; Save</button>
+  </div>
+
+  {%- form 'product', product, data-bf-purchase-form: true -%}
+    <input type="hidden" name="id" value="{{ reference_variant.id }}">
+    <input type="hidden" name="selling_plan" value="" disabled>
+
+    <!-- ONE-TIME PANEL -->
+    <div class="bf-tab-panel" data-bf-tab-panel="one-time" data-active="true">
+      <div class="bf-tiers">
+        {%- for variant in one_time_variants -%}
+          {%- liquid
+            assign bundle_count = 1
+            if variant.option1 contains '3'
+              assign bundle_count = 3
+            elsif variant.option1 contains '6'
+              assign bundle_count = 6
+            endif
+            assign per_bottle = variant.price | divided_by: bundle_count
+            assign per_day = per_bottle | divided_by: 30
+            assign savings = reference_price | times: bundle_count | minus: variant.price
+            assign is_recommended = false
+            if bundle_count == 6
+              assign is_recommended = true
+            endif
+          -%}
+          <button
+            type="button"
+            class="bf-tier"
+            data-bf-tier
+            data-variant-id="{{ variant.id }}"
+            data-selling-plan-id=""
+            data-price-main="{{ variant.price | money }}"
+            data-price-sub="{{ per_day | money }} / day"
+            aria-pressed="{% if bundle_count == 6 %}true{% else %}false{% endif %}"
+          >
+            <div class="bf-tier__row">
+              <span class="bf-tier__name">
+                {% case bundle_count %}
+                  {% when 1 %}1 Bottle<span class="bf-tier__identity">Start the Routine</span>
+                  {% when 3 %}3 Bottles<span class="bf-tier__identity">Build Consistency</span>
+                  {% when 6 %}6 Bottles<span class="bf-tier__identity">Commit to the Protocol</span>
+                {% endcase %}
+                {% if is_recommended %} {% render 'badge-recommended', label: 'Best Value' %}{% endif %}
+              </span>
+              <span class="bf-tier__price">
+                <span class="bf-tier__price-main">{{ variant.price | money }}</span>
+                <span class="bf-tier__price-sub">{{ per_bottle | money }} / bottle</span>
+              </span>
+            </div>
+            <div class="bf-tier__meta">
+              <span>{{ per_day | money }} / day*</span>
+              {% if savings > 0 %}<span>Save {{ savings | money }}</span>{% endif %}
+              <span>[PLACEHOLDER: supply duration pending confirmed serving size]</span>
+            </div>
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- SUBSCRIBE & SAVE PANEL -->
+    <div class="bf-tab-panel" data-bf-tab-panel="subscribe" data-active="false">
+      <div class="bf-tiers">
+        {%- for variant in one_time_variants -%}
+          {%- liquid
+            assign bundle_count = 1
+            if variant.option1 contains '3'
+              assign bundle_count = 3
+            elsif variant.option1 contains '6'
+              assign bundle_count = 6
+            endif
+            assign sub_allocation = variant.selling_plan_allocations.first
+            if sub_allocation
+              assign sub_price = sub_allocation.price
+            else
+              assign sub_price = variant.price | times: 0.85
+            endif
+            assign per_bottle = sub_price | divided_by: bundle_count
+            assign per_day = per_bottle | divided_by: 30
+            assign savings = reference_price | times: bundle_count | minus: sub_price
+            assign is_recommended = false
+            if bundle_count == 6
+              assign is_recommended = true
+            endif
+          -%}
+          <button
+            type="button"
+            class="bf-tier"
+            data-bf-tier
+            data-variant-id="{{ variant.id }}"
+            data-selling-plan-id="{{ sub_allocation.selling_plan_id }}"
+            data-price-main="{{ sub_price | money }}"
+            data-price-sub="{{ per_day | money }} / day"
+            aria-pressed="{% if bundle_count == 6 %}true{% else %}false{% endif %}"
+          >
+            <div class="bf-tier__row">
+              <span class="bf-tier__name">
+                {% case bundle_count %}
+                  {% when 1 %}1 Bottle<span class="bf-tier__identity">Stay Fuelled</span>
+                  {% when 3 %}3 Bottles<span class="bf-tier__identity">Stay Fuelled</span>
+                  {% when 6 %}6 Bottles<span class="bf-tier__identity">Stay Fuelled</span>
+                {% endcase %}
+                {% if is_recommended %} {% render 'badge-recommended', label: 'Best Ongoing Value' %}{% endif %}
+              </span>
+              <span class="bf-tier__price">
+                <span class="bf-tier__price-main">{{ sub_price | money }}</span>
+                <span class="bf-tier__price-sub">{{ per_bottle | money }} / bottle</span>
+              </span>
+            </div>
+            <div class="bf-tier__meta">
+              <span>{{ per_day | money }} / day*</span>
+              {% if savings > 0 %}<span>Save {{ savings | money }}</span>{% endif %}
+              <span>Ships every 30 days**</span>
+            </div>
+          </button>
+        {%- endfor -%}
+      </div>
+      <p class="bf-purchase__disclosure">
+        Subscribe &amp; Save renews automatically at the recurring price shown above, shipped at the frequency selected.
+        Skip, pause, or cancel anytime from your account before the next billing date. First-order welcome pricing (if applicable) applies to the initial shipment only —
+        <a href="/pages/subscription-terms">view full subscription terms</a>.
+      </p>
+    </div>
+
+    <div class="bf-purchase__notes">
+      <span>* Per-day price uses an illustrative 30-day supply — [PLACEHOLDER: confirm against final label serving size].</span>
+      <span>** {{ settings.shipping_note }}</span>
+      <span>{{ settings.guarantee_text }} — <a href="/pages/guarantee" style="color:inherit;">details</a></span>
+    </div>
+
+    <button type="submit" class="bf-btn bf-btn--primary bf-btn--block" data-bf-add-to-cart>Add to Cart</button>
+  {%- endform -%}
+</div>

@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "dr_hero": { "type": "dr-hero" },
+    "dr_proof": { "type": "dr-proof-stack" },
+    "dr_offer": { "type": "dr-offer-stack" },
+    "dr_objections": { "type": "dr-objections" },
+    "dr_final_cta": { "type": "dr-final-cta" }
+  },
+  "order": [
+    "dr_hero",
+    "dr_proof",
+    "dr_offer",
+    "dr_objections",
+    "dr_final_cta"
+  ]
+}

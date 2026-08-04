@@ -1,0 +1,58 @@
+<section class="bf-section bf-bg-white">
+  <div class="bf-container">
+    <h1>{{ section.settings.heading }}</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <p class="bf-muted">Your cart is empty.</p>
+      <a href="{{ section.settings.empty_cart_cta_url }}" class="bf-btn bf-btn--outline-light">{{ section.settings.empty_cart_cta_label }}</a>
+    {%- else -%}
+      {%- form 'cart', cart -%}
+        <div class="bf-cart-lines">
+          {%- for item in cart.items -%}
+            <div class="bf-cart-line" style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid #e7e5e0;align-items:center;">
+              <div style="width:80px;height:80px;background:var(--bf-off-white);border-radius:6px;overflow:hidden;">
+                {%- if item.image -%}<img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}">{%- endif -%}
+              </div>
+              <div style="flex:1;">
+                <p style="margin:0;font-weight:600;">{{ item.product.title }}</p>
+                <p class="bf-muted" style="margin:2px 0 0;font-size:0.85rem;">{{ item.variant.title }}</p>
+                {%- if item.selling_plan_allocation -%}
+                  <p class="bf-muted" style="margin:2px 0 0;font-size:0.8rem;">Subscribe & Save — {{ item.selling_plan_allocation.selling_plan.name }}</p>
+                {%- endif -%}
+              </div>
+              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:60px;">
+              <div style="min-width:90px;text-align:right;font-family:var(--bf-font-display);">{{ item.final_line_price | money }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="bf-cart-summary" style="display:flex;justify-content:space-between;align-items:center;margin-top:24px;">
+          <div>
+            <p class="bf-muted" style="margin:0;font-size:0.85rem;">{{ section.settings.shipping_note }}</p>
+            <p style="margin:4px 0 0;font-family:var(--bf-font-display);font-size:1.2rem;">Subtotal: {{ cart.total_price | money }}</p>
+          </div>
+          <div style="display:flex;gap:12px;">
+            <button type="submit" name="update" class="bf-btn bf-btn--outline-light">Update Cart</button>
+            <button type="submit" name="checkout" class="bf-btn bf-btn--primary">Checkout</button>
+          </div>
+        </div>
+      {%- endform -%}
+
+      <div class="bf-cart-upsell-slot bf-mt-32">
+        <p class="bf-placeholder-note">[PLACEHOLDER — future complementary product upsell slot. See /strategy/10-cart-checkout-upsells.md. Intentionally empty until a real second SKU exists.]</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your Cart" },
+    { "type": "text", "id": "shipping_note", "label": "Shipping note", "default": "Free shipping on Subscribe & Save orders." },
+    { "type": "text", "id": "empty_cart_cta_label", "label": "Empty cart CTA label", "default": "Choose Your Supply" },
+    { "type": "url", "id": "empty_cart_cta_url", "label": "Empty cart CTA URL" }
+  ]
+}
+{% endschema %}

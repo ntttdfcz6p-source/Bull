@@ -1,0 +1,41 @@
+<section class="bf-section bf-bg-white">
+  <div class="bf-container">
+    <span class="bf-eyebrow">Proof</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="bf-grid-3 bf-mt-32">
+      {%- for block in section.blocks -%}
+        <div class="bf-card">
+          <h3>{{ block.settings.title }}</h3>
+          <p class="bf-placeholder-note">{{ block.settings.status_text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product proof",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Formula transparency and manufacturing standards" }
+  ],
+  "blocks": [
+    {
+      "type": "proof_item",
+      "name": "Proof item",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "status_text", "label": "Status text" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "proof_item", "settings": { "title": "Manufacturing standard", "status_text": "[PLACEHOLDER — awaiting GMP facility certification document from manufacturer]" } },
+      { "type": "proof_item", "settings": { "title": "Third-party testing", "status_text": "[PLACEHOLDER — awaiting Certificate of Analysis]" } },
+      { "type": "proof_item", "settings": { "title": "Ingredient sourcing", "status_text": "[PLACEHOLDER — awaiting sourcing documentation for saffron, Panax ginseng, maca]" } }
+    ]
+  },
+  "presets": [{ "name": "Product proof" }]
+}
+{% endschema %}

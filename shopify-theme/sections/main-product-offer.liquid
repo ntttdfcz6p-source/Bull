@@ -1,0 +1,50 @@
+{% comment %}
+  Product Offer Page — the focused decision surface. Renders on the
+  `product.offer` template (Shopify admin: assign this template to the
+  BullFuel Male Vitality Gummies product, or set it as the product's
+  default template). Uses the native `product` object since this section
+  only ever renders inside a product template context.
+{% endcomment %}
+<section class="bf-section bf-bg-white">
+  <div class="bf-container">
+    <div class="bf-offer-grid" style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;">
+      <div>
+        <div class="bf-hero__media" style="aspect-ratio:1/1;">
+          {%- if product.featured_media != blank -%}
+            <img src="{{ product.featured_media | image_url: width: 900 }}" alt="{{ product.title | escape }}" loading="eager">
+          {%- else -%}
+            {% render 'icon-bull', size: 220, color: '#D90912' %}
+          {%- endif -%}
+        </div>
+        {%- if product.media.size > 1 -%}
+          <div class="bf-grid-4" style="margin-top:16px;">
+            {%- for media in product.media limit: 4 -%}
+              <div class="bf-hero__media" style="aspect-ratio:1/1;">
+                <img src="{{ media | image_url: width: 200 }}" alt="{{ product.title | escape }}" loading="lazy">
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+        <p class="bf-placeholder-note bf-mt-32">{{ section.settings.gallery_note }}</p>
+      </div>
+
+      <div>
+        {%- render 'purchase-module', product: product -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product offer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "gallery_note",
+      "label": "Gallery note",
+      "default": "Product photography shown is a temporary mockup — see /strategy/13-product-mockup-prompts.md. Not final packaging."
+    }
+  ]
+}
+{% endschema %}

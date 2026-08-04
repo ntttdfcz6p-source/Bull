@@ -1,0 +1,42 @@
+<section class="bf-section bf-bg-white">
+  <div class="bf-container">
+    <span class="bf-eyebrow">How It Works</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="bf-grid-3 bf-mt-32">
+      {%- for block in section.blocks -%}
+        <div class="bf-card">
+          <div class="bf-card__number">{{ forloop.index }}</div>
+          <h3>{{ block.settings.title }}</h3>
+          <p class="bf-muted">{{ block.settings.body }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How it works",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built for consistency, not a quick fix" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "step", "settings": { "title": "Take your daily dose", "body": "[PLACEHOLDER: exact serving size pending final label]." } },
+      { "type": "step", "settings": { "title": "Build the routine", "body": "Consistency is the mechanism — subscription is built around this, not a one-off try." } },
+      { "type": "step", "settings": { "title": "Notice the difference", "body": "[PLACEHOLDER: timeframe language pending real customer/survey data — do not publish an unverified timeframe claim]." } }
+    ]
+  },
+  "presets": [{ "name": "How it works" }]
+}
+{% endschema %}

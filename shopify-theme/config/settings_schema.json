@@ -1,0 +1,125 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "BullFuel",
+    "theme_version": "0.1.0",
+    "theme_author": "BullFuel",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logo lockups"
+      },
+      {
+        "type": "paragraph",
+        "content": "Upload each lockup once. Every section pulls the correct version automatically based on its background. Until real files are uploaded, the theme falls back to the built-in placeholder bull symbol + text wordmark."
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_horizontal_dark_bg",
+        "label": "Horizontal logo — for dark backgrounds"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_horizontal_light_bg",
+        "label": "Horizontal logo — for light backgrounds"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_stacked_dark_bg",
+        "label": "Stacked logo — for dark backgrounds"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_stacked_light_bg",
+        "label": "Stacked logo — for light backgrounds"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_symbol_only",
+        "label": "Symbol only (bull head) — used in mobile header, favicon source"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 80,
+        "max": 260,
+        "step": 10,
+        "unit": "px",
+        "label": "Desktop header logo width",
+        "default": 160
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "BullFuel palette"
+      },
+      { "type": "color", "id": "color_bull_black", "label": "Bull Black", "default": "#080808" },
+      { "type": "color", "id": "color_graphite", "label": "Graphite", "default": "#151515" },
+      { "type": "color", "id": "color_dark_surface", "label": "Dark Surface", "default": "#202020" },
+      { "type": "color", "id": "color_bullfuel_red", "label": "BullFuel Red", "default": "#D90912" },
+      { "type": "color", "id": "color_action_red", "label": "Bright Action Red", "default": "#F01823" },
+      { "type": "color", "id": "color_deep_red", "label": "Deep Red", "default": "#8D0B11" },
+      { "type": "color", "id": "color_white", "label": "White", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_off_white", "label": "Warm Off-White", "default": "#F5F4F1" },
+      { "type": "color", "id": "color_muted_grey", "label": "Muted Grey", "default": "#A5A5A5" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_display",
+        "label": "Display / headline font",
+        "default": "archivo_black_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body / UI font",
+        "default": "inter_n4"
+      }
+    ]
+  },
+  {
+    "name": "Cart & Purchase",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_sticky_cta",
+        "label": "Enable sticky mobile purchase bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "guarantee_text",
+        "label": "Guarantee note shown in purchase module",
+        "default": "30-day satisfaction guarantee"
+      },
+      {
+        "type": "text",
+        "id": "shipping_note",
+        "label": "Shipping note shown in purchase module",
+        "default": "Free shipping on Subscribe & Save orders"
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      { "type": "header", "content": "Social links (footer)" },
+      { "type": "url", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "url", "id": "social_tiktok", "label": "TikTok URL" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube URL" }
+    ]
+  }
+]

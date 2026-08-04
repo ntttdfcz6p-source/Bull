@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "hero": { "type": "hero-brand" },
+    "positioning": { "type": "positioning-statement" },
+    "product_intro": { "type": "product-intro" },
+    "problem_proof": { "type": "problem-proof" },
+    "how_it_works": { "type": "how-it-works" },
+    "ingredients": { "type": "ingredient-education" },
+    "product_proof": { "type": "product-proof" },
+    "reviews": { "type": "reviews-ugc" },
+    "pricing": { "type": "pricing-bundles" },
+    "welcome_offer": { "type": "welcome-offer" },
+    "guarantee": { "type": "guarantee" },
+    "faq": { "type": "faq" },
+    "final_cta": { "type": "final-cta" }
+  },
+  "order": [
+    "hero",
+    "positioning",
+    "product_intro",
+    "problem_proof",
+    "how_it_works",
+    "ingredients",
+    "product_proof",
+    "reviews",
+    "pricing",
+    "welcome_offer",
+    "guarantee",
+    "faq",
+    "final_cta"
+  ]
+}

@@ -1,0 +1,47 @@
+<section class="bf-section bf-bg-offwhite">
+  <div class="bf-container bf-max-640">
+    <span class="bf-eyebrow">FAQ</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <div>
+      {%- for block in section.blocks -%}
+        <div class="bf-accordion__item" data-bf-accordion-item>
+          <button type="button" class="bf-accordion__trigger" data-bf-accordion-trigger aria-expanded="false">
+            <span>{{ block.settings.question }}</span>
+            <span class="bf-accordion__icon">+</span>
+          </button>
+          <div class="bf-accordion__panel" data-bf-accordion-panel data-open="false">
+            <p class="bf-muted">{{ block.settings.answer }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions, answered" }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "faq_item", "settings": { "question": "How does Subscribe & Save work?", "answer": "You're charged the subscriber price shown at checkout, shipped at your selected frequency. You can skip, pause, or cancel anytime from your account before the next billing date." } },
+      { "type": "faq_item", "settings": { "question": "What's in BullFuel Male Vitality Gummies?", "answer": "Saffron, Panax ginseng, maca, and vitamin B6. Full Supplement Facts panel is available at /pages/supplement-facts once finalized." } },
+      { "type": "faq_item", "settings": { "question": "Is this safe?", "answer": "[PLACEHOLDER — insert safety/interaction guidance reviewed by a qualified professional before publishing]." } },
+      { "type": "faq_item", "settings": { "question": "What's your shipping and returns policy?", "answer": "See /pages/shipping and /pages/guarantee for full details." } }
+    ]
+  },
+  "presets": [{ "name": "FAQ" }]
+}
+{% endschema %}

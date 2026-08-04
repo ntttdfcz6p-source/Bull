@@ -1,0 +1,40 @@
+<section class="bf-section bf-bg-white bf-text-center">
+  <div class="bf-container">
+    <p class="bf-max-640" style="font-family:var(--bf-font-display);text-transform:uppercase;font-size:1.3rem;">
+      {{ section.settings.statement }}
+    </p>
+    <div class="bf-grid-3 bf-mt-32">
+      {%- for block in section.blocks -%}
+        <div class="bf-card">
+          <p style="margin:0;font-weight:600;">{{ block.settings.trust_line }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Positioning statement",
+  "settings": [
+    { "type": "textarea", "id": "statement", "label": "Positioning line", "default": "Premium male vitality support in a daily gummy format." }
+  ],
+  "blocks": [
+    {
+      "type": "trust_point",
+      "name": "Trust point",
+      "settings": [
+        { "type": "text", "id": "trust_line", "label": "Trust line", "default": "[PLACEHOLDER — pending verified manufacturing documentation]" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "trust_point", "settings": { "trust_line": "[PLACEHOLDER — GMP facility documentation]" } },
+      { "type": "trust_point", "settings": { "trust_line": "[PLACEHOLDER — third-party testing]" } },
+      { "type": "trust_point", "settings": { "trust_line": "Transparent formula, no proprietary blends" } }
+    ]
+  },
+  "presets": [{ "name": "Positioning statement" }]
+}
+{% endschema %}

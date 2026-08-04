@@ -1,0 +1,51 @@
+<section class="bf-section bf-bg-black">
+  <div class="bf-container">
+    <span class="bf-eyebrow">Context</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <p class="bf-muted bf-max-640" style="margin-bottom:32px;">{{ section.settings.framing_note }}</p>
+    <div class="bf-grid-3">
+      {%- for block in section.blocks -%}
+        <div class="bf-proof-item">
+          <span class="bf-proof-item__mark">—</span>
+          <div>
+            <p style="margin:0 0 6px;">{{ block.settings.stat }}</p>
+            <span class="bf-cite bf-muted">Source: {{ block.settings.source | default: '[PLACEHOLDER — citation required before publishing]' }}</span>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Problem proof",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The everyday reality for a lot of men" },
+    {
+      "type": "textarea",
+      "id": "framing_note",
+      "label": "Framing note (keeps this separate from BullFuel outcome claims — do not remove)",
+      "default": "These are general population statistics, not a claim about what BullFuel itself produces for any individual."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        { "type": "textarea", "id": "stat", "label": "Statistic", "default": "[PLACEHOLDER — insert a credible, cited statistic on adult male fatigue/stress/energy decline]" },
+        { "type": "text", "id": "source", "label": "Source citation (required)" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "stat", "settings": {} },
+      { "type": "stat", "settings": {} },
+      { "type": "stat", "settings": {} }
+    ]
+  },
+  "presets": [{ "name": "Problem proof" }]
+}
+{% endschema %}

@@ -1,0 +1,53 @@
+<section class="bf-section bf-bg-graphite">
+  <div class="bf-container">
+    <span class="bf-eyebrow">The Formula</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="bf-grid-4 bf-mt-32">
+      {%- for block in section.blocks -%}
+        <div class="bf-card">
+          <h3>{{ block.settings.name }}</h3>
+          <p class="bf-muted" style="font-size:0.85rem;">{{ block.settings.role }}</p>
+          <p class="bf-badge-placeholder" style="margin-top:10px;">{{ block.settings.amount_placeholder }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+    <p class="bf-muted" style="margin-top:20px;font-size:0.8rem;">
+      {{ section.settings.footnote }} <a href="/pages/supplement-facts" style="color:var(--bf-white);">View full Supplement Facts panel</a>
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ingredient education",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What's actually in it" },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "Exact amounts per serving are pending the final, regulator-reviewed Supplement Facts panel — do not publish specific mg/mcg amounts until confirmed."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Ingredient name" },
+        { "type": "textarea", "id": "role", "label": "Role / why it's included" },
+        { "type": "text", "id": "amount_placeholder", "label": "Amount (placeholder until confirmed)", "default": "[PLACEHOLDER amount]" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "ingredient", "settings": { "name": "Saffron", "role": "Included for its role in everyday mood and wellbeing support." } },
+      { "type": "ingredient", "settings": { "name": "Panax Ginseng", "role": "A traditionally used adaptogen included for energy and vitality support." } },
+      { "type": "ingredient", "settings": { "name": "Maca", "role": "Included for its traditional association with stamina and vitality." } },
+      { "type": "ingredient", "settings": { "name": "Vitamin B6", "role": "Supports normal energy-yielding metabolism." } }
+    ]
+  },
+  "presets": [{ "name": "Ingredient education" }]
+}
+{% endschema %}

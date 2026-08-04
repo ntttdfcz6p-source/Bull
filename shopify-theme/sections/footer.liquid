@@ -1,0 +1,82 @@
+{%- liquid
+  assign minimal_footer = section.settings.minimal_footer
+  if template.suffix == 'landing-page'
+    assign minimal_footer = true
+  endif
+-%}
+<footer class="bf-footer">
+  <div class="bf-container">
+    {%- unless minimal_footer -%}
+      <div class="bf-footer__grid">
+        <div>
+          {% render 'logo-wordmark', background: 'dark', layout: 'stacked' %}
+          <p class="bf-muted" style="font-size:0.8rem;margin-top:16px;">{{ section.settings.footer_blurb }}</p>
+        </div>
+        <div>
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="{{ section.settings.product_url }}">Male Vitality Gummies</a></li>
+            <li><a href="/pages/subscription-terms">Subscription Terms</a></li>
+            <li><a href="/pages/guarantee">Guarantee</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Company</h3>
+          <ul>
+            <li><a href="/pages/about">About BullFuel</a></li>
+            <li><a href="/pages/ingredients">Ingredients</a></li>
+            <li><a href="/pages/contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Follow</h3>
+          <ul>
+            {% if settings.social_instagram != blank %}<li><a href="{{ settings.social_instagram }}">Instagram</a></li>{% endif %}
+            {% if settings.social_tiktok != blank %}<li><a href="{{ settings.social_tiktok }}">TikTok</a></li>{% endif %}
+            {% if settings.social_youtube != blank %}<li><a href="{{ settings.social_youtube }}">YouTube</a></li>{% endif %}
+          </ul>
+        </div>
+      </div>
+    {%- else -%}
+      <div style="margin-bottom:24px;">{% render 'logo-wordmark', background: 'dark', layout: 'horizontal' %}</div>
+    {%- endunless -%}
+
+    <div class="bf-footer__legal">
+      <p>&copy; {{ 'now' | date: '%Y' }} BullFuel. All rights reserved.</p>
+      <p class="bf-footer__disclaimer">
+        {{ section.settings.regulatory_disclaimer }}
+      </p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "minimal_footer",
+      "label": "Minimal footer (legal links only) — use on DR landing page",
+      "default": false
+    },
+    {
+      "type": "textarea",
+      "id": "footer_blurb",
+      "label": "Footer blurb",
+      "default": "Premium male vitality support in a daily gummy format."
+    },
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "Flagship product URL"
+    },
+    {
+      "type": "textarea",
+      "id": "regulatory_disclaimer",
+      "label": "Regulatory disclaimer (requires legal review before launch — see /strategy/14-facts-placeholders-legal.md)",
+      "default": "[PLACEHOLDER — pending legal/regulatory review: insert the required supplement disclaimer for your market here, e.g. \"These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.\"]"
+    }
+  ]
+}
+{% endschema %}
