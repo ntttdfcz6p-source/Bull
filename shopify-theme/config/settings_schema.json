@@ -1,9 +1,9 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "BullFuel",
+    "theme_name": "BullRush",
     "theme_version": "0.1.0",
-    "theme_author": "BullFuel",
+    "theme_author": "BullRush",
     "theme_documentation_url": "",
     "theme_support_url": ""
   },
@@ -16,32 +16,43 @@
       },
       {
         "type": "paragraph",
-        "content": "Upload each lockup once. Every section pulls the correct version automatically based on its background. Until real files are uploaded, the theme falls back to the built-in placeholder bull symbol + text wordmark."
+        "content": "Upload each lockup to override the theme's built-in default (derived from the real BullRush logo). Every section pulls the correct version automatically based on its background."
       },
       {
         "type": "image_picker",
         "id": "logo_horizontal_dark_bg",
-        "label": "Horizontal logo — for dark backgrounds"
+        "label": "Horizontal logo — for dark backgrounds",
+        "info": "Defaults to bullrush-horizontal-dark.png (bundled) if left blank"
       },
       {
         "type": "image_picker",
         "id": "logo_horizontal_light_bg",
-        "label": "Horizontal logo — for light backgrounds"
+        "label": "Horizontal logo — for light backgrounds",
+        "info": "Defaults to bullrush-horizontal-light.png (bundled) if left blank"
       },
       {
         "type": "image_picker",
         "id": "logo_stacked_dark_bg",
-        "label": "Stacked logo — for dark backgrounds"
+        "label": "Stacked logo — for dark backgrounds",
+        "info": "Defaults to bullrush-stacked-dark.png (bundled) if left blank"
       },
       {
         "type": "image_picker",
         "id": "logo_stacked_light_bg",
-        "label": "Stacked logo — for light backgrounds"
+        "label": "Stacked logo — for light backgrounds",
+        "info": "Defaults to bullrush-stacked-light.png (bundled) if left blank"
       },
       {
         "type": "image_picker",
-        "id": "logo_symbol_only",
-        "label": "Symbol only (bull head) — used in mobile header, favicon source"
+        "id": "logo_symbol_only_dark_bg",
+        "label": "Symbol only (bull head) — for dark backgrounds",
+        "info": "Defaults to bullrush-symbol-dark.png (bundled) if left blank"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_symbol_only_light_bg",
+        "label": "Symbol only (bull head) — for light backgrounds / favicon source",
+        "info": "Defaults to bullrush-symbol-light.png (bundled) if left blank"
       },
       {
         "type": "range",
@@ -60,12 +71,12 @@
     "settings": [
       {
         "type": "header",
-        "content": "BullFuel palette"
+        "content": "BullRush palette"
       },
       { "type": "color", "id": "color_bull_black", "label": "Bull Black", "default": "#080808" },
       { "type": "color", "id": "color_graphite", "label": "Graphite", "default": "#151515" },
       { "type": "color", "id": "color_dark_surface", "label": "Dark Surface", "default": "#202020" },
-      { "type": "color", "id": "color_bullfuel_red", "label": "BullFuel Red", "default": "#D90912" },
+      { "type": "color", "id": "color_bullrush_red", "label": "BullRush Red", "default": "#D90912" },
       { "type": "color", "id": "color_action_red", "label": "Bright Action Red", "default": "#F01823" },
       { "type": "color", "id": "color_deep_red", "label": "Deep Red", "default": "#8D0B11" },
       { "type": "color", "id": "color_white", "label": "White", "default": "#FFFFFF" },

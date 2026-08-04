@@ -1,18 +1,23 @@
-# BullFuel — Brand Application Guide (Website)
+# BullRush — Brand Application Guide (Website)
 
 ## 0. Asset status
-**The actual BullFuel logo file was not available in this build.** Everything below specifies how the real logo should be applied once supplied, and describes the temporary placeholder built to the same spec (`shopify-theme/assets/bull-symbol-placeholder.svg` + a CSS wordmark) so the site is never left "unbranded" in the meantime. Do not treat the placeholder as a final logo concept — it is a geometric bull-head + wordmark built only to unblock the build, per the brief's own spec (geometric bull-head symbol, black/red, bold masculine type).
+**The real BullRush logo file was supplied on 2026-08-04** — a single stacked lockup on a white background (bull-head symbol above the BULLRUSH wordmark above the "FUEL YOUR POWER" tagline, black + brand red). Only that one file was provided, so the additional lockups the brand system needs (horizontal, dark-background recolors, symbol-only) were **derived from it programmatically** — cropped and recolored, not separately drawn:
+- **Light-background versions** (stacked, horizontal, symbol-only) are the supplied artwork with the white background made transparent, so it drops cleanly onto white/off-white sections.
+- **Dark-background versions** are the same artwork with the black linework recolored to Warm Off-White (`#F5F4F1`) — red stays exactly `#D90912` — so it reads on black/graphite sections. Classification of "this pixel is red vs. black" was done by hue, not by hand, so check the recolored files at full size before high-stakes use (packaging, print) to confirm no edge artifacts.
+- **Horizontal lockup** is a composite (symbol resized and placed beside the wordmark+tagline) — not a lockup the brand actually drew, so if pixel-perfect spacing/kerning matters for a specific placement (e.g. print), have a designer rebuild it from vector source rather than relying on this raster composite.
 
-## 1. Logo lockups required (prepare once the real file exists)
-| Lockup | Use |
-|---|---|
-| Full stacked (symbol above wordmark) | Homepage hero, social profile, favicon source |
-| Horizontal (symbol + wordmark side by side) | Desktop header, email header, packaging front |
-| Symbol only (bull head) | Favicon, mobile header (small viewport), app icon, loading state |
-| Light-background version | White / off-white page sections |
-| Dark-background version | Black / graphite page sections, footer |
+These five files ship in `shopify-theme/assets/` (`bullrush-stacked-light.png`, `bullrush-stacked-dark.png`, `bullrush-horizontal-light.png`, `bullrush-horizontal-dark.png`, `bullrush-symbol-light.png`, `bullrush-symbol-dark.png`) and are the theme's built-in defaults — no placeholder is in use anymore. If a designer later produces proper vector lockups (especially a true horizontal lockup and any print-specific versions), upload them in Theme settings → Logo, which overrides these bundled defaults without touching code.
 
-All five are exposed as separate theme settings (`config/settings_schema.json` → Logo group) so a merchant can upload each once and every section pulls from the correct one automatically based on that section's background setting.
+## 1. Logo lockups
+| Lockup | Use | Status |
+|---|---|---|
+| Full stacked (symbol above wordmark) | Homepage hero, social profile | Real artwork (supplied file) |
+| Horizontal (symbol + wordmark side by side) | Desktop header, email header, packaging front | Derived composite — reconstruct from vector if pixel-perfect fidelity matters |
+| Symbol only (bull head) | Favicon, mobile header (small viewport), app icon, loading state | Cropped from supplied file |
+| Light-background version | White / off-white page sections | Real artwork, background removed |
+| Dark-background version | Black / graphite page sections, footer | Recolored (black → off-white, red unchanged) |
+
+All are exposed as separate theme settings (`config/settings_schema.json` → Logo group) so a merchant can upload an improved/official version of any one of them without touching code — every section pulls from the correct setting automatically based on that section's background, falling back to the bundled default above when nothing's uploaded.
 
 ## 2. Color palette & usage rules
 | Token | Hex | Role |
@@ -20,7 +25,7 @@ All five are exposed as separate theme settings (`config/settings_schema.json` �
 | Bull Black | `#080808` | Primary dark background, primary body text on light backgrounds |
 | Graphite | `#151515` | Secondary dark surface (card backgrounds on black sections) |
 | Dark Surface | `#202020` | Tertiary dark surface, borders on dark sections |
-| BullFuel Red | `#D90912` | Brand red — logo, accents, tier badges |
+| BullRush Red | `#D90912` | Brand red — logo, accents, tier badges |
 | Bright Action Red | `#F01823` | Primary CTA buttons, active/selected states |
 | Deep Red | `#8D0B11` | Hover/pressed state for red buttons, dark-mode red accents |
 | White | `#FFFFFF` | Primary light background |
@@ -45,7 +50,7 @@ Do not use it to signal aggression, violence, or sexual dominance — this rules
 ## 5. What this site should never look like
 Energy-drink branding (no lightning bolts, no neon gradients), gym-equipment branding (no chrome/carbon-fiber textures), steroid-store branding (no syringe/pill-bottle-wall imagery), explicit adult-product branding (no innuendo imagery), or cheap "alpha male" supplement sites (no stock photos of shouting men, no gold/black clichés, no countdown-timer fake urgency).
 
-## 6. Clear space & minimum sizing (apply once real logo exists)
+## 6. Clear space & minimum sizing
 - Clear space around the logo: minimum 1x the height of the bull symbol on all sides.
 - Minimum digital size: symbol-only mark must remain legible down to 24×24px (favicon / mobile nav).
 - Never stretch, recolor outside the approved light/dark pairs, rotate, or add drop shadows/bevels to the logo.

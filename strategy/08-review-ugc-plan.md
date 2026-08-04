@@ -14,7 +14,7 @@
 - **Placement:** UGC grid on homepage (`sections/reviews-ugc.liquid`) and a condensed version on the DR landing page proof stack — never fabricated or stock-photo-substituted in the interim; the section renders an honest "customer stories coming soon" placeholder state until real content exists.
 
 ## Customer surveys / product-specific observational data
-- Run a simple post-purchase satisfaction survey (e.g., "how are you finding BullFuel so far?") at day 30 — feeds both the `09-ltv-framework.md` retention view and, once a real sample exists, a citable "X% of surveyed customers reported ___" stat (disclosed sample size, disclosed methodology, never phrased as a clinical result).
+- Run a simple post-purchase satisfaction survey (e.g., "how are you finding BullRush so far?") at day 30 — feeds both the `09-ltv-framework.md` retention view and, once a real sample exists, a citable "X% of surveyed customers reported ___" stat (disclosed sample size, disclosed methodology, never phrased as a clinical result).
 - Any "before/after" or outcome-style claim requires either a completed, disclosed customer survey with methodology shown, or removal from the site — never invented.
 
 ## Governance

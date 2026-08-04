@@ -1,23 +1,40 @@
 {% comment %}
-  Renders the BullFuel symbol. Uses a real uploaded logo image if present,
-  falls back to the temporary placeholder SVG otherwise.
-  Params: size (px, default 40), color (css color, default currentColor)
+  Renders the BullRush bull-head symbol. Uses a merchant-uploaded image if set
+  in Theme settings → Logo; otherwise falls back to the real BullRush symbol
+  bundled with the theme (derived from the supplied logo file — see
+  shopify-theme/README.md for how the dark/light variants were produced).
+  Params:
+    size: px, default 40
+    background: "dark" | "light" (default "dark") — picks the color-correct variant
 {% endcomment %}
 {%- liquid
   assign icon_size = size | default: 40
-  assign icon_color = color | default: 'currentColor'
+  assign bg = background | default: 'dark'
+  if bg == 'light'
+    assign logo_image = settings.logo_symbol_only_light_bg
+    assign fallback_asset = 'bullrush-symbol-light.png'
+  else
+    assign logo_image = settings.logo_symbol_only_dark_bg
+    assign fallback_asset = 'bullrush-symbol-dark.png'
+  endif
 -%}
-{%- if settings.logo_symbol_only != blank -%}
+{%- if logo_image != blank -%}
   <img
-    src="{{ settings.logo_symbol_only | image_url: width: icon_size | times: 2 }}"
+    src="{{ logo_image | image_url: width: icon_size | times: 2 }}"
     width="{{ icon_size }}"
     height="{{ icon_size }}"
-    alt="BullFuel"
+    alt="BullRush"
     loading="lazy"
     class="bf-icon-bull"
   >
 {%- else -%}
-  <span class="bf-icon-bull bf-icon-bull--placeholder" style="width:{{ icon_size }}px;height:{{ icon_size }}px;color:{{ icon_color }};">
-    {{ 'bull-symbol-placeholder.svg' | inline_asset_content }}
-  </span>
+  <img
+    src="{{ fallback_asset | asset_img_url: '400x' }}"
+    width="{{ icon_size }}"
+    height="{{ icon_size }}"
+    alt="BullRush"
+    loading="lazy"
+    class="bf-icon-bull"
+    style="object-fit:contain;"
+  >
 {%- endif -%}

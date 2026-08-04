@@ -2,7 +2,7 @@
 
 Inspired by the strategic *role* AG1's Welcome Kit plays (make the first commitment feel like more value than the price), not a copy of its contents. Only realistically sourceable items included.
 
-## Offer: "The BullFuel Start Kit"
+## Offer: "The BullRush Start Kit"
 Available only on a **first Subscribe & Save order** (any bundle size).
 
 | Included | Normal value | Status |

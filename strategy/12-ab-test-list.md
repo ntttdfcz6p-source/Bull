@@ -10,8 +10,8 @@ Grouped by surface. Prioritize tests that touch the primary purchase decision fi
 - Position of the subscription disclosure line (directly under CTA vs. inside an expandable "Subscription details")
 
 ## Hero / headline (DR landing page primarily, since it's built for testing)
-- "YOUR DAILY EDGE." vs. "DRIVE DOESN'T COME FROM NOWHERE." vs. "BUILT FOR THE DAYS THAT DEMAND MORE."
-- Hero CTA copy: "CHOOSE YOUR SUPPLY" vs. "START YOUR ROUTINE" vs. "FUEL YOUR EDGE"
+- "YOUR DAILY POWER." vs. "DRIVE DOESN'T COME FROM NOWHERE." vs. "BUILT FOR THE DAYS THAT DEMAND MORE."
+- Hero CTA copy: "CHOOSE YOUR SUPPLY" vs. "START YOUR ROUTINE" vs. "FUEL YOUR POWER"
 - Presence/absence of a rating badge directly under the hero CTA (once real reviews exist)
 
 ## Proof placement

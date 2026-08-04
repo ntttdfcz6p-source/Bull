@@ -14,9 +14,9 @@
     </div>
     <div class="bf-hero__media">
       {%- if section.settings.hero_image != blank -%}
-        <img src="{{ section.settings.hero_image | image_url: width: 900 }}" alt="BullFuel Male Vitality Gummies" loading="eager">
+        <img src="{{ section.settings.hero_image | image_url: width: 900 }}" alt="BullRush Male Vitality Gummies" loading="eager">
       {%- else -%}
-        {% render 'icon-bull', size: 240, color: '#D90912' %}
+        {% render 'icon-bull', size: 240 %}
       {%- endif -%}
     </div>
   </div>
@@ -26,7 +26,7 @@
 {
   "name": "Hero — Brand",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FUEL YOUR EDGE" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FUEL YOUR POWER" },
     { "type": "text", "id": "headline", "label": "Headline", "default": "BRING BACK YOUR DRIVE." },
     { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Premium daily gummies with saffron, Panax ginseng, maca, and vitamin B6, developed to support male vitality, energy, and everyday performance." },
     { "type": "text", "id": "cta_label", "label": "Primary CTA label", "default": "Choose Your Supply" },

@@ -1,4 +1,4 @@
-// BullFuel theme behavior: tabs, tier selection, accordion, sticky CTA, add-to-cart.
+// BullRush theme behavior: tabs, tier selection, accordion, sticky CTA, add-to-cart.
 (function () {
   'use strict';
 

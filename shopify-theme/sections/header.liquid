@@ -16,7 +16,7 @@
 -%}
 <header class="bf-header {% if minimal %}bf-header--minimal{% endif %}">
   <div class="bf-header__inner">
-    <a href="/" aria-label="BullFuel home">
+    <a href="/" aria-label="BullRush home">
       {% render 'logo-wordmark', background: 'dark', layout: 'horizontal' %}
     </a>
 
@@ -32,7 +32,6 @@
 
     <div class="bf-header__cart">
       <a href="/cart" aria-label="Cart" class="bf-header__cart-icon">
-        {% render 'icon-bull', size: 0 %}
         Cart <span data-bf-cart-count>{{ cart.item_count }}</span>
       </a>
     </div>

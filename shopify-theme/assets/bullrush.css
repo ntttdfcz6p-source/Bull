@@ -1,4 +1,4 @@
-/* BullFuel theme stylesheet — brand system per /strategy/01-brand-application-guide.md */
+/* BullRush theme stylesheet — brand system per /strategy/01-brand-application-guide.md */
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -79,17 +79,8 @@ p { line-height: 1.6; margin: 0 0 16px; color: inherit; }
 .bf-btn--block { display: flex; width: 100%; }
 
 /* ---------- Logo ---------- */
-.bf-logo { display: inline-flex; }
-.bf-logo--placeholder { align-items: center; gap: 10px; color: var(--bf-red); }
-.bf-logo--placeholder.bf-logo--stacked { flex-direction: column; gap: 4px; }
-.bf-logo__wordmark {
-  font-family: var(--bf-font-display);
-  font-size: 1.4rem;
-  letter-spacing: 0.03em;
-}
-.bf-logo--dark .bf-logo__wordmark, .bf-logo--placeholder .bf-logo__wordmark { color: currentColor; }
+.bf-logo { display: inline-flex; height: auto; }
 .bf-icon-bull { display: inline-block; }
-.bf-icon-bull--placeholder svg { width: 100%; height: 100%; display: block; }
 
 /* ---------- Badges ---------- */
 .bf-badge-recommended {

@@ -1,7 +1,7 @@
 {% comment %}
   Product Offer Page — the focused decision surface. Renders on the
   `product.offer` template (Shopify admin: assign this template to the
-  BullFuel Male Vitality Gummies product, or set it as the product's
+  BullRush Male Vitality Gummies product, or set it as the product's
   default template). Uses the native `product` object since this section
   only ever renders inside a product template context.
 {% endcomment %}
@@ -13,7 +13,7 @@
           {%- if product.featured_media != blank -%}
             <img src="{{ product.featured_media | image_url: width: 900 }}" alt="{{ product.title | escape }}" loading="eager">
           {%- else -%}
-            {% render 'icon-bull', size: 220, color: '#D90912' %}
+            {% render 'icon-bull', size: 220 %}
           {%- endif -%}
         </div>
         {%- if product.media.size > 1 -%}

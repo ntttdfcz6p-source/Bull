@@ -1,4 +1,4 @@
-# BullFuel — Strategy & Store Documentation Index
+# BullRush — Strategy & Store Documentation Index
 
 This folder contains the full strategic package behind the `/shopify-theme` build. Read `14-facts-placeholders-legal.md` first — it tells you exactly what in this package is a verified fact, what is a placeholder you must replace, and what needs sign-off from legal/regulatory counsel before anything goes live (supplement marketing claims are regulated; nothing here should be treated as pre-cleared copy).
 
@@ -18,8 +18,10 @@ This folder contains the full strategic package behind the `/shopify-theme` buil
 14. [Product Mockup Prompts](./13-product-mockup-prompts.md)
 15. [Facts vs. Placeholders vs. Legal Review](./14-facts-placeholders-legal.md)
 
-## Known gap at time of writing
+## Known gaps and updates
 
-No logo file, Grüns transcript, or AG1 transcript was ever attached in this session — the strategic principles applied throughout this package are built from the **written brief's own description** of those sources, not from independent review. The logo is a placeholder wordmark + geometric bull symbol (`shopify-theme/assets/bull-symbol-placeholder.svg`) built to the brief's spec (geometric bull head, black/red, bold masculine type) — swap in the real logo file the moment it's available; every template references it from a single settings location so the swap is one upload, not a rebuild.
+No Grüns transcript or AG1 transcript was ever attached in this session — the strategic principles applied throughout this package are built from the **written brief's own description** of those sources, not from independent review.
 
-**Update (2026-08-04):** the Male Libido Gummies formula sheet gap is now partly closed — screenshots of the manufacturer's (DAT Supply) private-label spec page were reviewed directly, confirming real per-serving ingredient amounts, manufacturing standard, and documentation availability. See the "confirmed 2026-08-04" sections in `07-proof-acquisition-plan.md`, `14-facts-placeholders-legal.md`, and `05-pricing-framework.md` for exactly what changed and what's still outstanding (gummies-per-serving and COGS remain unconfirmed).
+**Update (2026-08-04, formula):** the Male Libido Gummies formula sheet gap is now partly closed — screenshots of the manufacturer's (DAT Supply) private-label spec page were reviewed directly, confirming real per-serving ingredient amounts, manufacturing standard, and documentation availability. See the "confirmed 2026-08-04" sections in `07-proof-acquisition-plan.md`, `14-facts-placeholders-legal.md`, and `05-pricing-framework.md` for exactly what changed and what's still outstanding (gummies-per-serving and COGS remain unconfirmed).
+
+**Update (2026-08-04, brand name and logo):** the real logo file was supplied and turned out to read **BULLRUSH** / **"FUEL YOUR POWER"**, not BullFuel / Fuel Your Edge as the original written brief specified throughout. Per the user's direction, the entire package (this folder and `/shopify-theme`) has been renamed to BullRush — every prior BullFuel/Fuel Your Edge reference was find-and-replaced. The supplied logo (one stacked lockup, light background) is now the theme's real default artwork; the additional lockups the brand system needs (horizontal, dark-background) were derived from it — see `01-brand-application-guide.md` §0 for exactly what's real vs. reconstructed.

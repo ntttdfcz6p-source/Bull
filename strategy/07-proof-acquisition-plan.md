@@ -5,7 +5,7 @@ Goal: replace every `[PLACEHOLDER]` proof block in the theme with real, citable 
 ## Update (2026-08-04): formula amounts are now confirmed
 The private-label supplier's spec page (DAT Supply, "Male Libido Gummies") confirms per-serving actives — Saffron Extract 30 mg, Panax Ginseng Extract 100 mg, Maca Root Extract 300 mg, Pyridoxine HCl (B6) 2 mg — and these now populate `sections/ingredient-education.liquid` directly (no longer a placeholder). It also confirms manufacturing is EU-based under EU food supplement directives, and that a GMP certificate and batch-specific Certificate of Analysis **exist and are available on request** — they still need to be actively requested and are not yet in hand. It confirms gummy colour/flavour/shape are customizable ("Make It Yours"), so the brand's red/dark-red gummy direction is achievable. The one thing still not visible from the supplier's public pages is **gummies-per-serving** — it sits inside the gated Nutrition/Supplement Facts document, unlocked only by progressing an order in their client portal. Get that document before publishing any supply-duration or per-day-price claim.
 
-## Product Proof (what BullFuel itself can substantiate)
+## Product Proof (what BullRush itself can substantiate)
 | Proof type | Acquisition step | Owner | Status |
 |---|---|---|---|
 | Formula transparency (ingredient list + amounts) | ~~Get amounts from manufacturer~~ Done — confirmed 2026-08-04. Still need the gated Nutrition/Supplement Facts panel for gummies-per-serving. | Product/Regulatory | Partially resolved — see above |
@@ -16,12 +16,12 @@ The private-label supplier's spec page (DAT Supply, "Male Libido Gummies") confi
 | Verified customer reviews | See `08-review-ugc-plan.md` | Marketing | Not started |
 | Customer satisfaction statistics | Only after a real post-purchase survey has run with a disclosed sample size | Marketing | Not started |
 
-## Problem Proof (credible external context — never claimed as a BullFuel outcome)
+## Problem Proof (credible external context — never claimed as a BullRush outcome)
 | Statistic needed | Acceptable sources | Rule |
 |---|---|---|
 | Prevalence of fatigue/low energy in adult men | Peer-reviewed journals, CDC/NIH, national health surveys | Must show inline citation (source name + year) directly under the stat |
 | Stress/lifestyle pressure trends in adult men | Peer-reviewed surveys, reputable research bodies (e.g., APA, Pew) | Same citation rule |
-| General population wellbeing decline trends | Same as above | Never followed immediately by a BullFuel claim implying causation — a visible framing sentence must separate "here's the broader context" from "here's what BullFuel offers" |
+| General population wellbeing decline trends | Same as above | Never followed immediately by a BullRush claim implying causation — a visible framing sentence must separate "here's the broader context" from "here's what BullRush offers" |
 
 ## Process
 1. **Weeks 1–2:** request the gated documentation set from DAT Supply's client portal — Nutrition/Supplement Facts panel (resolves gummies-per-serving), GMP certificate, Compliance Dossier, and batch COA once production exists. This is now a known, concrete request rather than an open-ended sourcing task.

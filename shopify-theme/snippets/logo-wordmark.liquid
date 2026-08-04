@@ -1,7 +1,7 @@
 {% comment %}
-  Renders the BullFuel wordmark lockup. Uses a real uploaded logo image if
-  present for the requested background/orientation, otherwise falls back to
-  a temporary text + placeholder-symbol lockup.
+  Renders the BullRush wordmark lockup. Uses a merchant-uploaded image if set
+  in Theme settings → Logo for the requested background/orientation;
+  otherwise falls back to the real BullRush lockup bundled with the theme.
   Params:
     background: "dark" | "light" (default "dark")
     layout: "horizontal" | "stacked" (default "horizontal")
@@ -12,14 +12,18 @@
   if bg == 'light'
     if lay == 'stacked'
       assign logo_image = settings.logo_stacked_light_bg
+      assign fallback_asset = 'bullrush-stacked-light.png'
     else
       assign logo_image = settings.logo_horizontal_light_bg
+      assign fallback_asset = 'bullrush-horizontal-light.png'
     endif
   else
     if lay == 'stacked'
       assign logo_image = settings.logo_stacked_dark_bg
+      assign fallback_asset = 'bullrush-stacked-dark.png'
     else
       assign logo_image = settings.logo_horizontal_dark_bg
+      assign fallback_asset = 'bullrush-horizontal-dark.png'
     endif
   endif
 -%}
@@ -27,13 +31,16 @@
   <img
     src="{{ logo_image | image_url: width: settings.logo_width | times: 2 }}"
     width="{{ settings.logo_width }}"
-    alt="BullFuel"
+    alt="BullRush"
     loading="eager"
     class="bf-logo bf-logo--{{ lay }}"
   >
 {%- else -%}
-  <span class="bf-logo bf-logo--placeholder bf-logo--{{ lay }} bf-logo--{{ bg }}">
-    {% render 'icon-bull', size: 32 %}
-    <span class="bf-logo__wordmark">BULLFUEL</span>
-  </span>
+  <img
+    src="{{ fallback_asset | asset_img_url: '800x' }}"
+    width="{{ settings.logo_width }}"
+    alt="BullRush"
+    loading="eager"
+    class="bf-logo bf-logo--{{ lay }}"
+  >
 {%- endif -%}

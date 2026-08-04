@@ -7,8 +7,8 @@ For Meta / TikTok / influencer / affiliate / email traffic. Maps to `shopify-the
 │ STRIPPED HEADER — logo only + cart icon, no nav links       │
 ├───────────────────────────────────────────────────────────┤
 │ DR HERO (sections/dr-hero.liquid) — Black bg                │
-│  Eyebrow: FUEL YOUR EDGE                                     │
-│  H1 (test-able): "YOUR DAILY EDGE." / "DRIVE DOESN'T COME    │
+│  Eyebrow: FUEL YOUR POWER                                     │
+│  H1 (test-able): "YOUR DAILY POWER." / "DRIVE DOESN'T COME    │
 │  FROM NOWHERE."                                               │
 │  Sub: Premium male vitality support in a daily gummy format   │
 │  Primary CTA: [ CHOOSE YOUR SUPPLY ] → jumps to offer stack   │
@@ -20,7 +20,7 @@ For Meta / TikTok / influencer / affiliate / email traffic. Maps to `shopify-the
 │  in one scannable block, CTA repeated at the end              │
 ├───────────────────────────────────────────────────────────┤
 │ PROBLEM PROOF — cited stat(s) on male energy/stress/fatigue   │
-│  framed as context, not as a guaranteed BullFuel outcome       │
+│  framed as context, not as a guaranteed BullRush outcome       │
 ├───────────────────────────────────────────────────────────┤
 │ PRODUCT PROOF STACK (sections/dr-proof-stack.liquid)          │
 │  Formula transparency / manufacturing standard / sourcing —   │

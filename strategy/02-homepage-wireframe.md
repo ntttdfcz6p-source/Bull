@@ -8,7 +8,7 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 │ Logo (horizontal) · About · Ingredients · Reviews · Cart   │
 ├───────────────────────────────────────────────────────────┤
 │ HERO (sections/hero-brand.liquid) — Bull Black bg          │
-│  Tagline eyebrow: FUEL YOUR EDGE                            │
+│  Tagline eyebrow: FUEL YOUR POWER                            │
 │  H1: "BRING BACK YOUR DRIVE." (editable per settings)       │
 │  Sub: Premium male vitality support in a daily gummy format │
 │  CTA: [ CHOOSE YOUR SUPPLY ] (red, scrolls to pricing)      │
@@ -20,13 +20,13 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 │   Transparent formula) *pending verified facility docs      │
 ├───────────────────────────────────────────────────────────┤
 │ PRODUCT INTRO (sections/product-intro.liquid) — Off-white   │
-│  "Meet BullFuel Male Vitality Gummies"                       │
+│  "Meet BullRush Male Vitality Gummies"                       │
 │  3-up: What it is / Who it's for / How it fits your day     │
 ├───────────────────────────────────────────────────────────┤
 │ PROBLEM PROOF (sections/problem-proof.liquid) — Black       │
 │  Cited stat block on stress/fatigue/energy decline in adult  │
 │  men (source-linked, editable citation field per stat)       │
-│  Framed as context, NOT as a BullFuel outcome claim          │
+│  Framed as context, NOT as a BullRush outcome claim          │
 ├───────────────────────────────────────────────────────────┤
 │ HOW IT WORKS (sections/how-it-works.liquid) — White         │
 │  Step 1 Take daily → Step 2 Build consistency → Step 3 Feel  │
@@ -60,7 +60,7 @@ Full navigation present. Purpose: establish the brand, educate, build trust, the
 │  Accordion: subscription terms, ingredients, shipping, safety │
 ├───────────────────────────────────────────────────────────┤
 │ FINAL CTA (sections/final-cta.liquid) — Black                │
-│  "FUEL YOUR EDGE" + [ GET BULLFUEL ] button                   │
+│  "FUEL YOUR POWER" + [ GET BULLRUSH ] button                   │
 ├───────────────────────────────────────────────────────────┤
 │ FOOTER (sections/footer.liquid)                              │
 │  Logo (stacked, dark bg) · legal links · social · disclaimer  │
