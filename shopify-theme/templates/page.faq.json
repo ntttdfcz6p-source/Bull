@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Questions, Answered",
+        "body": "Everything you need to know before you start.",
+        "bg_word": "FAQ"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": { "heading": "Frequently Asked Questions" },
+      "blocks": {
+        "q1": { "type": "faq_item", "settings": { "question": "What is the product?", "answer": "BullRush Male Vitality Gummies — a daily gummy formulated with saffron, Panax ginseng, maca, and vitamin B6." } },
+        "q2": { "type": "faq_item", "settings": { "question": "Who is it for?", "answer": "Adult men looking for straightforward, premium support for everyday energy and vitality as part of a daily routine." } },
+        "q3": { "type": "faq_item", "settings": { "question": "How do I take it?", "answer": "[PLACEHOLDER — exact usage instructions pending final label]." } },
+        "q4": { "type": "faq_item", "settings": { "question": "When should I take it?", "answer": "[PLACEHOLDER — timing guidance pending final label/formulator input]." } },
+        "q5": { "type": "faq_item", "settings": { "question": "When can I expect to notice effects?", "answer": "[PLACEHOLDER — no specific timeframe claim until backed by real customer survey data or clinical substantiation]." } },
+        "q6": { "type": "faq_item", "settings": { "question": "Is this a subscription?", "answer": "You can buy one-time or subscribe. Subscribe & Save shows the recurring price and delivery frequency before you commit, and you can skip, pause, or cancel anytime from your account." } },
+        "q7": { "type": "faq_item", "settings": { "question": "Can I cancel?", "answer": "Yes — cancel your subscription anytime from your account before the next billing date. No phone calls required." } },
+        "q8": { "type": "faq_item", "settings": { "question": "Is it suitable for vegans?", "answer": "[PLACEHOLDER — pending confirmed formula/gelatin-vs-pectin base and gummy shell ingredients]." } },
+        "q9": { "type": "faq_item", "settings": { "question": "Does it contain sugar?", "answer": "[PLACEHOLDER — pending final Nutrition/Supplement Facts panel]." } },
+        "q10": { "type": "faq_item", "settings": { "question": "Where is it manufactured?", "answer": "Manufactured in Europe under EU food supplement directives." } },
+        "q11": { "type": "faq_item", "settings": { "question": "Is it third-party tested?", "answer": "[PLACEHOLDER — Certificate of Analysis available on request from the manufacturer; not yet in hand — do not publish as confirmed until received]." } },
+        "q12": { "type": "faq_item", "settings": { "question": "What is the refund policy?", "answer": "90-day money-back guarantee on your first order — see /policies/refund-policy for full terms." } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12"]
+    }
+  },
+  "order": ["hero", "faq"]
+}

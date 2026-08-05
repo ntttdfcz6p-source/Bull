@@ -1,0 +1,41 @@
+{% comment %} Native Shopify contact form. {% endcomment %}
+<section class="bf-section bf-bg-white">
+  <div class="bf-container" style="max-width:560px;">
+    {%- if form.posted_successfully? -%}
+      <div class="bf-badge-placeholder" style="display:block;padding:16px;margin-bottom:24px;">{{ section.settings.success_message }}</div>
+    {%- endif -%}
+    {%- form 'contact' -%}
+      {%- if form.errors -%}
+        <div class="bf-placeholder-note" style="border-color:var(--bf-accent-on-light, #4A6100);color:#8a2b00;margin-bottom:20px;">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+      <div style="display:grid;gap:16px;">
+        <label>
+          <span class="bf-eyebrow" style="display:block;">Name</span>
+          <input type="text" name="contact[name]" value="{{ form.name }}" required style="width:100%;padding:12px;border:1px solid #ccc;border-radius:4px;font-family:var(--bf-font-body);">
+        </label>
+        <label>
+          <span class="bf-eyebrow" style="display:block;">Email</span>
+          <input type="email" name="contact[email]" value="{{ form.email }}" required style="width:100%;padding:12px;border:1px solid #ccc;border-radius:4px;font-family:var(--bf-font-body);">
+        </label>
+        <label>
+          <span class="bf-eyebrow" style="display:block;">Message</span>
+          <textarea name="contact[body]" rows="6" required style="width:100%;padding:12px;border:1px solid #ccc;border-radius:4px;font-family:var(--bf-font-body);">{{ form.body }}</textarea>
+        </label>
+        <button type="submit" class="bf-btn bf-btn--primary">{{ section.settings.submit_label }}</button>
+      </div>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "Send Message" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks — we'll get back to you shortly." }
+  ],
+  "presets": [{ "name": "Contact form" }]
+}
+{% endschema %}

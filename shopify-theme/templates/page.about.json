@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "BullRush",
+        "heading": "Built For Men Who Refuse To Slow Down",
+        "body": "[PLACEHOLDER — brand origin story pending final copy].",
+        "bg_word": "DRIVE"
+      }
+    },
+    "story": { "type": "brand-story" },
+    "benefits": { "type": "benefits-list" },
+    "certifications": { "type": "certifications" },
+    "guarantee": { "type": "guarantee" },
+    "final_cta": { "type": "final-cta" }
+  },
+  "order": ["hero", "story", "benefits", "certifications", "guarantee", "final_cta"]
+}

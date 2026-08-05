@@ -1,0 +1,26 @@
+{% comment %}
+  Reusable content-page hero (About / Science / Contact) — oversized
+  background typography + eyebrow + heading + intro copy, kept visually
+  dense rather than a plain white page-title banner.
+{% endcomment %}
+<section class="bf-section bf-bg-black bf-pattern-dots-corner" style="position:relative;overflow:hidden;padding-bottom:48px;">
+  <div class="bf-oversized-bg" aria-hidden="true">{{ section.settings.bg_word }}</div>
+  <div class="bf-container" style="position:relative;z-index:1;max-width:760px;">
+    <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h1>{{ section.settings.heading }}</h1>
+    <p class="bf-muted" style="font-size:1.05rem;">{{ section.settings.body }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "BullRush" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Science" },
+    { "type": "textarea", "id": "body", "label": "Body" },
+    { "type": "text", "id": "bg_word", "label": "Oversized background word (decorative)", "default": "SCIENCE" }
+  ],
+  "presets": [{ "name": "Page hero" }]
+}
+{% endschema %}

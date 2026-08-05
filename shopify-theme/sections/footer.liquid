@@ -7,33 +7,58 @@
 <footer class="bf-footer">
   <div class="bf-container">
     {%- unless minimal_footer -%}
-      <div class="bf-footer__grid">
+      <div class="bf-footer__grid bf-footer__grid--5col">
         <div>
           {% render 'logo-wordmark', background: 'dark', layout: 'stacked' %}
           <p class="bf-muted" style="font-size:0.8rem;margin-top:16px;">{{ section.settings.footer_blurb }}</p>
+
+          {%- form 'customer', id: 'bf-newsletter-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div style="display:flex;gap:8px;margin-top:16px;">
+              <input type="email" name="contact[email]" placeholder="{{ section.settings.newsletter_placeholder }}" required
+                style="flex:1;min-width:0;padding:10px 12px;border-radius:4px;border:1px solid var(--bf-dark-surface);background:var(--bf-soft-black);color:var(--bf-white);">
+              <button type="submit" class="bf-btn bf-btn--primary" style="padding:10px 16px;font-size:0.75rem;">{{ section.settings.newsletter_cta }}</button>
+            </div>
+            {%- if form.posted_successfully? -%}
+              <p style="color:var(--bf-accent);font-size:0.8rem;margin-top:8px;">{{ section.settings.newsletter_success }}</p>
+            {%- endif -%}
+          {%- endform -%}
+
+          <ul style="list-style:none;padding:0;margin:16px 0 0;display:flex;gap:16px;">
+            {% if settings.social_instagram != blank %}<li><a href="{{ settings.social_instagram }}">Instagram</a></li>{% endif %}
+            {% if settings.social_tiktok != blank %}<li><a href="{{ settings.social_tiktok }}">TikTok</a></li>{% endif %}
+            {% if settings.social_youtube != blank %}<li><a href="{{ settings.social_youtube }}">YouTube</a></li>{% endif %}
+          </ul>
         </div>
         <div>
           <h3>Shop</h3>
           <ul>
             <li><a href="{{ section.settings.product_url }}">Male Vitality Gummies</a></li>
             <li><a href="/pages/subscription-terms">Subscription Terms</a></li>
-            <li><a href="/pages/guarantee">Guarantee</a></li>
+            <li><a href="{{ section.settings.manage_subscription_url | default: '#' }}">Manage Subscription</a></li>
           </ul>
         </div>
         <div>
-          <h3>Company</h3>
+          <h3>Learn</h3>
           <ul>
+            <li><a href="/pages/science">The Science</a></li>
             <li><a href="/pages/about">About BullRush</a></li>
-            <li><a href="/pages/ingredients">Ingredients</a></li>
-            <li><a href="/pages/contact">Contact</a></li>
+            <li><a href="/pages/faq">FAQ</a></li>
           </ul>
         </div>
         <div>
-          <h3>Follow</h3>
+          <h3>Support</h3>
           <ul>
-            {% if settings.social_instagram != blank %}<li><a href="{{ settings.social_instagram }}">Instagram</a></li>{% endif %}
-            {% if settings.social_tiktok != blank %}<li><a href="{{ settings.social_tiktok }}">TikTok</a></li>{% endif %}
-            {% if settings.social_youtube != blank %}<li><a href="{{ settings.social_youtube }}">YouTube</a></li>{% endif %}
+            <li><a href="/pages/contact">Contact</a></li>
+            <li><a href="/policies/shipping-policy">Shipping</a></li>
+            <li><a href="/policies/refund-policy">Refunds &amp; Guarantee</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/policies/terms-of-service">Terms &amp; Conditions</a></li>
           </ul>
         </div>
       </div>
@@ -41,12 +66,28 @@
       <div style="margin-bottom:24px;">{% render 'logo-wordmark', background: 'dark', layout: 'horizontal' %}</div>
     {%- endunless -%}
 
-    <div class="bf-footer__legal">
-      <p>&copy; {{ 'now' | date: '%Y' }} BullRush. All rights reserved.</p>
-      <p class="bf-footer__disclaimer">
-        {{ section.settings.regulatory_disclaimer }}
-      </p>
+    <div class="bf-footer__legal" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <p style="margin:0;">&copy; {{ 'now' | date: '%Y' }} BullRush. All rights reserved.</p>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        {%- if localization.available_countries.size > 1 -%}
+          {%- form 'localization' -%}
+            <select name="country_code" onchange="this.form.submit()" style="background:var(--bf-soft-black);color:var(--bf-white);border:1px solid var(--bf-dark-surface);border-radius:4px;padding:6px 8px;font-size:0.75rem;">
+              {%- for country in localization.available_countries -%}
+                <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }})</option>
+              {%- endfor -%}
+            </select>
+          {%- endform -%}
+        {%- endif -%}
+        <span style="display:flex;gap:6px;">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'bf-payment-icon' }}
+          {%- endfor -%}
+        </span>
+      </div>
     </div>
+    <p class="bf-footer__disclaimer">
+      {{ section.settings.regulatory_disclaimer }}
+    </p>
   </div>
 </footer>
 
@@ -71,6 +112,15 @@
       "id": "product_url",
       "label": "Flagship product URL"
     },
+    {
+      "type": "url",
+      "id": "manage_subscription_url",
+      "label": "Subscription management portal URL",
+      "info": "[PLACEHOLDER] Point this at your subscription app's customer portal (e.g. Shopify Subscriptions APIs, Recharge, Recurpay) once configured."
+    },
+    { "type": "text", "id": "newsletter_placeholder", "label": "Newsletter input placeholder", "default": "Your email" },
+    { "type": "text", "id": "newsletter_cta", "label": "Newsletter button label", "default": "Join" },
+    { "type": "text", "id": "newsletter_success", "label": "Newsletter success message", "default": "You're on the list." },
     {
       "type": "textarea",
       "id": "regulatory_disclaimer",

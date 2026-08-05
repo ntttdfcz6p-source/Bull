@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Get In Touch",
+        "heading": "Contact Us",
+        "body": "Questions about your order, subscription, or the formula? Send us a message.",
+        "bg_word": "CONTACT"
+      }
+    },
+    "form": { "type": "contact-form" },
+    "faq": {
+      "type": "faq",
+      "settings": { "heading": "Before You Reach Out" }
+    }
+  },
+  "order": ["hero", "form", "faq"]
+}

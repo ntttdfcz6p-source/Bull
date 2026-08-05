@@ -1,0 +1,35 @@
+{% comment %}
+  Split editorial block for the About page — text one side, image other,
+  oversized typography optional. Image ships as a TEMPORARY ASSET
+  placeholder until real brand photography exists.
+{% endcomment %}
+<div class="bf-split">
+  <div class="bf-split__content bf-bg-graphite">
+    <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="bf-muted" style="font-size:1rem;">{{ section.settings.body }}</div>
+  </div>
+  <div class="bf-split__media">
+    {%- if section.settings.image != blank -%}
+      <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="" loading="lazy">
+    {%- else -%}
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--bf-muted-gray);font-size:0.85rem;text-align:center;padding:24px;background:var(--bf-soft-black);">
+        TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>{{ section.settings.image_caption }}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Brand story block",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built For The Grind" },
+    { "type": "richtext", "id": "body", "label": "Body" },
+    { "type": "image_picker", "id": "image", "label": "Image — TEMPORARY ASSET, replace before launch" },
+    { "type": "text", "id": "image_caption", "label": "Placeholder caption (shown until real image uploaded)", "default": "Founder / brand photography" }
+  ],
+  "presets": [{ "name": "Brand story block" }]
+}
+{% endschema %}

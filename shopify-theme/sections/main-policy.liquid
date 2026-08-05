@@ -1,0 +1,18 @@
+{% comment %}
+  Renders whichever Shopify policy page the visitor is on (Privacy, Terms,
+  Refund, Shipping — configured in Admin → Settings → Policies).
+  Intentionally light/plain background — this is the one deliberate
+  exception to the "no white sections" rule in this theme: dense legal
+  text needs maximum readability, not a patterned/dark backdrop. See
+  strategy/01-brand-application-guide.md §9.
+{% endcomment %}
+<section class="bf-section bf-bg-white">
+  <div class="bf-container" style="max-width:760px;">
+    <h1>{{ page_title }}</h1>
+    <div class="bf-policy-body">{{ content_for_layout }}</div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Policy content" }
+{% endschema %}
