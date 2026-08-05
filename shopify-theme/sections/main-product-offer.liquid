@@ -4,14 +4,26 @@
   BullRush Male Vitality Gummies product, or set it as the product's
   default template). Uses the native `product` object since this section
   only ever renders inside a product template context.
+
+  Gallery supports images and Shopify-hosted video/model media via the
+  native `product.media` array; clicking a thumbnail swaps the main
+  viewer (data-bf-gallery, vanilla JS in bullrush.js — no library).
 {% endcomment %}
-<section class="bf-section bf-bg-white">
+<section class="bf-section bf-bg-graphite">
   <div class="bf-container">
     <div class="bf-offer-grid" style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;">
-      <div>
-        <div class="bf-hero__media" style="aspect-ratio:1/1;">
-          {%- if product.featured_media != blank -%}
-            <img src="{{ product.featured_media | image_url: width: 900 }}" alt="{{ product.title | escape }}" loading="eager">
+      <div data-bf-gallery>
+        <div class="bf-hero__media" style="aspect-ratio:1/1;position:relative;">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+              <div data-bf-gallery-slide data-index="{{ forloop.index0 }}" style="position:absolute;inset:0;{% unless forloop.first %}display:none;{% endunless %}">
+                {%- if media.media_type == 'video' or media.media_type == 'external_video' or media.media_type == 'model' -%}
+                  {{ media | media_tag: image_size: '900x', video_options: { controls: true } }}
+                {%- else -%}
+                  <img src="{{ media | image_url: width: 900 }}" alt="{{ product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" style="width:100%;height:100%;object-fit:cover;">
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
           {%- else -%}
             {% render 'icon-bull', size: 220 %}
           {%- endif -%}
@@ -19,9 +31,9 @@
         {%- if product.media.size > 1 -%}
           <div class="bf-grid-4" style="margin-top:16px;">
             {%- for media in product.media limit: 4 -%}
-              <div class="bf-hero__media" style="aspect-ratio:1/1;">
-                <img src="{{ media | image_url: width: 200 }}" alt="{{ product.title | escape }}" loading="lazy">
-              </div>
+              <button type="button" class="bf-hero__media" style="aspect-ratio:1/1;border:2px solid transparent;padding:0;cursor:pointer;" data-bf-gallery-thumb data-index="{{ forloop.index0 }}">
+                <img src="{{ media.preview_image | image_url: width: 200 }}" alt="{{ product.title | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+              </button>
             {%- endfor -%}
           </div>
         {%- endif -%}
@@ -30,6 +42,21 @@
 
       <div>
         {%- render 'purchase-module', product: product -%}
+      </div>
+    </div>
+
+    <div class="bf-grid-3 bf-mt-32" style="margin-top:56px;">
+      <div class="bf-card">
+        <h3>Supplement Facts</h3>
+        <p class="bf-placeholder-note">{{ section.settings.supplement_facts_note }}</p>
+      </div>
+      <div class="bf-card">
+        <h3>Usage Instructions</h3>
+        <div class="bf-muted">{{ section.settings.usage_instructions }}</div>
+      </div>
+      <div class="bf-card">
+        <h3>Warnings</h3>
+        <div class="bf-muted">{{ section.settings.warnings }}</div>
       </div>
     </div>
   </div>
@@ -44,6 +71,24 @@
       "id": "gallery_note",
       "label": "Gallery note",
       "default": "Product photography shown is a temporary mockup — see /strategy/13-product-mockup-prompts.md. Not final packaging."
+    },
+    {
+      "type": "textarea",
+      "id": "supplement_facts_note",
+      "label": "Supplement Facts note",
+      "default": "[PLACEHOLDER — full Supplement Facts panel (serving size, servings per container, per-serving actives, other ingredients) pending final label. Do not publish partial/unconfirmed values.]"
+    },
+    {
+      "type": "richtext",
+      "id": "usage_instructions",
+      "label": "Usage instructions",
+      "default": "<p>[PLACEHOLDER — exact serving instructions pending final label. Do not publish a specific dose/frequency until confirmed.]</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "warnings",
+      "label": "Warnings",
+      "default": "<p>[PLACEHOLDER — pending legal/regulatory review. Typical language to adapt once confirmed: consult a physician before use if pregnant, nursing, taking medication, or under medical supervision. Keep out of reach of children. Discontinue use and consult a doctor if adverse reactions occur.]</p>"
     }
   ]
 }

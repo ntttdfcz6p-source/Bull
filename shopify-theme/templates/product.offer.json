@@ -5,7 +5,9 @@
       "type": "ingredient-education",
       "settings": { "heading": "What's in your bottle" }
     },
+    "comparison": { "type": "comparison-table" },
     "product_proof": { "type": "product-proof" },
+    "certifications": { "type": "certifications" },
     "faq": {
       "type": "faq",
       "settings": { "heading": "Subscription & product questions" }
@@ -14,7 +16,9 @@
   "order": [
     "main_offer",
     "ingredients",
+    "comparison",
     "product_proof",
+    "certifications",
     "faq"
   ]
 }

@@ -310,4 +310,25 @@
       }
     }
   });
+
+  // ---------- Product gallery (thumbnail click swaps main slide; pauses any playing video) ----------
+  document.querySelectorAll('[data-bf-gallery]').forEach(function (gallery) {
+    var slides = gallery.querySelectorAll('[data-bf-gallery-slide]');
+    var thumbs = gallery.querySelectorAll('[data-bf-gallery-thumb]');
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        var index = thumb.getAttribute('data-index');
+        slides.forEach(function (slide) {
+          var isTarget = slide.getAttribute('data-index') === index;
+          slide.style.display = isTarget ? 'block' : 'none';
+          if (!isTarget) {
+            var video = slide.querySelector('video');
+            if (video) video.pause();
+          }
+        });
+        thumbs.forEach(function (t) { t.style.borderColor = 'transparent'; });
+        thumb.style.borderColor = 'var(--bf-accent)';
+      });
+    });
+  });
 })();
