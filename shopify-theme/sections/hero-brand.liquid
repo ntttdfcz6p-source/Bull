@@ -1,30 +1,48 @@
-<section class="bf-section bf-bg-black bf-hero bf-text-center" data-bf-hero>
-  <div class="bf-container">
-    <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
-    <h1 class="bf-max-640" style="margin-left:auto;margin-right:auto;">{{ section.settings.headline }}</h1>
-    <p class="bf-max-640" style="margin:0 auto 32px;">{{ section.settings.subheadline }}</p>
+{% comment %}
+  Two-column hero per the redesign brief: headline left, product visual
+  right on a cyan panel with an acid-green dot pattern, oversized cropped
+  background typography, and subtle cursor-parallax on the product image
+  (desktop pointer only; disabled under prefers-reduced-motion — see
+  assets/bullrush.js).
+{% endcomment %}
+<section class="bf-section bf-bg-black bf-hero" data-bf-hero style="position:relative;overflow:hidden;">
+  <div class="bf-oversized-bg" aria-hidden="true">{{ section.settings.bg_word }}</div>
+  <div class="bf-container bf-hero__grid" style="position:relative;z-index:1;">
+    <div>
+      <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
+      <h1>{{ section.settings.headline }}</h1>
+      <p style="max-width:480px;">{{ section.settings.subheadline }}</p>
 
-    <div style="max-width:520px;margin:0 auto;">
-      {%- render 'hero-visual',
-        product_image: section.settings.hero_image,
-        stat_1_number: section.settings.stat_1_number,
-        stat_1_label: section.settings.stat_1_label,
-        stat_2_number: section.settings.stat_2_number,
-        stat_2_label: section.settings.stat_2_label,
-        show_seal: section.settings.show_seal,
-        seal_percent: section.settings.seal_percent,
-        seal_label_top: section.settings.seal_label_top,
-        seal_label_bottom: section.settings.seal_label_bottom
-      -%}
+      <div class="bf-hero__rating" style="margin-top:16px;">
+        <span class="bf-badge-placeholder">★★★★★ — reviews pending launch</span>
+      </div>
+
+      {%- if section.settings.chip_1 != blank or section.settings.chip_2 != blank or section.settings.chip_3 != blank -%}
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+          {%- for chip in section.settings.chip_1, section.settings.chip_2, section.settings.chip_3 -%}
+            {%- if chip != blank -%}
+              <span class="bf-badge-amount">{{ chip }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="bf-cta-row">
+        <a href="#bf-purchase" class="bf-btn bf-btn--primary bf-btn--arrow">{{ section.settings.cta_label }} <span class="bf-btn__arrow">→</span></a>
+        <a href="{{ section.settings.secondary_url }}" class="bf-btn bf-btn--outline-dark">{{ section.settings.secondary_label }}</a>
+      </div>
+
+      <p class="bf-muted" style="font-size:0.78rem;margin-top:18px;margin-bottom:0;">{{ section.settings.guarantee_text }} · {{ section.settings.shipping_text }}</p>
     </div>
 
-    <div class="bf-hero__rating bf-text-center" style="justify-content:center;">
-      <span class="bf-badge-placeholder">★★★★★ — reviews pending launch</span>
-    </div>
-
-    <div class="bf-cta-row" style="justify-content:center;">
-      <a href="#bf-purchase" class="bf-btn bf-btn--primary bf-btn--arrow">{{ section.settings.cta_label }} <span class="bf-btn__arrow">→</span></a>
-      <a href="{{ section.settings.secondary_url }}" class="bf-btn bf-btn--outline-dark">{{ section.settings.secondary_label }}</a>
+    <div class="bf-hero__media bf-bg-cyan bf-pattern-dots" data-bf-cursor-zone style="aspect-ratio:1/1;position:relative;">
+      <div class="bf-cursor-parallax" style="width:60%;">
+        {%- if section.settings.hero_image != blank -%}
+          <img src="{{ section.settings.hero_image | image_url: width: 900 }}" alt="BullRush Male Vitality Gummies" loading="eager">
+        {%- else -%}
+          {% render 'icon-bull', size: 280, background: 'light' %}
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </section>
@@ -39,23 +57,19 @@
       "id": "headline",
       "label": "Headline",
       "info": "Wrap a word in <span class=\"bf-accent\">word</span> to highlight it in acid green.",
-      "default": "BRING BACK YOUR <span class=\"bf-accent\">DRIVE</span>."
+      "default": "POWER YOUR <span class=\"bf-accent\">DRIVE</span>."
     },
-    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Premium daily gummies with saffron, Panax ginseng, maca, and vitamin B6, developed to support male vitality, energy, and everyday performance." },
-    { "type": "text", "id": "cta_label", "label": "Primary CTA label", "default": "Choose Your Supply" },
-    { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "Learn the Formula" },
+    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Daily gummies with saffron, Panax ginseng, maca, and vitamin B6 — formulated to support male vitality, energy, and everyday performance." },
+    { "type": "text", "id": "bg_word", "label": "Oversized background word (decorative)", "default": "POWER" },
+    { "type": "text", "id": "chip_1", "label": "Benefit chip 1", "default": "Daily Energy" },
+    { "type": "text", "id": "chip_2", "label": "Benefit chip 2", "default": "Focus" },
+    { "type": "text", "id": "chip_3", "label": "Benefit chip 3", "default": "Male Vitality" },
+    { "type": "text", "id": "cta_label", "label": "Primary CTA label", "default": "Shop Now" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "Explore The Formula" },
     { "type": "url", "id": "secondary_url", "label": "Secondary CTA link" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero product image (temporary mockup until real photography exists)" },
-    { "type": "header", "content": "Stat callouts (leave blank until real numbers exist)" },
-    { "type": "text", "id": "stat_1_number", "label": "Stat 1 number" },
-    { "type": "text", "id": "stat_1_label", "label": "Stat 1 label" },
-    { "type": "text", "id": "stat_2_number", "label": "Stat 2 number" },
-    { "type": "text", "id": "stat_2_label", "label": "Stat 2 label" },
-    { "type": "header", "content": "Offer seal (only enable for a real, active promotion)" },
-    { "type": "checkbox", "id": "show_seal", "label": "Show offer seal", "default": false },
-    { "type": "text", "id": "seal_percent", "label": "Seal percentage", "default": "15" },
-    { "type": "text", "id": "seal_label_top", "label": "Seal top arc text", "default": "LAUNCH OFFER" },
-    { "type": "text", "id": "seal_label_bottom", "label": "Seal bottom arc text", "default": "SPECIAL OFFER" }
+    { "type": "text", "id": "guarantee_text", "label": "Guarantee text", "default": "90-day guarantee" },
+    { "type": "text", "id": "shipping_text", "label": "Shipping note", "default": "Free shipping on Subscribe & Save" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero product image — TEMPORARY ASSET, replace before launch" }
   ],
   "presets": [{ "name": "Hero — Brand" }]
 }

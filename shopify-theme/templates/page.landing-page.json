@@ -2,9 +2,11 @@
   "sections": {
     "promo_bar": { "type": "promo-bar" },
     "dr_hero": { "type": "dr-hero" },
+    "ticker": { "type": "social-ticker" },
     "press": { "type": "press-mentions" },
     "benefits": { "type": "benefits-list" },
     "ingredients": { "type": "ingredient-education" },
+    "comparison": { "type": "comparison-table" },
     "problem_proof": { "type": "problem-proof" },
     "how_it_works": { "type": "how-it-works" },
     "dr_proof": { "type": "dr-proof-stack" },
@@ -19,9 +21,11 @@
   "order": [
     "promo_bar",
     "dr_hero",
+    "ticker",
     "press",
     "benefits",
     "ingredients",
+    "comparison",
     "problem_proof",
     "how_it_works",
     "dr_proof",

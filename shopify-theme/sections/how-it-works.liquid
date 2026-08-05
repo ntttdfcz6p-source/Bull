@@ -1,32 +1,23 @@
 {% comment %}
-  Milestone timeline — visual pattern (connecting line + pill milestones)
-  adapted from the competitor reference at the user's request (see
-  strategy/01-brand-application-guide.md §7). The reference's version makes
-  specific physiological claims per milestone (e.g. "T-production optimized
-  fully") with no substantiation shown — this version deliberately limits
-  itself to routine/habit-building language (which needs no clinical
-  substantiation) and marks any subjective-effect bullet as an explicit
-  placeholder pending real customer survey data, per
+  Horizontal (desktop) / stacked (mobile) progression timeline. Limited to
+  routine/habit-building language per the brief's own compliance rule ("do
+  not promise specific physiological results") — every subjective-effect
+  bullet ships marked [PLACEHOLDER] pending real customer survey data, per
   strategy/08-review-ugc-plan.md.
 {% endcomment %}
-<section class="bf-section bf-bg-white">
-  <div class="bf-container" style="max-width:640px;">
+<section class="bf-section bf-bg-black" style="position:relative;overflow:hidden;">
+  <div class="bf-container">
     <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
     <h2>{{ section.settings.heading }}</h2>
-    <p class="bf-muted" style="margin-bottom:32px;">{{ section.settings.subheading }}</p>
+    <p class="bf-muted" style="margin-bottom:32px;max-width:640px;">{{ section.settings.subheading }}</p>
 
-    <div class="bf-timeline bf-reveal">
+    <div class="bf-timeline-h bf-reveal">
       {%- for block in section.blocks -%}
-        <div class="bf-milestone">
-          <div class="bf-milestone__head">
-            <span class="bf-milestone__pill">{{ block.settings.pill }}</span>
-            <span class="bf-milestone__name">{{ block.settings.name }}</span>
-          </div>
-          <ul>
-            {%- if block.settings.point_1 != blank -%}<li>{{ block.settings.point_1 }}</li>{%- endif -%}
-            {%- if block.settings.point_2 != blank -%}<li>{{ block.settings.point_2 }}</li>{%- endif -%}
-            {%- if block.settings.point_3 != blank -%}<li>{{ block.settings.point_3 }}</li>{%- endif -%}
-          </ul>
+        <div class="bf-timeline-h__stage">
+          <div class="bf-timeline-h__dot"></div>
+          <span class="bf-timeline-h__pill">{{ block.settings.pill }}</span>
+          <div class="bf-timeline-h__name">{{ block.settings.name }}</div>
+          <p class="bf-timeline-h__body">{{ block.settings.body }}</p>
         </div>
       {%- endfor -%}
     </div>
@@ -38,52 +29,26 @@
   "name": "How it works",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How It Works" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Built for consistency, not a quick fix" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built For Consistency, Not A Quick Fix" },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "A daily routine, not a one-off try — here's what to expect as you build the habit." }
   ],
   "blocks": [
     {
-      "type": "milestone",
-      "name": "Milestone",
+      "type": "stage",
+      "name": "Stage",
       "settings": [
-        { "type": "text", "id": "pill", "label": "Pill label (e.g. Week 1)" },
-        { "type": "text", "id": "name", "label": "Milestone name" },
-        { "type": "text", "id": "point_1", "label": "Point 1" },
-        { "type": "text", "id": "point_2", "label": "Point 2" },
-        { "type": "text", "id": "point_3", "label": "Point 3" }
+        { "type": "text", "id": "pill", "label": "Pill label (e.g. Day 1)" },
+        { "type": "text", "id": "name", "label": "Stage name" },
+        { "type": "textarea", "id": "body", "label": "Body" }
       ]
     }
   ],
   "default": {
     "blocks": [
-      {
-        "type": "milestone",
-        "settings": {
-          "pill": "Week 1",
-          "name": "Getting Started",
-          "point_1": "Take your daily serving — [PLACEHOLDER: exact instructions pending final label]",
-          "point_2": "Start building the habit into your existing routine",
-          "point_3": "[PLACEHOLDER — subjective early-effect claim pending real customer survey data]"
-        }
-      },
-      {
-        "type": "milestone",
-        "settings": {
-          "pill": "Week 4",
-          "name": "Building Consistency",
-          "point_1": "Subscription keeps the routine uninterrupted",
-          "point_2": "[PLACEHOLDER — subjective mid-point effect claim pending real customer survey data]"
-        }
-      },
-      {
-        "type": "milestone",
-        "settings": {
-          "pill": "Week 12",
-          "name": "Full Routine",
-          "point_1": "The daily habit is established",
-          "point_2": "[PLACEHOLDER — subjective long-term effect claim pending real customer survey data]"
-        }
-      }
+      { "type": "stage", "settings": { "pill": "Day 1", "name": "Build The Habit", "body": "Take your daily serving — [PLACEHOLDER: exact instructions pending final label] — and fold it into your existing routine." } },
+      { "type": "stage", "settings": { "pill": "Week 2", "name": "Feel The Momentum", "body": "[PLACEHOLDER — subjective early-effect claim pending real customer survey data]" } },
+      { "type": "stage", "settings": { "pill": "Month 1", "name": "Perform Consistently", "body": "Subscription keeps the routine uninterrupted. [PLACEHOLDER — subjective claim pending real customer survey data]" } },
+      { "type": "stage", "settings": { "pill": "Month 3", "name": "Own Your Routine", "body": "The daily habit is fully established. [PLACEHOLDER — subjective long-term claim pending real customer survey data]" } }
     ]
   },
   "presets": [{ "name": "How it works" }]

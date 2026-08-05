@@ -1,0 +1,46 @@
+{% comment %}
+  Continuously moving marquee ticker — acid-green text on black, editable
+  phrases via blocks. Pure CSS animation (pauses on hover, and is fully
+  static under prefers-reduced-motion — see assets/bullrush.css).
+{% endcomment %}
+<section class="bf-bg-black" style="padding:20px 0;overflow:hidden;">
+  <div class="bf-marquee">
+    <div class="bf-marquee__track">
+      {%- for i in (1..2) -%}
+        {%- for block in section.blocks -%}
+          <span class="bf-marquee__item">
+            {{ block.settings.phrase }}
+            <span class="bf-marquee__sep" aria-hidden="true">/</span>
+          </span>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Social proof ticker",
+  "blocks": [
+    {
+      "type": "phrase",
+      "name": "Phrase",
+      "settings": [
+        { "type": "text", "id": "phrase", "label": "Phrase" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "phrase", "settings": { "phrase": "ENERGY" } },
+      { "type": "phrase", "settings": { "phrase": "STRENGTH" } },
+      { "type": "phrase", "settings": { "phrase": "FOCUS" } },
+      { "type": "phrase", "settings": { "phrase": "RECOVERY" } },
+      { "type": "phrase", "settings": { "phrase": "DRIVE" } },
+      { "type": "phrase", "settings": { "phrase": "PERFORMANCE" } },
+      { "type": "phrase", "settings": { "phrase": "DAILY VITALITY" } }
+    ]
+  },
+  "presets": [{ "name": "Social proof ticker" }]
+}
+{% endschema %}

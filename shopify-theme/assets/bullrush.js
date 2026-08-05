@@ -203,4 +203,111 @@
   } else {
     document.querySelectorAll('.bf-reveal').forEach(function (el) { el.classList.add('is-visible'); });
   }
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- Animated counters (count up once in view) ----------
+  document.querySelectorAll('[data-bf-counter]').forEach(function (el) {
+    var target = parseFloat(el.getAttribute('data-bf-counter')) || 0;
+    var suffix = el.getAttribute('data-bf-counter-suffix') || '';
+    var decimals = parseInt(el.getAttribute('data-bf-counter-decimals') || '0', 10);
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      el.textContent = target.toFixed(decimals) + suffix;
+      return;
+    }
+    var done = false;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || done) return;
+        done = true;
+        var start = performance.now();
+        var duration = 1400;
+        function tick(now) {
+          var progress = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = (target * eased).toFixed(decimals) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        obs.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    obs.observe(el);
+  });
+
+  // ---------- Ingredient accordion (hover-expand desktop, tap-expand mobile) ----------
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest('[data-bf-ing-trigger]');
+    if (!trigger) return;
+    var card = trigger.closest('[data-bf-ing-card]');
+    var panel = card.querySelector('[data-bf-ing-panel]');
+    var isOpen = trigger.getAttribute('aria-expanded') === 'true';
+    trigger.setAttribute('aria-expanded', String(!isOpen));
+    if (panel) panel.setAttribute('data-open', String(!isOpen));
+  });
+
+  // ---------- Tilt-hover cards (desktop pointer only, respects reduced motion) ----------
+  if (!prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.bf-tilt-card').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width - 0.5;
+        var py = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = 'perspective(600px) rotateX(' + (py * -6) + 'deg) rotateY(' + (px * 6) + 'deg) translateY(-4px)';
+      });
+      card.addEventListener('mouseleave', function () {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // ---------- Cursor-responsive subtle movement on hero (desktop only) ----------
+  if (!prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('[data-bf-cursor-zone]').forEach(function (zone) {
+      var target = zone.querySelector('.bf-cursor-parallax');
+      if (!target) return;
+      zone.addEventListener('mousemove', function (e) {
+        var rect = zone.getBoundingClientRect();
+        var mx = ((e.clientX - rect.left) / rect.width - 0.5) * 16;
+        var my = ((e.clientY - rect.top) / rect.height - 0.5) * 16;
+        target.style.setProperty('--mx', mx.toFixed(1));
+        target.style.setProperty('--my', my.toFixed(1));
+      });
+      zone.addEventListener('mouseleave', function () {
+        target.style.setProperty('--mx', 0);
+        target.style.setProperty('--my', 0);
+      });
+    });
+  }
+
+  // ---------- Announcement bar message rotation ----------
+  document.querySelectorAll('[data-bf-announce-rotator]').forEach(function (rotator) {
+    var items = rotator.querySelectorAll('[data-bf-announce-item]');
+    if (items.length < 2) return;
+    var i = 0;
+    setInterval(function () {
+      items[i].setAttribute('data-active', 'false');
+      i = (i + 1) % items.length;
+      items[i].setAttribute('data-active', 'true');
+    }, 3200);
+  });
+
+  // ---------- Free-shipping progress bar (data-threshold/data-current are in cents, matching Shopify's cart.total_price) ----------
+  document.querySelectorAll('[data-bf-shipping-progress]').forEach(function (bar) {
+    var threshold = parseFloat(bar.getAttribute('data-threshold')) || 0;
+    var current = parseFloat(bar.getAttribute('data-current')) || 0;
+    var fill = bar.querySelector('[data-bf-shipping-progress-fill]');
+    var note = bar.parentElement.querySelector('[data-bf-shipping-progress-note]');
+    var pct = threshold > 0 ? Math.min(100, (current / threshold) * 100) : 100;
+    if (fill) fill.style.width = pct + '%';
+    if (note) {
+      if (current >= threshold) {
+        note.textContent = note.getAttribute('data-met-text') || 'You\'ve unlocked free shipping!';
+      } else {
+        var remaining = ((threshold - current) / 100).toFixed(2);
+        var template = note.getAttribute('data-remaining-text') || 'Add {amount} more for free shipping';
+        note.textContent = template.replace('{amount}', '$' + remaining);
+      }
+    }
+  });
 })();

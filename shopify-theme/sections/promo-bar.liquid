@@ -1,16 +1,18 @@
 {% comment %}
-  Sticky urgency bar (pattern borrowed from the competitor reference). Unlike
-  a fabricated countdown, this reads a real merchant-set end date/time —
-  if none is set, or it's in the past, the bar shows the message with no
-  countdown rather than faking urgency. Never hardcode a countdown here.
+  Sticky announcement bar with rotating, block-based messages (per the
+  redesign brief). Unlike a fabricated countdown, the optional countdown
+  reads a real merchant-set end date/time — if none is set, or it's in the
+  past, the bar shows the rotating messages with no countdown rather than
+  faking urgency. Never hardcode a countdown here.
 {% endcomment %}
-{%- if section.settings.enable_bar -%}
+{%- if section.settings.enable_bar and section.blocks.size > 0 -%}
   <div class="bf-promo-bar" data-bf-promo-bar {% if section.settings.end_datetime != blank %}data-end="{{ section.settings.end_datetime }}"{% endif %}>
     <div class="bf-promo-bar__message">
-      <span>{{ section.settings.message }}</span>
-      {%- if section.settings.pill_text != blank -%}
-        <span class="bf-promo-bar__pill">{{ section.settings.pill_text }}</span>
-      {%- endif -%}
+      <div class="bf-announce-rotator" data-bf-announce-rotator>
+        {%- for block in section.blocks -%}
+          <span class="bf-announce-rotator__item" data-bf-announce-item {% if forloop.first %}data-active="true"{% else %}data-active="false"{% endif %}>{{ block.settings.message }}</span>
+        {%- endfor -%}
+      </div>
     </div>
     {%- if section.settings.end_datetime != blank -%}
       <div class="bf-countdown" data-bf-countdown>
@@ -24,18 +26,36 @@
 
 {% schema %}
 {
-  "name": "Promo bar",
+  "name": "Announcement bar",
   "settings": [
-    { "type": "checkbox", "id": "enable_bar", "label": "Enable promo bar", "default": false },
-    { "type": "text", "id": "message", "label": "Message", "default": "LAUNCH OFFER" },
-    { "type": "text", "id": "pill_text", "label": "Pill text (e.g. discount)", "default": "SAVE ON YOUR FIRST ORDER" },
+    { "type": "checkbox", "id": "enable_bar", "label": "Enable announcement bar", "default": false },
     {
       "type": "text",
       "id": "end_datetime",
       "label": "Real promotion end date/time (ISO 8601, e.g. 2026-08-31T23:59:00)",
-      "info": "Must be a genuine end time for an actual promotion. Leave blank to show the message with no countdown — never fill this with a fake or recurring date."
+      "info": "Must be a genuine end time for an actual promotion. Leave blank to show the rotating messages with no countdown — never fill this with a fake or recurring date."
     }
   ],
-  "presets": [{ "name": "Promo bar" }]
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "message", "label": "Message" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "message", "settings": { "message": "[PLACEHOLDER] LAUNCH OFFER — SAVE 40%" } },
+      { "type": "message", "settings": { "message": "FREE SHIPPING OVER $[PLACEHOLDER]" } },
+      { "type": "message", "settings": { "message": "90-DAY MONEY-BACK GUARANTEE" } },
+      { "type": "message", "settings": { "message": "BUILT FOR MEN WHO REFUSE TO SLOW DOWN" } }
+    ]
+  },
+  "presets": [{ "name": "Announcement bar", "blocks": [
+    { "type": "message", "settings": { "message": "90-DAY MONEY-BACK GUARANTEE" } },
+    { "type": "message", "settings": { "message": "BUILT FOR MEN WHO REFUSE TO SLOW DOWN" } }
+  ] }]
 }
 {% endschema %}

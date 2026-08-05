@@ -1,0 +1,77 @@
+{% comment %}
+  Comparison table: BullRush vs. standard capsules vs. a generic booster.
+  All labels/values fully editable via blocks — every row ships with
+  reasonable, non-fabricated defaults (no invented lab/testing claims).
+{% endcomment %}
+<section class="bf-section bf-bg-graphite">
+  <div class="bf-container">
+    <span class="bf-eyebrow">The Comparison</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <div style="overflow-x:auto;margin-top:24px;">
+      <table class="bf-comparison">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="bf-comparison__us">{{ section.settings.col_us }}</th>
+            <th>{{ section.settings.col_b }}</th>
+            <th>{{ section.settings.col_c }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr>
+              <td>{{ block.settings.row_label }}</td>
+              <td class="bf-comparison__us">{{ block.settings.value_us }}</td>
+              <td>{{ block.settings.value_b }}</td>
+              <td>{{ block.settings.value_c }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+    <p class="bf-muted" style="margin-top:16px;font-size:0.78rem;">{{ section.settings.footnote }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison table",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why Gummies, Why Us" },
+    { "type": "text", "id": "col_us", "label": "Our column label", "default": "BullRush Gummies" },
+    { "type": "text", "id": "col_b", "label": "Column B label", "default": "Standard Capsules" },
+    { "type": "text", "id": "col_c", "label": "Column C label", "default": "Generic Booster" },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "Comparison values are illustrative and editable — replace with verified specifics for BullRush and named/typical competitor categories before publishing. Do not present unverified competitor claims as fact."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "row_label", "label": "Row label" },
+        { "type": "text", "id": "value_us", "label": "Our value" },
+        { "type": "text", "id": "value_b", "label": "Column B value" },
+        { "type": "text", "id": "value_c", "label": "Column C value" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "row", "settings": { "row_label": "Easy daily use", "value_us": "✓ Chew, no water needed", "value_b": "Swallow with water", "value_c": "Varies" } },
+      { "type": "row", "settings": { "row_label": "Taste", "value_us": "✓ [PLACEHOLDER flavor]", "value_b": "N/A", "value_c": "N/A" } },
+      { "type": "row", "settings": { "row_label": "Transparent formula", "value_us": "✓ No proprietary blend", "value_b": "Often proprietary blend", "value_c": "Often proprietary blend" } },
+      { "type": "row", "settings": { "row_label": "Third-party testing", "value_us": "[PLACEHOLDER — pending COA]", "value_b": "Varies", "value_c": "Varies" } },
+      { "type": "row", "settings": { "row_label": "Subscription flexibility", "value_us": "✓ Skip, pause, cancel anytime", "value_b": "Varies", "value_c": "Varies" } },
+      { "type": "row", "settings": { "row_label": "Vegan option", "value_us": "[PLACEHOLDER — pending formula confirmation]", "value_b": "Varies", "value_c": "Varies" } },
+      { "type": "row", "settings": { "row_label": "Sugar per serving", "value_us": "[PLACEHOLDER — pending label]", "value_b": "N/A", "value_c": "Varies" } },
+      { "type": "row", "settings": { "row_label": "Money-back guarantee", "value_us": "✓ 90 days", "value_b": "Varies", "value_c": "Varies" } }
+    ]
+  },
+  "presets": [{ "name": "Comparison table" }]
+}
+{% endschema %}

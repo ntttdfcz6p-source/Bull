@@ -1,27 +1,47 @@
 {% comment %}
-  Ingredient cards (texture-photo + dosage pill + overlay text) — layout
-  pattern adapted from the competitor reference at the user's request. The
-  "texture" backgrounds are CSS gradient placeholders standing in for real
-  macro photography of each ingredient — see
-  strategy/13-product-mockup-prompts.md for photography direction to
-  replace them with. Dosage amounts are the confirmed per-serving actives
-  from the formula spec (see strategy/14-facts-placeholders-legal.md).
+  Ingredient accordion cards — icon + name + dose always visible; tap/click
+  (or hover on desktop, via CSS :hover assist) expands a panel with the
+  full description and a study/reference link slot. Dosage amounts are the
+  CONFIRMED per-serving actives from the formula spec (see
+  strategy/14-facts-placeholders-legal.md) — NOT the generic placeholder
+  ingredient list (Tongkat Ali/Shilajit/etc.) from the redesign brief,
+  since that list doesn't match BullRush's actual confirmed formula.
 {% endcomment %}
-<section class="bf-section bf-bg-graphite">
-  <div class="bf-container">
+<section class="bf-section bf-bg-black bf-grid-overlay">
+  <div class="bf-container" style="position:relative;z-index:1;">
     <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
     <h2>{{ section.settings.heading }}</h2>
     {%- if section.settings.subheading != blank -%}
       <p class="bf-accent" style="font-family:var(--bf-font-display);text-transform:uppercase;letter-spacing:0.04em;font-size:0.95rem;">{{ section.settings.subheading }}</p>
     {%- endif -%}
-    <div class="bf-grid-4 bf-mt-32 bf-reveal">
+    <div class="bf-grid-4 bf-mt-32">
       {%- for block in section.blocks -%}
-        <div class="bf-ingredient-card">
-          <div class="bf-ingredient-card__texture bf-texture-{{ forloop.index | modulo: 6 | plus: 1 }}"></div>
-          <div class="bf-ingredient-card__content">
-            <span class="bf-ingredient-card__dose">{{ block.settings.amount_placeholder }} / serving</span>
-            <div class="bf-ingredient-card__name">{{ block.settings.name }}</div>
-            <p class="bf-ingredient-card__role">{{ block.settings.role }}</p>
+        <div class="bf-ing-accordion" data-bf-ing-card>
+          <button type="button" class="bf-ing-accordion__trigger" data-bf-ing-trigger aria-expanded="false">
+            <span class="bf-ing-accordion__icon">
+              {%- case block.settings.icon -%}
+                {%- when 'leaf' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 20c8 0 14-6 14-14V4h-2C9 4 5 10 5 18v2z"/></svg>
+                {%- when 'root' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v6M12 9c-3 1-4 4-5 9M12 9c3 1 4 4 5 9M12 9c-2 2-2 4-1 6M12 9c2 2 2 4 1 6"/></svg>
+                {%- when 'droplet' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12z"/></svg>
+                {%- when 'bolt' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/></svg>
+              {%- endcase -%}
+            </span>
+            <span class="bf-ing-accordion__name">{{ block.settings.name }}<span class="bf-ing-accordion__dose" style="display:block;">{{ block.settings.amount_placeholder }} / serving</span></span>
+            <span class="bf-ing-accordion__chevron">▾</span>
+          </button>
+          <div class="bf-ing-accordion__panel" data-bf-ing-panel data-open="false">
+            <p>{{ block.settings.role }}</p>
+            {%- if block.settings.study_url != blank -%}
+              <a href="{{ block.settings.study_url }}" target="_blank" rel="noopener">{{ block.settings.study_label | default: 'Reference / study' }} →</a>
+            {%- else -%}
+              <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
+            {%- endif -%}
           </div>
         </div>
       {%- endfor -%}
@@ -52,17 +72,26 @@
       "name": "Ingredient",
       "settings": [
         { "type": "text", "id": "name", "label": "Ingredient name" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+            { "value": "leaf", "label": "Leaf / botanical" },
+            { "value": "root", "label": "Root" },
+            { "value": "droplet", "label": "Droplet / extract" },
+            { "value": "bolt", "label": "Energy" },
+            { "value": "circle", "label": "Generic" }
+          ], "default": "leaf" },
         { "type": "textarea", "id": "role", "label": "Role / why it's included" },
-        { "type": "text", "id": "amount_placeholder", "label": "Amount per serving", "default": "[PLACEHOLDER amount]" }
+        { "type": "text", "id": "amount_placeholder", "label": "Amount per serving", "default": "[PLACEHOLDER amount]" },
+        { "type": "url", "id": "study_url", "label": "Study / reference link (optional)" },
+        { "type": "text", "id": "study_label", "label": "Study link label", "default": "Reference / study" }
       ]
     }
   ],
   "default": {
     "blocks": [
-      { "type": "ingredient", "settings": { "name": "Saffron Extract", "role": "Included for its role in everyday mood and wellbeing support.", "amount_placeholder": "30 mg" } },
-      { "type": "ingredient", "settings": { "name": "Panax Ginseng Extract", "role": "A traditionally used adaptogen included for energy and vitality support.", "amount_placeholder": "100 mg" } },
-      { "type": "ingredient", "settings": { "name": "Maca Root Extract", "role": "Included for its traditional association with stamina and vitality.", "amount_placeholder": "300 mg" } },
-      { "type": "ingredient", "settings": { "name": "Vitamin B6 (Pyridoxine HCl)", "role": "Supports normal energy-yielding metabolism.", "amount_placeholder": "2 mg" } }
+      { "type": "ingredient", "settings": { "name": "Saffron Extract", "icon": "droplet", "role": "Included for its role in everyday mood and wellbeing support.", "amount_placeholder": "30 mg" } },
+      { "type": "ingredient", "settings": { "name": "Panax Ginseng Extract", "icon": "root", "role": "A traditionally used adaptogen included for energy and vitality support.", "amount_placeholder": "100 mg" } },
+      { "type": "ingredient", "settings": { "name": "Maca Root Extract", "icon": "root", "role": "Included for its traditional association with stamina and vitality.", "amount_placeholder": "300 mg" } },
+      { "type": "ingredient", "settings": { "name": "Vitamin B6 (Pyridoxine HCl)", "icon": "bolt", "role": "Supports normal energy-yielding metabolism.", "amount_placeholder": "2 mg" } }
     ]
   },
   "presets": [{ "name": "Ingredient education" }]

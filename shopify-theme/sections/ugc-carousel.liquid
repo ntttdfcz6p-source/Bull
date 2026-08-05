@@ -1,0 +1,63 @@
+{% comment %}
+  Horizontal mobile-first UGC/lifestyle video carousel. Supports Shopify-
+  hosted MP4 (muted autoplay, loop) or a static image placeholder per
+  block. Ships with placeholder labels only -- see
+  strategy/13-product-mockup-prompts.md / REPLACE-BEFORE-LAUNCH.md for the
+  real content plan. TEMPORARY ASSET slots -- replace before launch.
+{% endcomment %}
+<section class="bf-section bf-bg-black">
+  <div class="bf-container">
+    <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="bf-ugc-carousel bf-mt-32">
+      {%- for block in section.blocks -%}
+        <div class="bf-ugc-carousel__item">
+          {%- if block.settings.video != blank -%}
+            <video muted autoplay loop playsinline preload="metadata">
+              <source src="{{ block.settings.video.sources.first.url }}" type="video/mp4">
+            </video>
+          {%- elsif block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+          {%- else -%}
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bf-soft-black);color:var(--bf-muted-gray);font-size:0.75rem;text-align:center;padding:12px;">
+              TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>{{ block.settings.label }}
+            </div>
+          {%- endif -%}
+          <span class="bf-ugc-carousel__label">{{ block.settings.label }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "UGC / lifestyle carousel",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real Routines" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See It In Action" }
+  ],
+  "blocks": [
+    {
+      "type": "clip",
+      "name": "Clip",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "video", "id": "video", "label": "Shopify-hosted video (optional)" },
+        { "type": "image_picker", "id": "image", "label": "Fallback image (used if no video set)" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "clip", "settings": { "label": "Gym Clip — TEMPORARY" } },
+      { "type": "clip", "settings": { "label": "Morning Routine — TEMPORARY" } },
+      { "type": "clip", "settings": { "label": "Unboxing — TEMPORARY" } },
+      { "type": "clip", "settings": { "label": "Gummy Close-Up — TEMPORARY" } },
+      { "type": "clip", "settings": { "label": "Founder Message — TEMPORARY" } },
+      { "type": "clip", "settings": { "label": "Customer Reaction — TEMPORARY" } }
+    ]
+  },
+  "presets": [{ "name": "UGC / lifestyle carousel" }]
+}
+{% endschema %}

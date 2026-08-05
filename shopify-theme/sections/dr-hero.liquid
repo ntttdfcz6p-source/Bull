@@ -1,6 +1,7 @@
 {% comment %} DR landing page hero — minimal, single CTA repeated, no nav. Visual pattern (collage + stat callouts + offer seal) adapted from the competitor reference at the user's request. {% endcomment %}
-<section class="bf-section bf-bg-black bf-hero" data-bf-hero>
-  <div class="bf-container bf-text-center">
+<section class="bf-section bf-bg-black bf-hero bf-pattern-dots-corner" data-bf-hero style="position:relative;overflow:hidden;">
+  <div class="bf-oversized-bg" aria-hidden="true">{{ section.settings.bg_word }}</div>
+  <div class="bf-container bf-text-center" style="position:relative;z-index:1;">
     <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
     <h1 class="bf-max-640" style="margin-left:auto;margin-right:auto;">{{ section.settings.headline }}</h1>
 
@@ -39,7 +40,8 @@
       "default": "YOUR DAILY <span class=\"bf-accent\">POWER</span>."
     },
     { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Premium male vitality support in a daily gummy format — with saffron, Panax ginseng, maca, and vitamin B6." },
-    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Choose Your Supply" },
+    { "type": "text", "id": "bg_word", "label": "Oversized background word (decorative)", "default": "DRIVE" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Shop Now" },
     { "type": "image_picker", "id": "hero_image", "label": "Hero product image (temporary mockup until real photography exists)" },
     { "type": "header", "content": "Stat callouts (leave blank until real numbers exist)" },
     { "type": "text", "id": "stat_1_number", "label": "Stat 1 number" },
