@@ -24,15 +24,17 @@
 
   <style>
     :root{
-      --bf-black: {{ settings.color_bull_black }};
-      --bf-graphite: {{ settings.color_graphite }};
+      --bf-black: {{ settings.color_primary_black }};
+      --bf-graphite: {{ settings.color_soft_black }};
       --bf-dark-surface: {{ settings.color_dark_surface }};
-      --bf-red: {{ settings.color_bullrush_red }};
-      --bf-action-red: {{ settings.color_action_red }};
-      --bf-deep-red: {{ settings.color_deep_red }};
+      --bf-accent: {{ settings.color_acid_green }};
+      --bf-accent-deep: {{ settings.color_acid_green_deep }};
+      --bf-cyan: {{ settings.color_electric_cyan }};
+      --bf-cyan-deep: {{ settings.color_electric_cyan_deep }};
+      --bf-accent-on-light: #4A6100; /* derived, WCAG-AAA-safe (7.0:1) dark-olive shade of acid green for legible text on white/light-gray backgrounds -- raw acid green is 1.18:1 on white and fails outright */
       --bf-white: {{ settings.color_white }};
-      --bf-off-white: {{ settings.color_off_white }};
-      --bf-muted-grey: {{ settings.color_muted_grey }};
+      --bf-light-gray: {{ settings.color_light_gray }};
+      --bf-muted-gray: {{ settings.color_muted_gray }};
       --bf-font-display: {{ settings.font_display.family }}, {{ settings.font_display.fallback_families }};
       --bf-font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
     }

@@ -24,22 +24,22 @@
       <div class="bf-chart">
         <svg viewBox="0 0 600 320" preserveAspectRatio="xMidYMid meet">
           <!-- axes -->
-          <line x1="50" y1="20" x2="50" y2="270" stroke="{{ settings.color_muted_grey }}" stroke-width="1"/>
-          <line x1="50" y1="270" x2="580" y2="270" stroke="{{ settings.color_muted_grey }}" stroke-width="1"/>
+          <line x1="50" y1="20" x2="50" y2="270" stroke="{{ settings.color_muted_gray }}" stroke-width="1"/>
+          <line x1="50" y1="270" x2="580" y2="270" stroke="{{ settings.color_muted_gray }}" stroke-width="1"/>
           {%- for i in (0..4) -%}
             <line x1="50" y1="{{ i | times: 62.5 | plus: 20 }}" x2="580" y2="{{ i | times: 62.5 | plus: 20 }}" stroke="{{ settings.color_dark_surface }}" stroke-width="1"/>
           {%- endfor -%}
 
           <!-- general population line (real curve pending citation) -->
-          <polyline points="70,90 180,110 290,150 400,190 510,225" fill="none" stroke="{{ settings.color_muted_grey }}" stroke-width="2.5"/>
+          <polyline points="70,90 180,110 290,150 400,190 510,225" fill="none" stroke="{{ settings.color_muted_gray }}" stroke-width="2.5"/>
 
           <!-- with BullRush — placeholder, dashed, unsubstantiated -->
-          <polyline points="70,90 180,85 290,82 400,80 510,78" fill="none" stroke="{{ settings.color_bullrush_red }}" stroke-width="2.5" stroke-dasharray="6 5"/>
+          <polyline points="70,90 180,85 290,82 400,80 510,78" fill="none" stroke="{{ settings.color_acid_green }}" stroke-width="2.5" stroke-dasharray="6 5"/>
 
           <!-- axis labels -->
-          <text x="50" y="285" font-size="10" fill="{{ settings.color_muted_grey }}">{{ section.settings.x_axis_start }}</text>
-          <text x="565" y="285" font-size="10" fill="{{ settings.color_muted_grey }}" text-anchor="end">{{ section.settings.x_axis_end }}</text>
-          <text x="20" y="24" font-size="10" fill="{{ settings.color_muted_grey }}">{{ section.settings.y_axis_label }}</text>
+          <text x="50" y="285" font-size="10" fill="{{ settings.color_muted_gray }}">{{ section.settings.x_axis_start }}</text>
+          <text x="565" y="285" font-size="10" fill="{{ settings.color_muted_gray }}" text-anchor="end">{{ section.settings.x_axis_end }}</text>
+          <text x="20" y="24" font-size="10" fill="{{ settings.color_muted_gray }}">{{ section.settings.y_axis_label }}</text>
         </svg>
       </div>
       <p class="bf-chart-caption">{{ section.settings.chart_caption }}</p>

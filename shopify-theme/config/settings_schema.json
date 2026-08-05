@@ -71,17 +71,22 @@
     "settings": [
       {
         "type": "header",
-        "content": "BullRush palette"
+        "content": "BullRush palette (rebrand 2026-08-04)"
       },
-      { "type": "color", "id": "color_bull_black", "label": "Bull Black", "default": "#080808" },
-      { "type": "color", "id": "color_graphite", "label": "Graphite", "default": "#151515" },
-      { "type": "color", "id": "color_dark_surface", "label": "Dark Surface", "default": "#202020" },
-      { "type": "color", "id": "color_bullrush_red", "label": "BullRush Red", "default": "#D90912" },
-      { "type": "color", "id": "color_action_red", "label": "Bright Action Red", "default": "#F01823" },
-      { "type": "color", "id": "color_deep_red", "label": "Deep Red", "default": "#8D0B11" },
+      {
+        "type": "paragraph",
+        "content": "Bold/aggressive/futuristic direction: acid green + electric cyan on black, replacing the earlier red/black palette. See strategy/01-brand-application-guide.md §9."
+      },
+      { "type": "color", "id": "color_primary_black", "label": "Primary Black", "default": "#080808" },
+      { "type": "color", "id": "color_soft_black", "label": "Soft Black", "default": "#151515" },
+      { "type": "color", "id": "color_dark_surface", "label": "Dark Surface (internal, card borders on dark bg)", "default": "#202020" },
+      { "type": "color", "id": "color_acid_green", "label": "Acid Green (primary accent — CTAs, badges, emphasis)", "default": "#C8FF00" },
+      { "type": "color", "id": "color_acid_green_deep", "label": "Acid Green Deep (hover/pressed shade, derived)", "default": "#A0CC00" },
+      { "type": "color", "id": "color_electric_cyan", "label": "Electric Cyan (secondary accent — panels, patterns)", "default": "#66D9E8" },
+      { "type": "color", "id": "color_electric_cyan_deep", "label": "Electric Cyan Deep (hover shade, derived)", "default": "#52AEBA" },
       { "type": "color", "id": "color_white", "label": "White", "default": "#FFFFFF" },
-      { "type": "color", "id": "color_off_white", "label": "Warm Off-White", "default": "#F5F4F1" },
-      { "type": "color", "id": "color_muted_grey", "label": "Muted Grey", "default": "#A5A5A5" }
+      { "type": "color", "id": "color_light_gray", "label": "Light Gray (short visual reset only — never several sections in a row)", "default": "#F2F2F2" },
+      { "type": "color", "id": "color_muted_gray", "label": "Muted Gray", "default": "#8B8B8B" }
     ]
   },
   {
