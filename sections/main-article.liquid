@@ -1,0 +1,49 @@
+<section class="bf-section bf-bg-white">
+  <article class="bf-container bf-max-640">
+    <p class="bf-muted" style="margin:0;">{{ article.published_at | date: '%B %d, %Y' }}{% if article.author != blank %} &middot; {{ article.author }}{% endif %}</p>
+    <h1>{{ article.title }}</h1>
+    {%- if article.image -%}
+      <div style="aspect-ratio:16/9;background:var(--bf-light-gray);border-radius:6px;overflow:hidden;margin:20px 0;">
+        <img src="{{ article.image | image_url: width: 1200 }}" width="1200" height="{{ 1200 | divided_by: article.image.aspect_ratio | round }}" alt="{{ article.title | escape }}" loading="eager" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    {%- endif -%}
+    <div class="bf-page-content">{{ article.content }}</div>
+
+    {%- if article.tags.size > 0 -%}
+      <div style="margin-top:24px;display:flex;gap:8px;flex-wrap:wrap;">
+        {%- for tag in article.tags -%}<span class="bf-badge-amount">{{ tag }}</span>{%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if blog.comments_enabled? -%}
+      <div class="bf-mt-32" style="border-top:1px solid #e7e5e0;padding-top:24px;">
+        <h2>Comments ({{ article.comments_count }})</h2>
+        {%- for comment in article.comments -%}
+          <div style="padding:12px 0;border-bottom:1px solid #e7e5e0;">
+            <p style="margin:0;font-weight:600;">{{ comment.author }}</p>
+            <p class="bf-muted" style="margin:2px 0 8px;font-size:0.8rem;">{{ comment.created_at | date: '%B %d, %Y' }}</p>
+            <p style="margin:0;">{{ comment.content }}</p>
+          </div>
+        {%- endfor -%}
+
+        {%- form 'new_comment', article -%}
+          {%- if form.posted_successfully? -%}
+            <p class="bf-badge-placeholder" style="display:block;padding:12px;margin:16px 0;">{% if blog.moderated? %}Your comment has been submitted and is awaiting approval.{% else %}Your comment was posted successfully.{% endif %}</p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div class="bf-placeholder-note" style="margin:16px 0;">{{ form.errors | default_errors }}</div>
+          {%- endif -%}
+          <div style="display:grid;gap:12px;margin-top:16px;max-width:480px;">
+            <input type="text" name="comment[author]" placeholder="Name" value="{{ form.author }}" required style="padding:12px;border:1px solid #ccc;border-radius:4px;">
+            <input type="email" name="comment[email]" placeholder="Email" value="{{ form.email }}" required style="padding:12px;border:1px solid #ccc;border-radius:4px;">
+            <textarea name="comment[body]" rows="5" placeholder="Comment" required style="padding:12px;border:1px solid #ccc;border-radius:4px;">{{ form.body }}</textarea>
+            <button type="submit" class="bf-btn bf-btn--primary" style="justify-self:start;">Post Comment</button>
+          </div>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </article>
+</section>
+{% schema %}
+{ "name": "Main article" }
+{% endschema %}

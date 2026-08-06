@@ -26,8 +26,8 @@ The repository root is a valid Shopify theme — `assets/`, `config/`, `layout/`
 6. **Add the regulatory disclaimer** in the Footer section settings, and point `manage_subscription_url` at your real subscription portal, before public launch.
 
 ## Scope of this build
-In scope: full homepage + DR landing page + product offer page funnels, Science/About/Contact/FAQ pages, legal policy rendering, cart page, generic content-page template, header/footer with newsletter/country-selector/payment icons.
-Out of scope (would need to be added before a full production launch): collection template, blog/article templates, search template, 404 template, customer account templates.
+In scope: full homepage + DR landing page + product offer page funnels, Science/About/Contact/FAQ pages, legal policy rendering, cart page, generic content-page template, header/footer with newsletter/country-selector/payment icons, plus every other template Shopify's router requires so no storefront URL ever falls through to a broken page: collection, 404, search, blog, article, and password (coming-soon/locked-store) — each backed by a minimal, on-brand `main-*` section (grid/list/message + existing button and card styles, no new visual language introduced).
+Out of scope (would need to be added before a full production launch): customer account templates (login/register/addresses/order/account/activate/reset-password) and the gift card template — this store has no customer-accounts or gift-card flow enabled yet, so these aren't wired up; Shopify's official `theme check` does not flag them as required (only the older, deprecated `theme-check` Ruby gem does, for Theme Store submission purposes).
 
 ## File map
 - `layout/theme.liquid` — shell, loads fonts/CSS/JS, defines the color/font CSS custom properties, renders header/footer/sticky-cta

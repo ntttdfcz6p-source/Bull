@@ -1,0 +1,39 @@
+<section class="bf-section bf-bg-white">
+  <div class="bf-container bf-max-640">
+    <h1>{{ section.settings.heading }}</h1>
+    {%- form 'search' -%}
+      <div style="display:flex;gap:12px;margin:20px 0;flex-wrap:wrap;">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.placeholder }}" style="flex:1;min-width:200px;padding:12px;border:1px solid #ccc;border-radius:4px;font-family:var(--bf-font-body);">
+        <input type="hidden" name="type" value="product,page,article">
+        <button type="submit" class="bf-btn bf-btn--primary">Search</button>
+      </div>
+    {%- endform -%}
+
+    {%- if search.performed -%}
+      {%- if search.results_count == 0 -%}
+        <p class="bf-muted">No results found for "{{ search.terms }}".</p>
+      {%- else -%}
+        <p class="bf-muted">{{ search.results_count }} result{% unless search.results_count == 1 %}s{% endunless %} for "{{ search.terms }}"</p>
+        <div style="display:grid;gap:16px;margin-top:20px;">
+          {%- for item in search.results -%}
+            <a href="{{ item.url }}" class="bf-card" style="display:block;text-decoration:none;color:inherit;">
+              <p style="margin:0;font-weight:600;">{{ item.title }}</p>
+              {%- if item.object_type == 'product' -%}
+                <p class="bf-muted" style="margin:4px 0 0;">{{ item.price | money }}</p>
+              {%- endif -%}
+            </a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Main search",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Search" },
+    { "type": "text", "id": "placeholder", "label": "Input placeholder", "default": "Search products, pages…" }
+  ]
+}
+{% endschema %}

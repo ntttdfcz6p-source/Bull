@@ -1,0 +1,34 @@
+<section class="bf-section bf-bg-white">
+  <div class="bf-container">
+    <h1 class="bf-text-center">{{ blog.title }}</h1>
+    {%- paginate blog.articles by 12 -%}
+      {%- if blog.articles.size == 0 -%}
+        <p class="bf-muted bf-text-center">No posts yet.</p>
+      {%- else -%}
+        <div class="bf-grid-3 bf-mt-32">
+          {%- for article in blog.articles -%}
+            <a href="{{ article.url }}" class="bf-card" style="display:block;text-decoration:none;color:inherit;">
+              {%- if article.image -%}
+                <div style="aspect-ratio:16/9;background:var(--bf-light-gray);border-radius:6px;overflow:hidden;margin-bottom:12px;">
+                  <img src="{{ article.image | image_url: width: 500 }}" width="500" height="{{ 500 | divided_by: article.image.aspect_ratio | round }}" alt="{{ article.title | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+              {%- endif -%}
+              <p style="margin:0;font-weight:600;">{{ article.title }}</p>
+              <p class="bf-muted" style="margin:4px 0 0;font-size:0.85rem;">{{ article.published_at | date: '%B %d, %Y' }}</p>
+              <p class="bf-muted" style="margin:8px 0 0;">{{ article.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
+            </a>
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}
+          <div class="bf-text-center bf-mt-32" style="display:flex;gap:12px;justify-content:center;">
+            {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="bf-btn bf-btn--outline-light">Previous</a>{%- endif -%}
+            {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="bf-btn bf-btn--outline-light">Next</a>{%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Main blog" }
+{% endschema %}
