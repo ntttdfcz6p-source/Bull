@@ -47,13 +47,13 @@
 <body class="template-{{ request.page_type }}">
   <a class="bf-skip-link" href="#MainContent">Skip to content</a>
 
-  {% section 'header' %}
+  {% sections 'header-group' %}
 
   <main id="MainContent" role="main">
     {{ content_for_layout }}
   </main>
 
-  {% section 'main-footer' %}
+  {% sections 'footer-group' %}
 
   {% if settings.enable_sticky_cta %}
     {% section 'sticky-mobile-cta' %}
