@@ -1,44 +1,59 @@
-<!-- BullRush homepage — static reconstruction of templates/index.json
-     as rendered with each section's schema DEFAULTS, post-rebrand (acid-green/electric-cyan/black).
-     Real stylesheet is linked directly; the only <style> override below reproduces the
-     :root custom-property block that layout/theme.liquid normally generates from
-     config/settings_data.json's "Default" preset, with literal resolved hex values. -->
+<!-- BULLRUSH homepage — static reconstruction of templates/index.json rendered
+     with every section's schema DEFAULTS, post-redesign (acid-green / electric-lime /
+     off-white / dark-olive on black). This is NOT a live Shopify render: there is no
+     store, no cart, no product, no real navigation menu reachable from this sandbox.
+     The real stylesheet/script are linked directly (../assets/bullrush.css,
+     ../assets/bullrush.js); the only <style> override below reproduces the :root
+     custom-property block that layout/theme.liquid normally generates from
+     config/settings_data.json's "Default" preset, with literal resolved hex values,
+     plus a couple of screenshot-only settling rules. See preview/README.md for the
+     full list of known deviations from a real Shopify render. -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BullRush — Homepage (rebrand reconstruction)</title>
+<title>BULLRUSH — Homepage (rebrand reconstruction)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* Mirrors layout/theme.liquid's inline :root block, resolved against
+     config/settings_data.json's "Default" preset (the literal hex values a
+     fresh install ships with). */
   :root{
-    --bf-black: #080808;
-    --bf-graphite: #151515;
-    --bf-dark-surface: #202020;
-    --bf-accent: #C8FF00;
-    --bf-accent-deep: #A0CC00;
-    --bf-cyan: #66D9E8;
-    --bf-cyan-deep: #52AEBA;
-    --bf-accent-on-light: #4A6100;
+    --bf-black: #070707;
+    --bf-charcoal: #121212;
+    --bf-dark-surface: #1A1A1A;
+    --bf-accent: #BFFF00;
+    --bf-accent-deep: #96CC00;
+    --bf-lime: #D4FF00;
+    --bf-olive: #293114;
+    --bf-accent-on-light: #293114;
     --bf-white: #FFFFFF;
-    --bf-light-gray: #F2F2F2;
-    --bf-muted-gray: #8B8B8B;
+    --bf-light-gray: #F4F1E9;
+    --bf-muted-gray: #8E8E8E;
     --bf-font-display: 'Archivo Black', sans-serif;
     --bf-font-body: 'Inter', sans-serif;
   }
 </style>
-<link rel="stylesheet" href="/home/user/Bull/assets/bullrush.css">
+<link rel="stylesheet" href="../assets/bullrush.css">
 <style>
-  /* Screenshot-only: force scroll-reveal / animated elements to their settled end state */
+  /* Screenshot-only: settle scroll-reveal / animated / cursor-parallax elements to
+     their end state so full-page screenshots don't capture a mid-animation frame. */
   .bf-reveal { opacity: 1 !important; transform: none !important; }
   .bf-marquee__track { animation: none !important; }
   .bf-badge-spin svg { animation: none !important; }
   .bf-cursor-parallax { transform: none !important; }
-  /* Screenshot-only: labelled placeholder boxes standing in for unshot photography/video */
+  .bf-tilt-card { transform: none !important; }
+  /* Screenshot-only: labelled placeholder boxes standing in for real photography/
+     video assets this reconstruction has no access to (the theme itself falls back
+     to the bundled temporary-product-*.webp graphics for product shots, used as-is
+     below — these placeholder boxes only stand in for the photography/video slots
+     that have NO bundled fallback asset at all: lifestyle photos, UGC clips, press
+     logos, advisor photos, gift icons). */
   .ph-box {
     display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px;
     text-align: center; color: var(--bf-muted-gray); font-size: 0.72rem; letter-spacing: 0.04em;
-    text-transform: uppercase; padding: 16px; width: 100%; height: 100%;
+    text-transform: uppercase; padding: 16px; width: 100%; height: 100%; background: var(--bf-charcoal);
   }
   .ph-box span.ph-label { color: var(--bf-white); font-family: var(--bf-font-display); font-size: 0.78rem; }
 </style>
@@ -46,7 +61,23 @@
 <body class="template-index">
 <a class="bf-skip-link" href="#MainContent">Skip to content</a>
 
-<!-- ================= HEADER (sections/header.liquid) ================= -->
+<!-- ================= PROMO BAR (sections/promo-bar.liquid) =================
+     enable_bar defaults to true and 4 message blocks ship by default, so the bar
+     DOES render out of the box (no end_datetime set → rotating messages, no
+     countdown, per the section's own anti-fake-urgency rule). -->
+<div class="bf-promo-bar" style="background:#070707;color:#F4F1E9;">
+  <div class="bf-promo-bar__message">
+    <div class="bf-announce-rotator">
+      <span class="bf-announce-rotator__item" data-active="true">LIMITED LAUNCH OFFER — SAVE 50%</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HEADER (sections/header.liquid) =================
+     main_menu has no real linklist reachable from this sandbox (no navigation.json
+     exists in a theme repo — menus are store data); illustrative links below point
+     at the in-page anchor ids the sections themselves define (#formula,
+     #how-it-works, #reviews, #faq). -->
 <header class="bf-header">
   <div class="bf-header__inner">
     <button type="button" class="bf-hamburger" aria-expanded="false" aria-label="Open menu">
@@ -54,20 +85,26 @@
       <span class="bf-hamburger__bar"></span>
       <span class="bf-hamburger__bar"></span>
     </button>
-    <a href="/" aria-label="BullRush home">
-      <img src="/home/user/Bull/assets/bullrush-horizontal-dark.png" width="160" alt="BullRush" class="bf-logo bf-logo--horizontal">
+    <a href="/" aria-label="BULLRUSH home">
+      <img src="../assets/bullrush-horizontal-dark.svg" width="160" height="28" alt="BULLRUSH" class="bf-logo bf-logo--horizontal">
     </a>
     <nav aria-label="Main">
       <ul class="bf-header__nav">
-        <li><a href="#bf-purchase">Shop</a></li>
-        <li><a href="/pages/science">The Science</a></li>
-        <li><a href="/pages/about">About</a></li>
-        <li><a href="/pages/faq">FAQ</a></li>
-        <li><a href="/pages/contact">Contact</a></li>
+        <li><a href="#formula">Formula</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
-    <div class="bf-header__cart">
-      <a href="/cart" aria-label="Cart" class="bf-header__cart-icon">Cart <span>0</span></a>
+    <div class="bf-header__actions">
+      <a href="#" aria-label="Account" class="bf-header__icon-link bf-header__account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke-linecap="round"/></svg>
+      </a>
+      <a href="#" aria-label="Cart, 0 items" class="bf-header__icon-link bf-header__cart-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20"><path d="M4 7h16l-1.5 12.5a2 2 0 0 1-2 1.5H7.5a2 2 0 0 1-2-1.5L4 7z"/><path d="M8 7a4 4 0 0 1 8 0" stroke-linecap="round"/></svg>
+        <span class="bf-header__cart-count">0</span>
+      </a>
+      <a href="#bf-purchase" class="bf-btn bf-btn--primary bf-header__shop-now">Shop Now</a>
     </div>
   </div>
 </header>
@@ -76,32 +113,29 @@
 
   <!-- ================= HERO — BRAND (sections/hero-brand.liquid) ================= -->
   <section class="bf-section bf-bg-black bf-hero" style="position:relative;overflow:hidden;">
-    <div class="bf-oversized-bg" aria-hidden="true">POWER</div>
+    <div class="bf-oversized-bg" aria-hidden="true">BULLRUSH</div>
     <div class="bf-container bf-hero__grid" style="position:relative;z-index:1;">
       <div>
-        <span class="bf-eyebrow">FUEL YOUR POWER</span>
-        <h1>POWER YOUR <span class="bf-accent">DRIVE</span>.</h1>
-        <p style="max-width:480px;">Daily gummies with saffron, Panax ginseng, maca, and vitamin B6 — formulated to support male vitality, energy, and everyday performance.</p>
+        <span class="bf-eyebrow">BUILT FOR MEN WHO REFUSE TO SLOW DOWN</span>
+        <h1>UNLEASH YOUR <span class="bf-accent">DRIVE.</span></h1>
+        <p style="max-width:480px;">A powerful daily formula built to support energy, focus, strength, recovery and male vitality.</p>
+
         <div class="bf-hero__rating" style="margin-top:16px;">
-          <span class="bf-badge-placeholder">★★★★★ — reviews pending launch</span>
+          <span class="bf-accent" style="font-family:var(--bf-font-display);font-size:1rem;">★★★★★ 4.8/5</span>
+          <span class="bf-muted">(1,200+ reviews — placeholder)</span>
         </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
-          <span class="bf-badge-amount">Daily Energy</span>
-          <span class="bf-badge-amount">Focus</span>
-          <span class="bf-badge-amount">Male Vitality</span>
-        </div>
+
         <div class="bf-cta-row">
           <a href="#bf-purchase" class="bf-btn bf-btn--primary bf-btn--arrow">Shop Now <span class="bf-btn__arrow">→</span></a>
-          <a href="#" class="bf-btn bf-btn--outline-dark">Explore The Formula</a>
+          <a href="#formula" class="bf-btn bf-btn--outline-dark">See The Formula</a>
         </div>
-        <p class="bf-muted" style="font-size:0.78rem;margin-top:18px;margin-bottom:0;">90-day guarantee · Free shipping on Subscribe &amp; Save</p>
+
+        <p class="bf-muted" style="font-size:0.78rem;margin-top:18px;margin-bottom:0;">90-day money-back guarantee · Free shipping on multi-bottle orders</p>
       </div>
-      <div class="bf-hero__media bf-bg-cyan bf-pattern-dots" style="aspect-ratio:1/1;position:relative;">
-        <div class="bf-cursor-parallax" style="width:60%;">
-          <div class="ph-box" style="color:#08080899;">
-            <span class="ph-label">TEMPORARY ASSET</span>
-            Hero product shot — replace before launch
-          </div>
+
+      <div class="bf-hero__media bf-glow" style="aspect-ratio:1/1;position:relative;background:none;overflow:visible;">
+        <div class="bf-cursor-parallax bf-float" style="width:62%;position:relative;z-index:1;">
+          <img src="../assets/temporary-product-01.webp" width="900" height="900" alt="BULLRUSH Testosterone Support Gummies — temporary placeholder image" style="width:100%;height:auto;">
         </div>
       </div>
     </div>
@@ -111,100 +145,260 @@
   <section class="bf-bg-black" style="padding:20px 0;overflow:hidden;">
     <div class="bf-marquee">
       <div class="bf-marquee__track">
-        <span class="bf-marquee__item">ENERGY <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">STRENGTH <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">FOCUS <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">RECOVERY <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">DRIVE <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">PERFORMANCE <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">DAILY VITALITY <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">ENERGY <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">STRENGTH <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">FOCUS <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">RECOVERY <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">DRIVE <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">PERFORMANCE <span class="bf-marquee__sep">/</span></span>
-        <span class="bf-marquee__item">DAILY VITALITY <span class="bf-marquee__sep">/</span></span>
+        <span class="bf-marquee__item">ENERGY <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">DRIVE <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">STRENGTH <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">FOCUS <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">RECOVERY <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">PERFORMANCE <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">MALE VITALITY <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">DAILY DISCIPLINE <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">ENERGY <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">DRIVE <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">STRENGTH <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">FOCUS <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">RECOVERY <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">PERFORMANCE <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">MALE VITALITY <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
+        <span class="bf-marquee__item">DAILY DISCIPLINE <span class="bf-marquee__sep" aria-hidden="true">/</span></span>
       </div>
     </div>
   </section>
 
-  <!-- ================= PRESS MENTIONS: skipped — ships with zero blocks by default (renders nothing) ================= -->
-
-  <!-- ================= POSITIONING STATEMENT (sections/positioning-statement.liquid) ================= -->
-  <section class="bf-section bf-bg-cyan bf-text-center bf-pattern-dots">
+  <!-- ================= PRESS MENTIONS (sections/press-mentions.liquid) ================= -->
+  <section class="bf-section bf-bg-black" style="padding-top:32px;padding-bottom:32px;">
     <div class="bf-container">
-      <p class="bf-max-640" style="font-family:var(--bf-font-display);text-transform:uppercase;font-size:1.3rem;">
-        Premium male vitality support in a daily gummy format.
-      </p>
-      <div class="bf-grid-3 bf-mt-32">
-        <div class="bf-card"><p style="margin:0;font-weight:600;">[PLACEHOLDER — GMP facility documentation]</p></div>
-        <div class="bf-card"><p style="margin:0;font-weight:600;">[PLACEHOLDER — third-party testing]</p></div>
-        <div class="bf-card"><p style="margin:0;font-weight:600;">Transparent formula, no proprietary blends</p></div>
+      <p class="bf-eyebrow bf-text-center" style="display:block;">As Featured In</p>
+      <div class="bf-press-strip bf-reveal is-visible">
+        <span class="bf-press-strip__logo">PUBLICATION 01</span>
+        <span class="bf-press-strip__logo">PUBLICATION 02</span>
+        <span class="bf-press-strip__logo">PUBLICATION 03</span>
+        <span class="bf-press-strip__logo">PUBLICATION 04</span>
+        <span class="bf-press-strip__logo">PUBLICATION 05</span>
       </div>
+      <p class="bf-muted bf-text-center" style="font-size:0.68rem;margin-top:10px;">TEMPORARY PRESS PLACEHOLDER — REPLACE BEFORE LAUNCH. These are generic placeholder logo slots, not real press coverage.</p>
     </div>
   </section>
 
-  <!-- ================= PROBLEM PROOF (sections/problem-proof.liquid) — split screen ================= -->
+  <!-- ================= INGREDIENTS (sections/ingredient-education.liquid) ================= -->
+  <section class="bf-section bf-bg-black bf-grid-overlay" id="formula">
+    <div class="bf-container" style="position:relative;z-index:1;">
+      <span class="bf-eyebrow">The Formula</span>
+      <h2>8 Ingredients. Zero Guesswork.</h2>
+      <p class="bf-accent" style="font-family:var(--bf-font-display);text-transform:uppercase;letter-spacing:0.04em;font-size:0.95rem;">Transparent Doses, No Proprietary Blends</p>
+      <div class="bf-grid-4 bf-mt-32">
+
+        <div class="bf-ing-accordion" style="--bf-ing-accent:#BFFF00;">
+          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="false">
+            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v6M12 9c-3 1-4 4-5 9M12 9c3 1 4 4 5 9M12 9c-2 2-2 4-1 6M12 9c2 2 2 4 1 6"/></svg></span>
+            <span class="bf-ing-accordion__name">Tongkat Ali<span class="bf-ing-accordion__dose" style="display:block;">200 mg / serving — placeholder</span></span>
+            <span class="bf-ing-accordion__chevron">▾</span>
+          </button>
+          <div class="bf-ing-accordion__panel" data-open="false">
+            <span class="bf-badge-amount" style="margin-bottom:10px;">Drive &amp; Vitality</span>
+            <p>A traditionally used botanical extract included to help support everyday male vitality and drive.</p>
+            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
+          </div>
+        </div>
+
+        <div class="bf-ing-accordion" style="--bf-ing-accent:#BFFF00;">
+          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="false">
+            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12z"/></svg></span>
+            <span class="bf-ing-accordion__name">Shilajit<span class="bf-ing-accordion__dose" style="display:block;">250 mg / serving — placeholder</span></span>
+            <span class="bf-ing-accordion__chevron">▾</span>
+          </button>
+          <div class="bf-ing-accordion__panel" data-open="false">
+            <span class="bf-badge-amount" style="margin-bottom:10px;">Energy &amp; Stamina</span>
+            <p>A mineral-rich resin traditionally used to help support stamina and everyday energy.</p>
+            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
+          </div>
+        </div>
+
+        <div class="bf-ing-accordion" style="--bf-ing-accent:#BFFF00;">
+          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="false">
+            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 20c8 0 14-6 14-14V4h-2C9 4 5 10 5 18v2z"/></svg></span>
+            <span class="bf-ing-accordion__name">Ashwagandha<span class="bf-ing-accordion__dose" style="display:block;">300 mg / serving — placeholder</span></span>
+            <span class="bf-ing-accordion__chevron">▾</span>
+          </button>
+          <div class="bf-ing-accordion__panel" data-open="false">
+            <span class="bf-badge-amount" style="margin-bottom:10px;">Recovery</span>
+            <p>An adaptogenic herb included to help support the body's normal response to everyday stress.</p>
+            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
+          </div>
+        </div>
+
+        <div class="bf-ing-accordion" style="--bf-ing-accent:#BFFF00;">
+          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="false">
+            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 4 9l8 13 8-13z"/><path d="M4 9h16M9 9l3 13M15 9l-3 13" stroke-width="1"/></svg></span>
+            <span class="bf-ing-accordion__name">Zinc<span class="bf-ing-accordion__dose" style="display:block;">10 mg / serving — placeholder</span></span>
+            <span class="bf-ing-accordion__chevron">▾</span>
+          </button>
+          <div class="bf-ing-accordion__panel" data-open="false">
+            <span class="bf-badge-amount" style="margin-bottom:10px;">Male Vitality</span>
+            <p>An essential mineral that supports the maintenance of normal testosterone levels in the blood.</p>
+            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
+          </div>
+        </div>
+
+        <div class="bf-ing-accordion" style="--bf-ing-accent:#BFFF00;">
+          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="false">
+            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+            <span class="bf-ing-accordion__name">Vitamin D<span class="bf-ing-accordion__dose" style="display:block;">50 mcg / serving — placeholder</span></span>
+            <span class="bf-ing-accordion__chevron">▾</span>
+          </button>
+          <div class="bf-ing-accordion__panel" data-open="false">
+            <span class="bf-badge-amount" style="margin-bottom:10px;">Strength &amp; Performance</span>
+            <p>Supports normal muscle function and helps maintain normal energy levels as part of daily performance.</p>
+            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
+          </div>
+        </div>
+
+        <div class="bf-ing-accordion" style="--bf-ing-accent:#BFFF00;">
+          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="false">
+            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 4 9l8 13 8-13z"/><path d="M4 9h16M9 9l3 13M15 9l-3 13" stroke-width="1"/></svg></span>
+            <span class="bf-ing-accordion__name">Boron<span class="bf-ing-accordion__dose" style="display:block;">3 mg / serving — placeholder</span></span>
+            <span class="bf-ing-accordion__chevron">▾</span>
+          </button>
+          <div class="bf-ing-accordion__panel" data-open="false">
+            <span class="bf-badge-amount" style="margin-bottom:10px;">Strength &amp; Performance</span>
+            <p>A trace mineral included for its studied role in supporting healthy hormone metabolism.</p>
+            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
+          </div>
+        </div>
+
+        <div class="bf-ing-accordion" style="--bf-ing-accent:#BFFF00;">
+          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="false">
+            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 20c8 0 14-6 14-14V4h-2C9 4 5 10 5 18v2z"/></svg></span>
+            <span class="bf-ing-accordion__name">Fenugreek<span class="bf-ing-accordion__dose" style="display:block;">500 mg / serving — placeholder</span></span>
+            <span class="bf-ing-accordion__chevron">▾</span>
+          </button>
+          <div class="bf-ing-accordion__panel" data-open="false">
+            <span class="bf-badge-amount" style="margin-bottom:10px;">Performance</span>
+            <p>A traditional botanical extract included to help support male performance and vitality.</p>
+            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
+          </div>
+        </div>
+
+        <div class="bf-ing-accordion" style="--bf-ing-accent:#BFFF00;">
+          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="false">
+            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 4 9l8 13 8-13z"/><path d="M4 9h16M9 9l3 13M15 9l-3 13" stroke-width="1"/></svg></span>
+            <span class="bf-ing-accordion__name">Magnesium<span class="bf-ing-accordion__dose" style="display:block;">100 mg / serving — placeholder</span></span>
+            <span class="bf-ing-accordion__chevron">▾</span>
+          </button>
+          <div class="bf-ing-accordion__panel" data-open="false">
+            <span class="bf-badge-amount" style="margin-bottom:10px;">Recovery &amp; Sleep</span>
+            <p>Supports normal muscle function and nervous system relaxation as part of daily recovery.</p>
+            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
+          </div>
+        </div>
+
+      </div>
+      <p class="bf-muted" style="margin-top:20px;font-size:0.8rem;">
+        [PLACEHOLDER] All amounts per serving shown above are temporary placeholders pending the final, manufacturer-confirmed Supplement Facts panel. Do not publish a supply-duration or dosage claim until confirmed. <a href="/pages/formula" style="color:var(--bf-white);">View full Supplement Facts panel</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= CERTIFICATIONS (sections/certifications.liquid) — dark:true default ================= -->
+  <div class="bf-cert-row bf-reveal is-visible bf-bg-black">
+    <div class="bf-cert-row__item">
+      <span class="bf-cert-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 2h6M10 2v7l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span>Third-Party Tested</span>
+    </div>
+    <div class="bf-cert-row__item">
+      <span class="bf-cert-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 20c8 0 14-6 14-14V4h-2C9 4 5 10 5 18v2z"/></svg></span>
+      <span>Transparent Formula</span>
+    </div>
+    <div class="bf-cert-row__item">
+      <span class="bf-cert-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M8.5 12l2.3 2.3L16 9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span>Manufactured to Quality Standards</span>
+    </div>
+    <div class="bf-cert-row__item">
+      <span class="bf-cert-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/></svg></span>
+      <span>Non-GMO Option</span>
+    </div>
+    <div class="bf-cert-row__item">
+      <span class="bf-cert-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M8.5 12l2.3 2.3L16 9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span>90-Day Guarantee</span>
+    </div>
+  </div>
+
+  <!-- ================= PROBLEM PROOF (sections/problem-proof.liquid) =================
+       stat_1_number / stat_2_number default blank → no oversized counters render
+       (matches the section's own "never fabricate a placeholder number" rule). -->
   <div class="bf-split">
     <div class="bf-split__content bf-bg-black">
       <span class="bf-eyebrow">The Reality</span>
-      <h2>The Everyday Reality For A Lot Of Men</h2>
-      <p class="bf-muted" style="margin-bottom:24px;">These are general population statistics, not a claim about what BullRush itself produces for any individual.</p>
-      <!-- Stat counters: both ship blank by default (no fabricated numbers), so the counter row does not render -->
-      <div class="bf-chart-wrap" style="margin:0 0 24px;">
+      <h2>Modern Life Is Working Against Men.</h2>
+      <p class="bf-muted" style="margin-bottom:24px;">These are general population statistics, not a claim about what BULLRUSH itself produces for any individual.</p>
+
+      <div class="bf-chart-wrap bf-reveal is-visible" style="margin:0 0 24px;">
         <div class="bf-chart-legend">
           <span class="bf-chart-legend__item"><span class="bf-chart-legend__swatch bf-chart-legend__swatch--population"></span> General population</span>
-          <span class="bf-chart-legend__item"><span class="bf-chart-legend__swatch bf-chart-legend__swatch--placeholder"></span> With BullRush — [PLACEHOLDER, unsubstantiated]</span>
+          <span class="bf-chart-legend__item"><span class="bf-chart-legend__swatch bf-chart-legend__swatch--placeholder"></span> With BULLRUSH — [PLACEHOLDER, unsubstantiated]</span>
         </div>
         <div class="bf-chart">
           <svg viewBox="0 0 600 320" preserveAspectRatio="xMidYMid meet">
-            <line x1="50" y1="20" x2="50" y2="270" stroke="#8B8B8B" stroke-width="1"/>
-            <line x1="50" y1="270" x2="580" y2="270" stroke="#8B8B8B" stroke-width="1"/>
-            <line x1="50" y1="20" x2="580" y2="20" stroke="#202020" stroke-width="1"/>
-            <line x1="50" y1="82.5" x2="580" y2="82.5" stroke="#202020" stroke-width="1"/>
-            <line x1="50" y1="145" x2="580" y2="145" stroke="#202020" stroke-width="1"/>
-            <line x1="50" y1="207.5" x2="580" y2="207.5" stroke="#202020" stroke-width="1"/>
-            <line x1="50" y1="270" x2="580" y2="270" stroke="#202020" stroke-width="1"/>
-            <polyline points="70,90 180,110 290,150 400,190 510,225" fill="none" stroke="#8B8B8B" stroke-width="2.5"/>
-            <polyline points="70,90 180,85 290,82 400,80 510,78" fill="none" stroke="#C8FF00" stroke-width="2.5" stroke-dasharray="6 5"/>
-            <text x="50" y="285" font-size="10" fill="#8B8B8B">20s</text>
-            <text x="565" y="285" font-size="10" fill="#8B8B8B" text-anchor="end">60s</text>
-            <text x="20" y="24" font-size="10" fill="#8B8B8B">[PLACEHOLDER METRIC — pending cited statistic]</text>
+            <line x1="50" y1="20" x2="50" y2="270" stroke="#8E8E8E" stroke-width="1"/>
+            <line x1="50" y1="270" x2="580" y2="270" stroke="#8E8E8E" stroke-width="1"/>
+            <line x1="50" y1="20" x2="580" y2="20" stroke="#1A1A1A" stroke-width="1"/>
+            <line x1="50" y1="82.5" x2="580" y2="82.5" stroke="#1A1A1A" stroke-width="1"/>
+            <line x1="50" y1="145" x2="580" y2="145" stroke="#1A1A1A" stroke-width="1"/>
+            <line x1="50" y1="207.5" x2="580" y2="207.5" stroke="#1A1A1A" stroke-width="1"/>
+            <line x1="50" y1="270" x2="580" y2="270" stroke="#1A1A1A" stroke-width="1"/>
+            <polyline points="70,90 180,110 290,150 400,190 510,225" fill="none" stroke="#8E8E8E" stroke-width="2.5"/>
+            <polyline points="70,90 180,85 290,82 400,80 510,78" fill="none" stroke="#BFFF00" stroke-width="2.5" stroke-dasharray="6 5"/>
+            <text x="50" y="285" font-size="10" fill="#8E8E8E">20s</text>
+            <text x="565" y="285" font-size="10" fill="#8E8E8E" text-anchor="end">60s</text>
+            <text x="20" y="24" font-size="10" fill="#8E8E8E">[PLACEHOLDER METRIC — pending cited statistic]</text>
           </svg>
         </div>
-        <p class="bf-chart-caption">Illustrative chart. The general-population curve requires a cited source before publishing; the "With BullRush" line is a placeholder and must not be shown as fact without clinical substantiation and legal review.</p>
+        <p class="bf-chart-caption">Illustrative chart. The general-population curve requires a cited source before publishing; the "With BULLRUSH" line is a placeholder and must not be shown as fact without clinical substantiation and legal review.</p>
       </div>
-      <div>
+
+      <div class="bf-grid-3 bf-reveal is-visible" style="margin-bottom:8px;">
+        <div class="bf-proof-item" style="margin-bottom:0;"><span class="bf-proof-item__mark">—</span><p style="margin:0;">Poor sleep</p></div>
+        <div class="bf-proof-item" style="margin-bottom:0;"><span class="bf-proof-item__mark">—</span><p style="margin:0;">High stress</p></div>
+        <div class="bf-proof-item" style="margin-bottom:0;"><span class="bf-proof-item__mark">—</span><p style="margin:0;">Processed diets</p></div>
+        <div class="bf-proof-item" style="margin-bottom:0;"><span class="bf-proof-item__mark">—</span><p style="margin:0;">Sedentary habits</p></div>
+        <div class="bf-proof-item" style="margin-bottom:0;"><span class="bf-proof-item__mark">—</span><p style="margin:0;">Inconsistent recovery</p></div>
+        <div class="bf-proof-item" style="margin-bottom:0;"><span class="bf-proof-item__mark">—</span><p style="margin:0;">Declining daily performance</p></div>
+      </div>
+
+      <div class="bf-reveal is-visible">
         <div class="bf-proof-item">
           <span class="bf-proof-item__mark">—</span>
-          <div><p style="margin:0 0 6px;">[PLACEHOLDER — insert a credible, cited statistic on adult male fatigue/stress/energy decline]</p>
-          <span class="bf-cite bf-muted">Source: [PLACEHOLDER — citation required before publishing]</span></div>
+          <div>
+            <p style="margin:0 0 6px;">[PLACEHOLDER — insert a credible, cited statistic on adult male fatigue/stress/energy decline]</p>
+            <span class="bf-cite bf-muted">Source: [PLACEHOLDER — citation required before publishing]</span>
+          </div>
         </div>
         <div class="bf-proof-item">
           <span class="bf-proof-item__mark">—</span>
-          <div><p style="margin:0 0 6px;">[PLACEHOLDER — insert a credible, cited statistic on adult male fatigue/stress/energy decline]</p>
-          <span class="bf-cite bf-muted">Source: [PLACEHOLDER — citation required before publishing]</span></div>
+          <div>
+            <p style="margin:0 0 6px;">[PLACEHOLDER — insert a credible, cited statistic on adult male fatigue/stress/energy decline]</p>
+            <span class="bf-cite bf-muted">Source: [PLACEHOLDER — citation required before publishing]</span>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="bf-split__media">
-      <div style="position:absolute;inset:0;" class="ph-box" style="background:var(--bf-graphite);">
-        <span class="ph-label">TEMPORARY ASSET — REPLACE BEFORE LAUNCH</span>
-        Black-and-white lifestyle photography
+      <div style="position:absolute;inset:0;" class="ph-box">
+        TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>Black-and-white lifestyle photography
       </div>
     </div>
   </div>
 
-  <!-- ================= BENEFITS LIST (sections/benefits-list.liquid) — tilt cards ================= -->
+  <!-- ================= SOLUTION — BENEFIT CARDS (sections/benefits-list.liquid) ================= -->
   <section class="bf-section bf-bg-black">
     <div class="bf-container">
-      <span class="bf-eyebrow">Why It Matters</span>
-      <h2>Built To Support The Daily Grind</h2>
-      <div class="bf-grid-3 bf-mt-32">
+      <span class="bf-eyebrow">The Solution</span>
+      <h2>One Daily Habit. Multiple Performance Benefits.</h2>
+      <div class="bf-grid-3 bf-mt-32 bf-reveal is-visible">
         <div class="bf-tilt-card">
           <span class="bf-tilt-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
-          <div class="bf-tilt-card__title">Daily Energy</div>
+          <div class="bf-tilt-card__title">Energy Support</div>
           <p class="bf-tilt-card__body">Formulated to support steadier energy through the day</p>
         </div>
         <div class="bf-tilt-card">
@@ -225,59 +419,90 @@
         <div class="bf-tilt-card">
           <span class="bf-tilt-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
           <div class="bf-tilt-card__title">Male Vitality</div>
-          <p class="bf-tilt-card__body">Formulated to support overall vitality</p>
+          <p class="bf-tilt-card__body">Formulated to support overall male vitality</p>
         </div>
         <div class="bf-tilt-card">
           <span class="bf-tilt-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></span>
-          <div class="bf-tilt-card__title">Hormone Support</div>
-          <p class="bf-tilt-card__body">Formulated to help support the body's normal hormonal balance — not a treatment for low testosterone</p>
+          <div class="bf-tilt-card__title">Daily Performance</div>
+          <p class="bf-tilt-card__body">Designed for consistent, everyday performance — not a one-off boost</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= PRODUCT INTRO (sections/product-intro.liquid) ================= -->
-  <section class="bf-section bf-bg-graphite">
+  <!-- ================= BENEFIT PANELS (sections/benefit-panels.liquid) ================= -->
+  <section class="bf-section bf-bg-black">
     <div class="bf-container">
-      <span class="bf-eyebrow">The Product</span>
-      <h2>Meet BullRush Male Vitality Gummies</h2>
-      <div class="bf-grid-3 bf-mt-32">
-        <div class="bf-card">
-          <div class="bf-card__number">1</div>
-          <h3>What it is</h3>
-          <p class="bf-muted">A daily gummy formulated with saffron, Panax ginseng, maca, and vitamin B6 — one clear product, one clear routine.</p>
+      <span class="bf-eyebrow">The Benefits</span>
+      <h2>Built For Every Part Of Your Day</h2>
+    </div>
+    <div class="bf-mt-32">
+      <div class="bf-benefit-panel-row bf-bg-charcoal">
+        <div class="bf-benefit-panel-row__media">
+          <img src="../assets/temporary-product-03.webp" width="1000" height="1000" alt="Energy &amp; Stamina — temporary placeholder image" style="width:100%;height:auto;display:block;">
         </div>
-        <div class="bf-card">
-          <div class="bf-card__number">2</div>
-          <h3>Who it's for</h3>
-          <p class="bf-muted">Adult men who want straightforward, premium support for everyday energy and vitality without a complicated regimen.</p>
+        <div class="bf-benefit-panel-row__content">
+          <h3 style="margin-bottom:12px;">Energy &amp; Stamina</h3>
+          <p style="margin:0;">Formulated to support steadier daily energy so you're not running on empty by 3pm.</p>
         </div>
-        <div class="bf-card">
-          <div class="bf-card__number">3</div>
-          <h3>How it fits your day</h3>
-          <p class="bf-muted">Take your dose daily — [PLACEHOLDER: exact serving instructions pending final label].</p>
+      </div>
+      <div class="bf-benefit-panel-row bf-benefit-panel-row--reverse bf-bg-lime">
+        <div class="bf-benefit-panel-row__media">
+          <img src="../assets/temporary-product-03.webp" width="1000" height="1000" alt="Drive &amp; Vitality — temporary placeholder image" style="width:100%;height:auto;display:block;">
+        </div>
+        <div class="bf-benefit-panel-row__content">
+          <h3 style="margin-bottom:12px;">Drive &amp; Vitality</h3>
+          <p style="margin:0;color:#141900;">Designed to help support everyday male vitality and drive.</p>
+        </div>
+      </div>
+      <div class="bf-benefit-panel-row bf-bg-charcoal">
+        <div class="bf-benefit-panel-row__media">
+          <img src="../assets/temporary-product-03.webp" width="1000" height="1000" alt="Focus &amp; Productivity — temporary placeholder image" style="width:100%;height:auto;display:block;">
+        </div>
+        <div class="bf-benefit-panel-row__content">
+          <h3 style="margin-bottom:12px;">Focus &amp; Productivity</h3>
+          <p style="margin:0;">Built to help support mental clarity and staying on task through a demanding day.</p>
+        </div>
+      </div>
+      <div class="bf-benefit-panel-row bf-benefit-panel-row--reverse bf-bg-lime">
+        <div class="bf-benefit-panel-row__media">
+          <img src="../assets/temporary-product-03.webp" width="1000" height="1000" alt="Strength &amp; Performance — temporary placeholder image" style="width:100%;height:auto;display:block;">
+        </div>
+        <div class="bf-benefit-panel-row__content">
+          <h3 style="margin-bottom:12px;">Strength &amp; Performance</h3>
+          <p style="margin:0;color:#141900;">Part of a daily routine formulated to support training consistency and performance.</p>
+        </div>
+      </div>
+      <div class="bf-benefit-panel-row bf-bg-charcoal">
+        <div class="bf-benefit-panel-row__media">
+          <img src="../assets/temporary-product-03.webp" width="1000" height="1000" alt="Recovery &amp; Sleep Support — temporary placeholder image" style="width:100%;height:auto;display:block;">
+        </div>
+        <div class="bf-benefit-panel-row__content">
+          <h3 style="margin-bottom:12px;">Recovery &amp; Sleep Support</h3>
+          <p style="margin:0;">Included to help support the body's normal recovery and nightly rest.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= HOW IT WORKS (sections/how-it-works.liquid) — horizontal timeline ================= -->
-  <section class="bf-section bf-bg-black" style="position:relative;overflow:hidden;">
+  <!-- ================= HOW IT WORKS (sections/how-it-works.liquid) ================= -->
+  <section class="bf-section bf-bg-black" id="how-it-works" style="position:relative;overflow:hidden;">
     <div class="bf-container">
       <span class="bf-eyebrow">How It Works</span>
       <h2>Built For Consistency, Not A Quick Fix</h2>
       <p class="bf-muted" style="margin-bottom:32px;max-width:640px;">A daily routine, not a one-off try — here's what to expect as you build the habit.</p>
-      <div class="bf-timeline-h">
+
+      <div class="bf-timeline-h bf-reveal is-visible">
         <div class="bf-timeline-h__stage">
           <div class="bf-timeline-h__dot"></div>
           <span class="bf-timeline-h__pill">Day 1</span>
-          <div class="bf-timeline-h__name">Build The Habit</div>
+          <div class="bf-timeline-h__name">Start The Ritual</div>
           <p class="bf-timeline-h__body">Take your daily serving — [PLACEHOLDER: exact instructions pending final label] — and fold it into your existing routine.</p>
         </div>
         <div class="bf-timeline-h__stage">
           <div class="bf-timeline-h__dot"></div>
           <span class="bf-timeline-h__pill">Week 2</span>
-          <div class="bf-timeline-h__name">Feel The Momentum</div>
+          <div class="bf-timeline-h__name">Build Momentum</div>
           <p class="bf-timeline-h__body">[PLACEHOLDER — subjective early-effect claim pending real customer survey data]</p>
         </div>
         <div class="bf-timeline-h__stage">
@@ -289,161 +514,274 @@
         <div class="bf-timeline-h__stage">
           <div class="bf-timeline-h__dot"></div>
           <span class="bf-timeline-h__pill">Month 3</span>
-          <div class="bf-timeline-h__name">Own Your Routine</div>
+          <div class="bf-timeline-h__name">Own The Routine</div>
           <p class="bf-timeline-h__body">The daily habit is fully established. [PLACEHOLDER — subjective long-term claim pending real customer survey data]</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= INGREDIENT EDUCATION (sections/ingredient-education.liquid) ================= -->
-  <section class="bf-section bf-bg-black bf-grid-overlay">
-    <div class="bf-container" style="position:relative;z-index:1;">
-      <span class="bf-eyebrow">The Formula</span>
-      <h2>4 Ingredients In 1 Focused Formula</h2>
-      <p class="bf-accent" style="font-family:var(--bf-font-display);text-transform:uppercase;letter-spacing:0.04em;font-size:0.95rem;">Transparent Doses, No Proprietary Blends</p>
-      <div class="bf-grid-4 bf-mt-32">
-        <div class="bf-ing-accordion">
-          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="true">
-            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12z"/></svg></span>
-            <span class="bf-ing-accordion__name">Saffron Extract<span class="bf-ing-accordion__dose" style="display:block;">30 mg / serving</span></span>
-            <span class="bf-ing-accordion__chevron">▾</span>
-          </button>
-          <div class="bf-ing-accordion__panel" data-open="true" style="display:block;">
-            <p>Included for its role in everyday mood and wellbeing support.</p>
-            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
-          </div>
-        </div>
-        <div class="bf-ing-accordion">
-          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="true">
-            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v6M12 9c-3 1-4 4-5 9M12 9c3 1 4 4 5 9M12 9c-2 2-2 4-1 6M12 9c2 2 2 4 1 6"/></svg></span>
-            <span class="bf-ing-accordion__name">Panax Ginseng Extract<span class="bf-ing-accordion__dose" style="display:block;">100 mg / serving</span></span>
-            <span class="bf-ing-accordion__chevron">▾</span>
-          </button>
-          <div class="bf-ing-accordion__panel" data-open="true" style="display:block;">
-            <p>A traditionally used adaptogen included for energy and vitality support.</p>
-            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
-          </div>
-        </div>
-        <div class="bf-ing-accordion">
-          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="true">
-            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v6M12 9c-3 1-4 4-5 9M12 9c3 1 4 4 5 9M12 9c-2 2-2 4-1 6M12 9c2 2 2 4 1 6"/></svg></span>
-            <span class="bf-ing-accordion__name">Maca Root Extract<span class="bf-ing-accordion__dose" style="display:block;">300 mg / serving</span></span>
-            <span class="bf-ing-accordion__chevron">▾</span>
-          </button>
-          <div class="bf-ing-accordion__panel" data-open="true" style="display:block;">
-            <p>Included for its traditional association with stamina and vitality.</p>
-            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
-          </div>
-        </div>
-        <div class="bf-ing-accordion">
-          <button type="button" class="bf-ing-accordion__trigger" aria-expanded="true">
-            <span class="bf-ing-accordion__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
-            <span class="bf-ing-accordion__name">Vitamin B6 (Pyridoxine HCl)<span class="bf-ing-accordion__dose" style="display:block;">2 mg / serving</span></span>
-            <span class="bf-ing-accordion__chevron">▾</span>
-          </button>
-          <div class="bf-ing-accordion__panel" data-open="true" style="display:block;">
-            <p>Supports normal energy-yielding metabolism.</p>
-            <span class="bf-badge-placeholder">[PLACEHOLDER — study/reference link pending]</span>
-          </div>
-        </div>
+  <!-- ================= PRICING & PURCHASE MODULE (sections/pricing-bundles.liquid + snippets/purchase-module.liquid) =================
+       No real Shopify `product` object exists in this sandbox. Per the task brief,
+       this renders 3 static illustrative tier cards (made-up prices, clearly marked)
+       reproducing the purchase-module markup/classes so the layout can be checked —
+       NOT real variant/pricing data. The section's own "select a product" placeholder
+       state is not shown here since that would just be an empty page region. -->
+  <section class="bf-section bf-bg-lime bf-pattern-dots" id="bf-purchase">
+    <div class="bf-container" style="max-width:820px;">
+      <div class="bf-text-center" style="margin-bottom:32px;">
+        <span class="bf-eyebrow">Choose Your Supply</span>
+        <h2>One product. One decision.</h2>
       </div>
-      <p class="bf-muted" style="margin-top:20px;font-size:0.8rem;">
-        Amounts per serving are confirmed from the formula specification. Gummies-per-serving and total supply duration are pending the final Nutrition/Supplement Facts panel — do not publish a supply-duration claim until that's confirmed. <a href="/pages/supplement-facts" style="color:var(--bf-white);">View full Supplement Facts panel</a>
-      </p>
+
+      <div class="bf-purchase">
+        <div class="bf-purchase__head">
+          <div>
+            <h3>BULLRUSH Testosterone Support Gummies</h3>
+            <p class="bf-muted" style="margin:0;font-size:0.85rem;">Formulated to support energy, focus, strength, recovery and male vitality — one daily gummy.</p>
+          </div>
+          <div class="bf-purchase__rating">
+            <span class="bf-badge-placeholder">★★★★★ — reviews pending launch</span>
+          </div>
+        </div>
+
+        <div class="bf-purchase__tabs" role="tablist">
+          <button type="button" class="bf-tab" role="tab" aria-selected="true">One-Time Purchase</button>
+          <button type="button" class="bf-tab" role="tab" aria-selected="false">Subscribe &amp; Save</button>
+        </div>
+
+        <div class="bf-tab-panel" data-active="true">
+          <div class="bf-tiers">
+            <button type="button" class="bf-tier" aria-pressed="false">
+              <div class="bf-tier__row">
+                <span class="bf-tier__name">1 Bottle<span class="bf-tier__identity">Start the Routine</span></span>
+                <span class="bf-tier__price">
+                  <span class="bf-tier__price-main">$59.99</span>
+                  <span class="bf-tier__price-sub">$59.99 / bottle</span>
+                </span>
+              </div>
+              <div class="bf-tier__meta">
+                <span>$2.00 / day*</span>
+                <span>[PLACEHOLDER: supply duration pending confirmed serving size]</span>
+              </div>
+            </button>
+            <button type="button" class="bf-tier" aria-pressed="false">
+              <div class="bf-tier__row">
+                <span class="bf-tier__name">3 Bottles<span class="bf-tier__identity">Build Consistency</span></span>
+                <span class="bf-tier__price">
+                  <span class="bf-tier__price-main">$149.99</span>
+                  <span class="bf-tier__price-sub">$50.00 / bottle</span>
+                </span>
+              </div>
+              <div class="bf-tier__meta">
+                <span>$1.67 / day*</span>
+                <span>Save $29.98</span>
+                <span>[PLACEHOLDER: supply duration pending confirmed serving size]</span>
+              </div>
+            </button>
+            <button type="button" class="bf-tier" aria-pressed="true">
+              <div class="bf-tier__row">
+                <span class="bf-tier__name">6 Bottles<span class="bf-tier__identity">Commit to the Protocol</span> <span class="bf-badge-recommended">Best Value</span></span>
+                <span class="bf-tier__price">
+                  <span class="bf-tier__price-main">$269.99</span>
+                  <span class="bf-tier__price-sub">$45.00 / bottle</span>
+                </span>
+              </div>
+              <div class="bf-tier__meta">
+                <span>$1.50 / day*</span>
+                <span>Save $89.95</span>
+                <span>[PLACEHOLDER: supply duration pending confirmed serving size]</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="bf-purchase__notes">
+          <span>* Per-day price uses an illustrative 30-day supply — [PLACEHOLDER: confirm against final label serving size].</span>
+          <span>** Free shipping on multi-bottle orders</span>
+          <span>90-day money-back guarantee — <a href="/pages/guarantee" style="color:inherit;">details</a></span>
+        </div>
+
+        <button type="button" class="bf-btn bf-btn--primary bf-btn--block">Add to Cart</button>
+        <p class="bf-placeholder-note bf-text-center" style="margin-top:12px;">[PLACEHOLDER — illustrative example prices only, for layout review; no real product/variant data exists in this reconstruction]</p>
+      </div>
     </div>
   </section>
 
-  <!-- ================= COMPARISON TABLE (sections/comparison-table.liquid) ================= -->
-  <section class="bf-section bf-bg-graphite">
+  <!-- ================= GIFTS (sections/gifts.liquid) =================
+       cart.total_price is 0 in this static reconstruction (no real cart), so the
+       progress bar sits at 0% and every gift shows "Locked" — exactly what a fresh
+       empty cart would show on a real store too. -->
+  <section class="bf-section bf-bg-charcoal">
+    <div class="bf-container">
+      <span class="bf-eyebrow">Free Gifts</span>
+      <h2>Unlock Free Gifts As You Build Your Order</h2>
+      <p class="bf-muted" style="max-width:560px;">Add more to your cart to unlock these bonuses automatically at checkout.</p>
+
+      <div class="bf-gift-track bf-mt-32" style="position:relative;">
+        <div class="bf-progress-bar" style="margin:28px 0 44px;">
+          <div class="bf-progress-bar__fill" style="width:0%;"></div>
+        </div>
+        <div class="bf-gift-grid">
+          <div class="bf-gift-card">
+            <div class="bf-gift-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12h18M12 8v13"/><path d="M12 8c-2 0-4-1-4-3a2 2 0 0 1 4 0 2 2 0 0 1 4 0c0 2-2 3-4 3z"/></svg></div>
+            <p class="bf-gift-card__threshold">$50+</p>
+            <p class="bf-gift-card__title">Digital Performance Guide</p>
+            <span class="bf-badge-placeholder">Locked</span>
+          </div>
+          <div class="bf-gift-card">
+            <div class="bf-gift-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12h18M12 8v13"/><path d="M12 8c-2 0-4-1-4-3a2 2 0 0 1 4 0 2 2 0 0 1 4 0c0 2-2 3-4 3z"/></svg></div>
+            <p class="bf-gift-card__threshold">$75+</p>
+            <p class="bf-gift-card__title">Travel Case</p>
+            <span class="bf-badge-placeholder">Locked</span>
+          </div>
+          <div class="bf-gift-card">
+            <div class="bf-gift-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12h18M12 8v13"/><path d="M12 8c-2 0-4-1-4-3a2 2 0 0 1 4 0 2 2 0 0 1 4 0c0 2-2 3-4 3z"/></svg></div>
+            <p class="bf-gift-card__threshold">$100+</p>
+            <p class="bf-gift-card__title">Training Plan</p>
+            <span class="bf-badge-placeholder">Locked</span>
+          </div>
+          <div class="bf-gift-card">
+            <div class="bf-gift-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="8" width="18" height="13" rx="1.5"/><path d="M3 12h18M12 8v13"/><path d="M12 8c-2 0-4-1-4-3a2 2 0 0 1 4 0 2 2 0 0 1 4 0c0 2-2 3-4 3z"/></svg></div>
+            <p class="bf-gift-card__threshold">$150+</p>
+            <p class="bf-gift-card__title">Bonus Product</p>
+            <span class="bf-badge-placeholder">Locked</span>
+          </div>
+        </div>
+      </div>
+      <p class="bf-muted" style="font-size:0.72rem;margin-top:16px;">[PLACEHOLDER] Gift items and thresholds shown are temporary placeholders — confirm real bonus items, stock, and cart-total logic before launch.</p>
+    </div>
+  </section>
+
+  <!-- ================= COMPARISON TABLE (sections/comparison-table.liquid) =================
+       Fixed since this reconstruction was first generated: the real section
+       used to reference an undefined "bf-bg-graphite" class (dangling rename);
+       it now correctly uses bf-bg-charcoal, reproduced as such below. -->
+  <section class="bf-section bf-bg-charcoal">
     <div class="bf-container">
       <span class="bf-eyebrow">The Comparison</span>
       <h2>Why Gummies, Why Us</h2>
       <div style="overflow-x:auto;margin-top:24px;">
         <table class="bf-comparison">
           <thead>
-            <tr><th></th><th class="bf-comparison__us">BullRush Gummies</th><th>Standard Capsules</th><th>Generic Booster</th></tr>
+            <tr>
+              <th></th>
+              <th class="bf-comparison__us">BULLRUSH Gummies</th>
+              <th>Standard Capsules</th>
+              <th>Generic Testosterone Booster</th>
+            </tr>
           </thead>
           <tbody>
             <tr><td>Easy daily use</td><td class="bf-comparison__us">✓ Chew, no water needed</td><td>Swallow with water</td><td>Varies</td></tr>
+            <tr><td>Transparent ingredient list</td><td class="bf-comparison__us">✓ No proprietary blends</td><td>Often proprietary blend</td><td>Often proprietary blend</td></tr>
+            <tr><td>Product testing</td><td class="bf-comparison__us">[PLACEHOLDER — pending COA]</td><td>Varies</td><td>Varies</td></tr>
             <tr><td>Taste</td><td class="bf-comparison__us">✓ [PLACEHOLDER flavor]</td><td>N/A</td><td>N/A</td></tr>
-            <tr><td>Transparent formula</td><td class="bf-comparison__us">✓ No proprietary blend</td><td>Often proprietary blend</td><td>Often proprietary blend</td></tr>
-            <tr><td>Third-party testing</td><td class="bf-comparison__us">[PLACEHOLDER — pending COA]</td><td>Varies</td><td>Varies</td></tr>
             <tr><td>Subscription flexibility</td><td class="bf-comparison__us">✓ Skip, pause, cancel anytime</td><td>Varies</td><td>Varies</td></tr>
-            <tr><td>Vegan option</td><td class="bf-comparison__us">[PLACEHOLDER — pending formula confirmation]</td><td>Varies</td><td>Varies</td></tr>
-            <tr><td>Sugar per serving</td><td class="bf-comparison__us">[PLACEHOLDER — pending label]</td><td>N/A</td><td>Varies</td></tr>
-            <tr><td>Money-back guarantee</td><td class="bf-comparison__us">✓ 90 days</td><td>Varies</td><td>Varies</td></tr>
+            <tr><td>Guarantee</td><td class="bf-comparison__us">✓ 90-day money-back</td><td>Varies</td><td>Varies</td></tr>
+            <tr><td>Bundle savings</td><td class="bf-comparison__us">✓ Up to [PLACEHOLDER]% off on 6-bottle bundles</td><td>Varies</td><td>Varies</td></tr>
+            <tr><td>Customer support</td><td class="bf-comparison__us">✓ [PLACEHOLDER — e.g. email + chat]</td><td>Varies</td><td>Varies</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="bf-muted" style="margin-top:16px;font-size:0.78rem;">Comparison values are illustrative and editable — replace with verified specifics for BullRush and named/typical competitor categories before publishing. Do not present unverified competitor claims as fact.</p>
+      <p class="bf-muted" style="margin-top:16px;font-size:0.78rem;">Comparison values are illustrative and editable — replace with verified specifics for BULLRUSH and named/typical competitor categories before publishing. Do not present unverified competitor claims as fact.</p>
     </div>
   </section>
 
-  <!-- ================= PRODUCT PROOF (sections/product-proof.liquid) ================= -->
-  <section class="bf-section bf-bg-graphite">
+  <!-- ================= PRODUCT PROOF (sections/product-proof.liquid) =================
+       Same bf-bg-graphite -> bf-bg-charcoal fix as the comparison table above. -->
+  <section class="bf-section bf-bg-charcoal">
     <div class="bf-container">
       <span class="bf-eyebrow">Proof</span>
       <h2>Formula transparency and manufacturing standards</h2>
       <div class="bf-grid-3 bf-mt-32">
-        <div class="bf-card"><h3>Manufacturing standard</h3><p class="bf-placeholder-note">[PLACEHOLDER — awaiting GMP facility certification document from manufacturer]</p></div>
-        <div class="bf-card"><h3>Third-party testing</h3><p class="bf-placeholder-note">[PLACEHOLDER — awaiting Certificate of Analysis]</p></div>
-        <div class="bf-card"><h3>Ingredient sourcing</h3><p class="bf-placeholder-note">[PLACEHOLDER — awaiting sourcing documentation for saffron, Panax ginseng, maca]</p></div>
+        <div class="bf-card">
+          <h3>Manufacturing standard</h3>
+          <p class="bf-placeholder-note">[PLACEHOLDER — awaiting GMP facility certification document from manufacturer]</p>
+        </div>
+        <div class="bf-card">
+          <h3>Third-party testing</h3>
+          <p class="bf-placeholder-note">[PLACEHOLDER — awaiting Certificate of Analysis]</p>
+        </div>
+        <div class="bf-card">
+          <h3>Ingredient sourcing</h3>
+          <p class="bf-placeholder-note">[PLACEHOLDER — awaiting sourcing documentation for the full formula: Tongkat Ali, Shilajit, Ashwagandha, Zinc, Vitamin D, Boron, Fenugreek, Magnesium]</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= CERTIFICATIONS (sections/certifications.liquid) — dark:true default ================= -->
-  <div class="bf-cert-row bf-bg-black">
-    <div class="bf-cert-row__item">
-      <span class="bf-cert-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 20c8 0 14-6 14-14V4h-2C9 4 5 10 5 18v2z"/></svg></span>
-      <span>Made in the EU</span>
-    </div>
-    <div class="bf-cert-row__item">
-      <span class="bf-cert-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M8.5 12l2.3 2.3L16 9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span>GMP Standard (cert. on request)</span>
-    </div>
-    <div class="bf-cert-row__item">
-      <span class="bf-cert-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 7h11v9H2z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="6.5" cy="18" r="1.5"/><circle cx="17.5" cy="18" r="1.5"/></svg></span>
-      <span>Fast, Discreet Shipping</span>
-    </div>
-    <div class="bf-cert-row__item">
-      <span class="bf-cert-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 2h6M10 2v7l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      <span>[PLACEHOLDER — Third-Party Tested, pending COA]</span>
-    </div>
-  </div>
-
-  <!-- ================= EXPERTS TRUST: skipped — ships with zero blocks by default (renders nothing) ================= -->
-
-  <!-- ================= REVIEWS & UGC (sections/reviews-ugc.liquid) ================= -->
-  <section class="bf-section bf-bg-black">
+  <!-- ================= REVIEWS (sections/reviews-ugc.liquid) ================= -->
+  <section class="bf-section bf-bg-black" id="reviews">
     <div class="bf-container">
       <span class="bf-eyebrow">Real Customers</span>
-      <h2>What customers are saying</h2>
-      <div class="bf-grid-3 bf-mt-32" style="margin-bottom:32px;">
-        <div class="bf-review-card">
-          <div class="bf-review-card__stars">★★★★★</div>
-          <p style="margin:0 0 8px;">[PLACEHOLDER — verified review pending launch]</p>
-          <span class="bf-muted" style="font-size:0.8rem;">Verified Buyer — pending</span>
+      <h2>What Men Are Saying</h2>
+
+      <div class="bf-review-featured bf-reveal is-visible">
+        <div class="bf-review-featured__photo">
+          <span class="bf-review-featured__initial">[</span>
         </div>
-        <div class="bf-review-card">
+        <div>
           <div class="bf-review-card__stars">★★★★★</div>
-          <p style="margin:0 0 8px;">[PLACEHOLDER — verified review pending launch]</p>
-          <span class="bf-muted" style="font-size:0.8rem;">Verified Buyer — pending</span>
-        </div>
-        <div class="bf-review-card">
-          <div class="bf-review-card__stars">★★★★★</div>
-          <p style="margin:0 0 8px;">[PLACEHOLDER — verified review pending launch]</p>
-          <span class="bf-muted" style="font-size:0.8rem;">Verified Buyer — pending</span>
+          <p class="bf-review-featured__quote">"[PLACEHOLDER — fictional featured review text, replace before launch]"</p>
+          <div class="bf-review-card__meta">
+            <span style="font-weight:700;">[PLACEHOLDER name]</span>
+            <span class="bf-badge-amount">Verified Buyer</span>
+            <span class="bf-muted">[PLACEHOLDER date]</span>
+          </div>
         </div>
       </div>
-      <h3 class="bf-muted" style="font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;">Customer stories</h3>
-      <div class="bf-ugc-grid">
-        <div class="bf-ugc-grid__slot">Customer stories coming soon</div>
-        <div class="bf-ugc-grid__slot">Customer stories coming soon</div>
-        <div class="bf-ugc-grid__slot">Customer stories coming soon</div>
-        <div class="bf-ugc-grid__slot">Customer stories coming soon</div>
+
+      <div class="bf-review-strip bf-mt-32">
+        <div class="bf-review-card bf-review-strip__item">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div class="bf-review-card__photo"><span>V</span></div>
+            <div>
+              <div style="font-weight:700;font-size:0.85rem;">Verified Buyer — pending</div>
+              <div class="bf-muted" style="font-size:0.72rem;"></div>
+            </div>
+          </div>
+          <div class="bf-review-card__stars">★★★★★</div>
+          <p style="margin:8px 0;">[PLACEHOLDER — verified review pending launch]</p>
+          <span class="bf-badge-amount">Verified Buyer</span>
+        </div>
+        <div class="bf-review-card bf-review-strip__item">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div class="bf-review-card__photo"><span>V</span></div>
+            <div>
+              <div style="font-weight:700;font-size:0.85rem;">Verified Buyer — pending</div>
+              <div class="bf-muted" style="font-size:0.72rem;"></div>
+            </div>
+          </div>
+          <div class="bf-review-card__stars">★★★★☆</div>
+          <p style="margin:8px 0;">[PLACEHOLDER — verified review pending launch]</p>
+          <span class="bf-badge-amount">Verified Buyer</span>
+        </div>
+        <div class="bf-review-card bf-review-strip__item">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div class="bf-review-card__photo"><span>V</span></div>
+            <div>
+              <div style="font-weight:700;font-size:0.85rem;">Verified Buyer — pending</div>
+              <div class="bf-muted" style="font-size:0.72rem;"></div>
+            </div>
+          </div>
+          <div class="bf-review-card__stars">★★★★★</div>
+          <p style="margin:8px 0;">[PLACEHOLDER — verified review pending launch]</p>
+          <span class="bf-badge-amount">Verified Buyer</span>
+        </div>
+        <div class="bf-review-card bf-review-strip__item">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div class="bf-review-card__photo"><span>V</span></div>
+            <div>
+              <div style="font-weight:700;font-size:0.85rem;">Verified Buyer — pending</div>
+              <div class="bf-muted" style="font-size:0.72rem;"></div>
+            </div>
+          </div>
+          <div class="bf-review-card__stars">★★★★★</div>
+          <p style="margin:8px 0;">[PLACEHOLDER — verified review pending launch]</p>
+          <span class="bf-badge-amount">Verified Buyer</span>
+        </div>
       </div>
+      <p class="bf-muted" style="font-size:0.72rem;margin-top:16px;">[PLACEHOLDER] Reviews shown are fictional placeholder content pending real verified-buyer submissions — replace before launch.</p>
     </div>
   </section>
 
@@ -453,117 +791,117 @@
       <span class="bf-eyebrow">Real Routines</span>
       <h2>See It In Action</h2>
       <div class="bf-ugc-carousel bf-mt-32">
-        <div class="bf-ugc-carousel__item">
-          <div class="ph-box" style="background:var(--bf-soft-black,#151515);"><span class="ph-label">TEMPORARY ASSET</span>Gym Clip</div>
-          <span class="bf-ugc-carousel__label">Gym Clip — TEMPORARY</span>
-        </div>
-        <div class="bf-ugc-carousel__item">
-          <div class="ph-box" style="background:var(--bf-soft-black,#151515);"><span class="ph-label">TEMPORARY ASSET</span>Morning Routine</div>
-          <span class="bf-ugc-carousel__label">Morning Routine — TEMPORARY</span>
-        </div>
-        <div class="bf-ugc-carousel__item">
-          <div class="ph-box" style="background:var(--bf-soft-black,#151515);"><span class="ph-label">TEMPORARY ASSET</span>Unboxing</div>
-          <span class="bf-ugc-carousel__label">Unboxing — TEMPORARY</span>
-        </div>
-        <div class="bf-ugc-carousel__item">
-          <div class="ph-box" style="background:var(--bf-soft-black,#151515);"><span class="ph-label">TEMPORARY ASSET</span>Gummy Close-Up</div>
-          <span class="bf-ugc-carousel__label">Gummy Close-Up — TEMPORARY</span>
-        </div>
-        <div class="bf-ugc-carousel__item">
-          <div class="ph-box" style="background:var(--bf-soft-black,#151515);"><span class="ph-label">TEMPORARY ASSET</span>Founder Message</div>
-          <span class="bf-ugc-carousel__label">Founder Message — TEMPORARY</span>
-        </div>
-        <div class="bf-ugc-carousel__item">
-          <div class="ph-box" style="background:var(--bf-soft-black,#151515);"><span class="ph-label">TEMPORARY ASSET</span>Customer Reaction</div>
-          <span class="bf-ugc-carousel__label">Customer Reaction — TEMPORARY</span>
-        </div>
+        <div class="bf-ugc-carousel__item"><div class="ph-box">TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>Gym Clip — TEMPORARY</div><span class="bf-ugc-carousel__label">Gym Clip — TEMPORARY</span></div>
+        <div class="bf-ugc-carousel__item"><div class="ph-box">TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>Morning Routine — TEMPORARY</div><span class="bf-ugc-carousel__label">Morning Routine — TEMPORARY</span></div>
+        <div class="bf-ugc-carousel__item"><div class="ph-box">TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>Unboxing — TEMPORARY</div><span class="bf-ugc-carousel__label">Unboxing — TEMPORARY</span></div>
+        <div class="bf-ugc-carousel__item"><div class="ph-box">TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>Gummy Close-Up — TEMPORARY</div><span class="bf-ugc-carousel__label">Gummy Close-Up — TEMPORARY</span></div>
+        <div class="bf-ugc-carousel__item"><div class="ph-box">TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>Founder Message — TEMPORARY</div><span class="bf-ugc-carousel__label">Founder Message — TEMPORARY</span></div>
+        <div class="bf-ugc-carousel__item"><div class="ph-box">TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>Customer Reaction — TEMPORARY</div><span class="bf-ugc-carousel__label">Customer Reaction — TEMPORARY</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ================= PRICING & PURCHASE MODULE (sections/pricing-bundles.liquid) =================
-       Faithful to the real default state: this section's "product" setting has no default
-       product assigned, so the live theme renders only the placeholder note below — it does
-       NOT render a purchase module until a merchant picks the flagship product in the editor. -->
-  <section class="bf-section bf-bg-cyan bf-pattern-dots" id="bf-purchase">
-    <div class="bf-container" style="max-width:820px;">
-      <div class="bf-text-center" style="margin-bottom:32px;">
-        <span class="bf-eyebrow">Choose Your Supply</span>
-        <h2>One product. One decision.</h2>
+  <!-- ================= EXPERT ADVISORY PANEL (sections/experts-trust.liquid) ================= -->
+  <section class="bf-section bf-bg-black bf-text-center">
+    <div class="bf-container">
+      <span class="bf-eyebrow">Advisory Panel</span>
+      <h2 class="bf-max-640" style="margin-left:auto;margin-right:auto;">Guided By Performance Expertise</h2>
+      <div class="bf-grid-3 bf-mt-32 bf-reveal is-visible" style="text-align:left;">
+        <div class="bf-expert-card">
+          <div class="bf-expert-card__photo"><span class="bf-muted" style="font-size:0.75rem;text-align:center;padding:12px;">Placeholder — advisor photo pending</span></div>
+          <div class="bf-expert-card__name">Men's Performance Advisor</div>
+          <div class="bf-expert-card__title">TEMPORARY PLACEHOLDER — REPLACE BEFORE LAUNCH</div>
+        </div>
+        <div class="bf-expert-card">
+          <div class="bf-expert-card__photo"><span class="bf-muted" style="font-size:0.75rem;text-align:center;padding:12px;">Placeholder — advisor photo pending</span></div>
+          <div class="bf-expert-card__name">Nutrition Specialist</div>
+          <div class="bf-expert-card__title">TEMPORARY PLACEHOLDER — REPLACE BEFORE LAUNCH</div>
+        </div>
+        <div class="bf-expert-card">
+          <div class="bf-expert-card__photo"><span class="bf-muted" style="font-size:0.75rem;text-align:center;padding:12px;">Placeholder — advisor photo pending</span></div>
+          <div class="bf-expert-card__name">Strength Coach</div>
+          <div class="bf-expert-card__title">TEMPORARY PLACEHOLDER — REPLACE BEFORE LAUNCH</div>
+        </div>
       </div>
-      <p class="bf-placeholder-note bf-text-center">[PLACEHOLDER — select the BullRush Male Vitality Gummies product in this section's settings to render live pricing]</p>
+      <p class="bf-muted" style="font-size:0.72rem;margin-top:20px;">[PLACEHOLDER] Generic advisory roles shown for illustration — replace with real, documented advisor relationships before launch. Never a real doctor, athlete, or public figure without their genuine, current endorsement.</p>
     </div>
   </section>
 
-  <!-- ================= WELCOME OFFER (sections/welcome-offer.liquid) ================= -->
-  <section class="bf-section" style="background:linear-gradient(180deg,var(--bf-black),var(--bf-accent-deep));color:var(--bf-white);">
-    <div class="bf-container bf-text-center">
-      <span class="bf-eyebrow">New Subscribers</span>
-      <h2>The BullRush Start Kit</h2>
-      <p class="bf-max-640" style="margin:0 auto 24px;">New Subscribe &amp; Save orders start with the Start Kit — real value, clearly disclosed.</p>
-      <div class="bf-grid-3 bf-max-640" style="margin:0 auto 24px;">
-        <div class="bf-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);">
-          <p style="margin:0;font-weight:700;">Intro subscriber price on your first shipment</p>
-          <p class="bf-muted" style="margin:6px 0 0;font-size:0.8rem;">See pricing above</p>
-        </div>
-        <div class="bf-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);">
-          <p style="margin:0;font-weight:700;">Free branded travel case</p>
-          <p class="bf-muted" style="margin:6px 0 0;font-size:0.8rem;">[PLACEHOLDER value — pending sourcing]</p>
-        </div>
-        <div class="bf-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);">
-          <p style="margin:0;font-weight:700;">Bonus digital Men's Daily Performance Guide</p>
-          <p class="bf-muted" style="margin:6px 0 0;font-size:0.8rem;">[PLACEHOLDER value]</p>
-        </div>
-      </div>
-      <a href="#bf-purchase" class="bf-btn bf-btn--primary">Start Your Routine</a>
-      <p class="bf-muted" style="font-size:0.72rem;max-width:560px;margin:16px auto 0;">Available on a new Subscribe &amp; Save order only, one per customer. After the first shipment, your subscription renews at the recurring price shown at checkout. Skip, pause, or cancel anytime.</p>
-    </div>
-  </section>
-
-  <!-- ================= GUARANTEE (sections/guarantee.liquid) — spinning badge ================= -->
+  <!-- ================= GUARANTEE (sections/guarantee.liquid) ================= -->
   <section class="bf-section bf-bg-black bf-pattern-dots-corner" style="position:relative;overflow:hidden;">
     <div class="bf-oversized-bg" aria-hidden="true">90</div>
-    <div class="bf-container">
-      <div class="bf-guarantee-banner">
+    <div class="bf-container" style="position:relative;z-index:1;">
+      <div class="bf-guarantee-banner bf-reveal is-visible">
         <div class="bf-guarantee-banner__badge bf-badge-spin">
           <svg viewBox="0 0 120 120">
             <circle cx="60" cy="60" r="56" fill="none" stroke="var(--bf-accent)" stroke-width="2"/>
-            <circle cx="60" cy="60" r="46" fill="none" stroke="var(--bf-cyan)" stroke-width="1"/>
-            <text x="60" y="52" text-anchor="middle" font-family="Archivo Black" font-size="20" fill="var(--bf-white)">90</text>
-            <text x="60" y="70" text-anchor="middle" font-family="Archivo Black" font-size="9" letter-spacing="1" fill="var(--bf-accent)">DAY</text>
-            <text x="60" y="84" text-anchor="middle" font-family="Archivo Black" font-size="8" letter-spacing="0.5" fill="var(--bf-muted-gray)">GUARANTEE</text>
+            <circle cx="60" cy="60" r="46" fill="none" stroke="var(--bf-lime)" stroke-width="1"/>
+            <text x="60" y="52" text-anchor="middle" font-family="'Archivo Black', sans-serif" font-size="20" fill="var(--bf-white)">90</text>
+            <text x="60" y="70" text-anchor="middle" font-family="'Archivo Black', sans-serif" font-size="9" letter-spacing="1" fill="var(--bf-accent)">DAY</text>
+            <text x="60" y="84" text-anchor="middle" font-family="'Archivo Black', sans-serif" font-size="8" letter-spacing="0.5" fill="var(--bf-muted-gray)">GUARANTEE</text>
           </svg>
         </div>
         <div class="bf-guarantee-banner__content">
-          <h2 style="color:var(--bf-accent);margin-bottom:8px;">90-Day Guarantee</h2>
-          <p style="color:var(--bf-light-gray);margin-bottom:20px;">If BullRush isn't right for you, contact us within 90 days of delivery for a refund on your first order. Full terms at /pages/guarantee.</p>
+          <h2 style="color:var(--bf-accent);margin-bottom:8px;">90-Day BULLRUSH Guarantee</h2>
+          <p style="color:var(--bf-light-gray);margin-bottom:20px;">If BULLRUSH isn't right for you, contact us within 90 days of delivery for a refund on your first order. Full terms at /pages/guarantee.</p>
           <a href="/pages/guarantee" class="bf-btn bf-btn--outline-dark">Full Guarantee Terms</a>
+        </div>
+        <div class="bf-guarantee-banner__product">
+          <img src="../assets/temporary-product-01.webp" width="180" height="180" alt="BULLRUSH Testosterone Support Gummies — temporary placeholder image">
         </div>
       </div>
     </div>
   </section>
 
   <!-- ================= FAQ (sections/faq.liquid) ================= -->
-  <section class="bf-section bf-bg-offwhite">
+  <section class="bf-section bf-bg-offwhite" id="faq">
     <div class="bf-container bf-max-640">
       <span class="bf-eyebrow">FAQ</span>
       <h2>Questions, answered</h2>
       <div>
         <div class="bf-accordion__item">
-          <button type="button" class="bf-accordion__trigger" aria-expanded="true"><span>How does Subscribe &amp; Save work?</span><span class="bf-accordion__icon">+</span></button>
-          <div class="bf-accordion__panel" data-open="true" style="display:block;"><p class="bf-muted">You're charged the subscriber price shown at checkout, shipped at your selected frequency. You can skip, pause, or cancel anytime from your account before the next billing date.</p></div>
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>What is BULLRUSH?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">BULLRUSH Testosterone Support Gummies is a daily men's performance supplement formulated to support energy, focus, strength, recovery and male vitality.</p></div>
         </div>
         <div class="bf-accordion__item">
-          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>What's in BullRush Male Vitality Gummies?</span><span class="bf-accordion__icon">+</span></button>
-          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">Saffron, Panax ginseng, maca, and vitamin B6. Full Supplement Facts panel is available at /pages/supplement-facts once finalized.</p></div>
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>Who is it for?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">Adult men looking for straightforward, premium support for everyday energy and performance as part of a daily routine.</p></div>
         </div>
         <div class="bf-accordion__item">
-          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>Is this safe?</span><span class="bf-accordion__icon">+</span></button>
-          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">[PLACEHOLDER — insert safety/interaction guidance reviewed by a qualified professional before publishing].</p></div>
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>How should I take it?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">[PLACEHOLDER — exact usage instructions pending final label].</p></div>
         </div>
         <div class="bf-accordion__item">
-          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>What's your shipping and returns policy?</span><span class="bf-accordion__icon">+</span></button>
-          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">See /pages/shipping and /pages/guarantee for full details.</p></div>
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>Is this a subscription?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">You can buy one-time or subscribe. Subscribe &amp; Save shows the recurring price and delivery frequency before you commit, and you can skip, pause, or cancel anytime from your account.</p></div>
+        </div>
+        <div class="bf-accordion__item">
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>Can I cancel?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">Yes — cancel your subscription anytime from your account before the next billing date. No phone calls required.</p></div>
+        </div>
+        <div class="bf-accordion__item">
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>What ingredients are included?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">Tongkat Ali, Shilajit, Ashwagandha, Zinc, Vitamin D, Boron, Fenugreek and Magnesium. Full Supplement Facts panel is available on the Formula page once finalized.</p></div>
+        </div>
+        <div class="bf-accordion__item">
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>Does it contain sugar?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">[PLACEHOLDER — pending final Nutrition/Supplement Facts panel].</p></div>
+        </div>
+        <div class="bf-accordion__item">
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>Where is it made?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">[PLACEHOLDER — manufacturing location pending final label].</p></div>
+        </div>
+        <div class="bf-accordion__item">
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>Is it tested?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">[PLACEHOLDER — Certificate of Analysis available on request from the manufacturer; not yet in hand — do not publish as confirmed until received].</p></div>
+        </div>
+        <div class="bf-accordion__item">
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>When should I take it?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">[PLACEHOLDER — timing guidance pending final label/formulator input].</p></div>
+        </div>
+        <div class="bf-accordion__item">
+          <button type="button" class="bf-accordion__trigger" aria-expanded="false"><span>What is the refund policy?</span><span class="bf-accordion__icon">+</span></button>
+          <div class="bf-accordion__panel" data-open="false"><p class="bf-muted">90-day money-back guarantee on your first order — see our Refund Policy for full terms.</p></div>
         </div>
       </div>
     </div>
@@ -571,66 +909,74 @@
 
   <!-- ================= FINAL CTA (sections/final-cta.liquid) ================= -->
   <section class="bf-section bf-bg-black bf-text-center bf-pattern-dots-corner" style="position:relative;overflow:hidden;">
-    <div class="bf-container">
-      <span class="bf-eyebrow">FUEL YOUR POWER</span>
-      <h2>Your routine starts today.</h2>
-      <a href="#bf-purchase" class="bf-btn bf-btn--primary">Get BullRush</a>
+    <div class="bf-container" style="position:relative;z-index:1;">
+      <div class="bf-glow" style="width:180px;margin:0 auto 20px;">
+        <img src="../assets/temporary-product-01.webp" width="180" height="180" alt="BULLRUSH Testosterone Support Gummies — temporary placeholder image" class="bf-float">
+      </div>
+      <span class="bf-eyebrow">Last Call</span>
+      <h2>Stop Running On Empty.</h2>
+      <p class="bf-max-640" style="margin:0 auto 28px;color:var(--bf-light-gray);">One daily habit, formulated to support energy, focus, strength, recovery and male vitality.</p>
+      <a href="#bf-purchase" class="bf-btn bf-btn--primary">Shop BULLRUSH</a>
+      <div class="bf-final-cta__trust">
+        <span>★★★★★ 4.8/5 (1,200+ reviews — placeholder)</span>
+        <span>90-day money-back guarantee</span>
+        <span>Free shipping on multi-bottle orders</span>
+      </div>
     </div>
   </section>
 
 </main>
 
-<!-- ================= FOOTER (sections/footer.liquid) ================= -->
+<!-- ================= FOOTER (sections/main-footer.liquid) ================= -->
 <footer class="bf-footer">
   <div class="bf-container">
     <div class="bf-footer__grid bf-footer__grid--5col">
       <div>
-        <img src="/home/user/Bull/assets/bullrush-stacked-dark.png" width="160" alt="BullRush" class="bf-logo bf-logo--stacked">
-        <p class="bf-muted" style="font-size:0.8rem;margin-top:16px;">Premium male vitality support in a daily gummy format.</p>
+        <img src="../assets/bullrush-stacked-dark.svg" width="160" height="95" alt="BULLRUSH" class="bf-logo bf-logo--stacked">
+        <p class="bf-muted" style="font-size:0.8rem;margin-top:16px;">Daily performance gummies formulated to support energy, focus, strength, recovery and male vitality.</p>
         <div style="display:flex;gap:8px;margin-top:16px;">
-          <input type="email" placeholder="Your email" style="flex:1;min-width:0;padding:10px 12px;border-radius:4px;border:1px solid var(--bf-dark-surface);background:var(--bf-graphite);color:var(--bf-white);">
+          <input type="email" placeholder="Your email" disabled
+            style="flex:1;min-width:0;padding:10px 12px;border-radius:4px;border:1px solid var(--bf-dark-surface);background:var(--bf-charcoal);color:var(--bf-white);">
           <button type="button" class="bf-btn bf-btn--primary" style="padding:10px 16px;font-size:0.75rem;">Join</button>
         </div>
-        <ul style="list-style:none;padding:0;margin:16px 0 0;display:flex;gap:16px;">
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">TikTok</a></li>
-          <li><a href="#">YouTube</a></li>
-        </ul>
+        <!-- settings.social_instagram / _tiktok / _youtube are blank by default → no social links render -->
       </div>
       <div>
         <h3>Shop</h3>
         <ul>
-          <li><a href="#">Male Vitality Gummies</a></li>
-          <li><a href="#">Subscription Terms</a></li>
-          <li><a href="#">Manage Subscription</a></li>
+          <li><a href="#bf-purchase">Testosterone Support Gummies</a></li>
+          <li><a href="/pages/subscription-terms">Subscription Terms</a></li>
+          <li><a href="/pages/subscription-management">Manage Subscription</a></li>
         </ul>
       </div>
       <div>
         <h3>Learn</h3>
         <ul>
-          <li><a href="#">The Science</a></li>
-          <li><a href="#">About BullRush</a></li>
-          <li><a href="#">FAQ</a></li>
+          <li><a href="/pages/formula">The Formula</a></li>
+          <li><a href="/pages/science">The Science</a></li>
+          <li><a href="/pages/about">About BULLRUSH</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
       <div>
         <h3>Support</h3>
         <ul>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Shipping</a></li>
-          <li><a href="#">Refunds &amp; Guarantee</a></li>
+          <li><a href="/pages/contact">Contact</a></li>
+          <li><a href="/policies/shipping-policy">Shipping</a></li>
+          <li><a href="/policies/refund-policy">Refunds &amp; Guarantee</a></li>
         </ul>
       </div>
       <div>
         <h3>Legal</h3>
         <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/policies/terms-of-service">Terms &amp; Conditions</a></li>
         </ul>
       </div>
     </div>
+
     <div class="bf-footer__legal" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-      <p style="margin:0;">&copy; 2026 BullRush. All rights reserved.</p>
+      <p style="margin:0;">&copy; 2026 BULLRUSH. All rights reserved.</p>
     </div>
     <p class="bf-footer__disclaimer">
       [PLACEHOLDER — pending legal/regulatory review: insert the required supplement disclaimer for your market here, e.g. "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."]
@@ -638,4 +984,15 @@
   </div>
 </footer>
 
+<!-- ================= STICKY MOBILE CTA (sections/sticky-mobile-cta.liquid) — enable_sticky_cta:true default ================= -->
+<div class="bf-sticky-cta">
+  <div>
+    <span class="bf-sticky-cta__price">From $39.99/bottle</span>
+    <span class="bf-sticky-cta__price-sub">Subscribe &amp; Save</span>
+  </div>
+  <button type="button" class="bf-btn bf-btn--primary">Choose Your Supply</button>
+</div>
+
+<script src="../assets/bullrush.js" defer></script>
 </body>
+</html>
