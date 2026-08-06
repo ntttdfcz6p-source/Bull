@@ -30,7 +30,7 @@
       </button>
     {%- endunless -%}
 
-    <a href="/" aria-label="BullRush home">
+    <a href="{{ routes.root_url }}" aria-label="BullRush home">
       {% render 'logo-wordmark', background: 'dark', layout: 'horizontal' %}
     </a>
 
@@ -45,7 +45,7 @@
     {%- endunless -%}
 
     <div class="bf-header__cart">
-      <a href="/cart" aria-label="Cart" class="bf-header__cart-icon">
+      <a href="{{ routes.cart_url }}" aria-label="Cart" class="bf-header__cart-icon">
         Cart <span data-bf-cart-count>{{ cart.item_count }}</span>
       </a>
     </div>

@@ -1,10 +1,10 @@
 {% comment %} Native Shopify contact form. {% endcomment %}
 <section class="bf-section bf-bg-white">
   <div class="bf-container" style="max-width:560px;">
-    {%- if form.posted_successfully? -%}
-      <div class="bf-badge-placeholder" style="display:block;padding:16px;margin-bottom:24px;">{{ section.settings.success_message }}</div>
-    {%- endif -%}
     {%- form 'contact' -%}
+      {%- if form.posted_successfully? -%}
+        <div class="bf-badge-placeholder" style="display:block;padding:16px;margin-bottom:24px;">{{ section.settings.success_message }}</div>
+      {%- endif -%}
       {%- if form.errors -%}
         <div class="bf-placeholder-note" style="border-color:var(--bf-accent-on-light, #4A6100);color:#8a2b00;margin-bottom:20px;">
           {{ form.errors | default_errors }}
