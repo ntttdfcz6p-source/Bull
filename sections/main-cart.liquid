@@ -11,7 +11,7 @@
           {%- for item in cart.items -%}
             <div class="bf-cart-line" style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid #e7e5e0;align-items:center;">
               <div style="width:80px;height:80px;background:var(--bf-light-gray);border-radius:6px;overflow:hidden;">
-                {%- if item.image -%}<img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}">{%- endif -%}
+                {%- if item.image -%}<img src="{{ item.image | image_url: width: 160 }}" width="160" height="{{ 160 | divided_by: item.image.aspect_ratio | round }}" alt="{{ item.title | escape }}" loading="lazy">{%- endif -%}
               </div>
               <div style="flex:1;">
                 <p style="margin:0;font-weight:600;">{{ item.product.title }}</p>

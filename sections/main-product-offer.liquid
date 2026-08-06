@@ -18,9 +18,9 @@
             {%- for media in product.media -%}
               <div data-bf-gallery-slide data-index="{{ forloop.index0 }}" style="position:absolute;inset:0;{% unless forloop.first %}display:none;{% endunless %}">
                 {%- if media.media_type == 'video' or media.media_type == 'external_video' or media.media_type == 'model' -%}
-                  {{ media | media_tag: image_size: '900x', video_options: { controls: true } }}
+                  {{ media | media_tag: image_size: '900x', controls: true }}
                 {%- else -%}
-                  <img src="{{ media | image_url: width: 900 }}" alt="{{ product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" style="width:100%;height:100%;object-fit:cover;">
+                  <img src="{{ media | image_url: width: 900 }}" width="900" height="{{ 900 | divided_by: media.preview_image.aspect_ratio | round }}" alt="{{ product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" style="width:100%;height:100%;object-fit:cover;">
                 {%- endif -%}
               </div>
             {%- endfor -%}
@@ -32,7 +32,7 @@
           <div class="bf-grid-4" style="margin-top:16px;">
             {%- for media in product.media limit: 4 -%}
               <button type="button" class="bf-hero__media" style="aspect-ratio:1/1;border:2px solid transparent;padding:0;cursor:pointer;" data-bf-gallery-thumb data-index="{{ forloop.index0 }}">
-                <img src="{{ media.preview_image | image_url: width: 200 }}" alt="{{ product.title | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+                <img src="{{ media.preview_image | image_url: width: 200 }}" width="200" height="{{ 200 | divided_by: media.preview_image.aspect_ratio | round }}" alt="{{ product.title | escape }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
               </button>
             {%- endfor -%}
           </div>

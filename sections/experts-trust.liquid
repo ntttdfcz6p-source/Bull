@@ -18,7 +18,7 @@
         <div class="bf-expert-card">
           <div class="bf-expert-card__photo">
             {%- if block.settings.photo != blank -%}
-              <img src="{{ block.settings.photo | image_url: width: 400 }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+              <img src="{{ block.settings.photo | image_url: width: 400 }}" width="400" height="{{ 400 | divided_by: block.settings.photo.aspect_ratio | round }}" alt="{{ block.settings.name | escape }}" loading="lazy">
             {%- endif -%}
           </div>
           <div class="bf-expert-card__name">{{ block.settings.name }}</div>

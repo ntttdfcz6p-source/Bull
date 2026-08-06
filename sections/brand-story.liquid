@@ -11,7 +11,7 @@
   </div>
   <div class="bf-split__media">
     {%- if section.settings.image != blank -%}
-      <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="" loading="lazy">
+      <img src="{{ section.settings.image | image_url: width: 1000 }}" width="1000" height="{{ 1000 | divided_by: section.settings.image.aspect_ratio | round }}" alt="" loading="lazy">
     {%- else -%}
       <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--bf-muted-gray);font-size:0.85rem;text-align:center;padding:24px;background:var(--bf-soft-black);">
         TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>{{ section.settings.image_caption }}

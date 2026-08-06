@@ -17,7 +17,7 @@
               <source src="{{ block.settings.video.sources.first.url }}" type="video/mp4">
             </video>
           {%- elsif block.settings.image != blank -%}
-            <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+            <img src="{{ block.settings.image | image_url: width: 500 }}" width="500" height="{{ 500 | divided_by: block.settings.image.aspect_ratio | round }}" alt="{{ block.settings.label | escape }}" loading="lazy">
           {%- else -%}
             <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--bf-soft-black);color:var(--bf-muted-gray);font-size:0.75rem;text-align:center;padding:12px;">
               TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>{{ block.settings.label }}

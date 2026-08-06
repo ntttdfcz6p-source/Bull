@@ -17,7 +17,7 @@
   {%- endfor -%}
 
   {%- if product_image != blank -%}
-    <img class="bf-collage__product" src="{{ product_image | image_url: width: 600 }}" alt="BullRush Male Vitality Gummies">
+    <img class="bf-collage__product" src="{{ product_image | image_url: width: 600 }}" width="600" height="{{ 600 | divided_by: product_image.aspect_ratio | round }}" alt="BullRush Male Vitality Gummies" loading="eager">
   {%- else -%}
     <div class="bf-collage__product" style="opacity:.9;">{% render 'icon-bull', size: 200 %}</div>
   {%- endif -%}

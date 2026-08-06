@@ -9,6 +9,11 @@
 {%- liquid
   assign bg = background | default: 'dark'
   assign lay = layout | default: 'horizontal'
+  if lay == 'stacked'
+    assign fallback_aspect_ratio = 1.678657
+  else
+    assign fallback_aspect_ratio = 5.732484
+  endif
   if bg == 'light'
     if lay == 'stacked'
       assign logo_image = settings.logo_stacked_light_bg
@@ -26,11 +31,17 @@
       assign fallback_asset = 'bullrush-horizontal-dark.png'
     endif
   endif
+  if logo_image != blank
+    assign logo_height = settings.logo_width | divided_by: logo_image.aspect_ratio | round
+  else
+    assign logo_height = settings.logo_width | divided_by: fallback_aspect_ratio | round
+  endif
 -%}
 {%- if logo_image != blank -%}
   <img
     src="{{ logo_image | image_url: width: settings.logo_width | times: 2 }}"
     width="{{ settings.logo_width }}"
+    height="{{ logo_height }}"
     alt="BullRush"
     loading="eager"
     class="bf-logo bf-logo--{{ lay }}"
@@ -39,6 +50,7 @@
   <img
     src="{{ fallback_asset | asset_img_url: '800x' }}"
     width="{{ settings.logo_width }}"
+    height="{{ logo_height }}"
     alt="BullRush"
     loading="eager"
     class="bf-logo bf-logo--{{ lay }}"
