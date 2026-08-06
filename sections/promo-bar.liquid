@@ -1,12 +1,17 @@
 {% comment %}
-  Sticky announcement bar with rotating, block-based messages (per the
-  redesign brief). Unlike a fabricated countdown, the optional countdown
-  reads a real merchant-set end date/time — if none is set, or it's in the
-  past, the bar shows the rotating messages with no countdown rather than
-  faking urgency. Never hardcode a countdown here.
+  Sticky announcement bar with rotating, block-based messages. Unlike a
+  fabricated countdown, the optional countdown reads a real merchant-set
+  end date/time — if none is set, or it's in the past, the bar shows the
+  rotating messages with no countdown rather than faking urgency. Never
+  hardcode a countdown here.
 {% endcomment %}
 {%- if section.settings.enable_bar and section.blocks.size > 0 -%}
-  <div class="bf-promo-bar" data-bf-promo-bar {% if section.settings.end_datetime != blank %}data-end="{{ section.settings.end_datetime }}"{% endif %}>
+  <div
+    class="bf-promo-bar"
+    data-bf-promo-bar
+    {% if section.settings.end_datetime != blank %}data-end="{{ section.settings.end_datetime }}"{% endif %}
+    style="background:{{ section.settings.bg_color }};color:{{ section.settings.text_color }};"
+  >
     <div class="bf-promo-bar__message">
       <div class="bf-announce-rotator" data-bf-announce-rotator>
         {%- for block in section.blocks -%}
@@ -28,7 +33,9 @@
 {
   "name": "Announcement bar",
   "settings": [
-    { "type": "checkbox", "id": "enable_bar", "label": "Enable announcement bar", "default": false },
+    { "type": "checkbox", "id": "enable_bar", "label": "Enable announcement bar", "default": true },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#070707" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#F4F1E9" },
     {
       "type": "text",
       "id": "end_datetime",
@@ -47,13 +54,15 @@
   ],
   "default": {
     "blocks": [
-      { "type": "message", "settings": { "message": "[PLACEHOLDER] LAUNCH OFFER — SAVE 40%" } },
-      { "type": "message", "settings": { "message": "FREE SHIPPING OVER $[PLACEHOLDER]" } },
+      { "type": "message", "settings": { "message": "LIMITED LAUNCH OFFER — SAVE 50%" } },
+      { "type": "message", "settings": { "message": "FREE SHIPPING ON MULTI-BOTTLE ORDERS" } },
       { "type": "message", "settings": { "message": "90-DAY MONEY-BACK GUARANTEE" } },
       { "type": "message", "settings": { "message": "BUILT FOR MEN WHO REFUSE TO SLOW DOWN" } }
     ]
   },
   "presets": [{ "name": "Announcement bar", "blocks": [
+    { "type": "message", "settings": { "message": "LIMITED LAUNCH OFFER — SAVE 50%" } },
+    { "type": "message", "settings": { "message": "FREE SHIPPING ON MULTI-BOTTLE ORDERS" } },
     { "type": "message", "settings": { "message": "90-DAY MONEY-BACK GUARANTEE" } },
     { "type": "message", "settings": { "message": "BUILT FOR MEN WHO REFUSE TO SLOW DOWN" } }
   ] }]

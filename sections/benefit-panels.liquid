@@ -1,0 +1,74 @@
+{% comment %}
+  Benefits section — large image-backed panels, alternating dark
+  photography and acid-green panels, alternating image-left/image-right on
+  desktop. Each block's image is a TEMPORARY ASSET (replace before launch)
+  unless a merchant image is set.
+{% endcomment %}
+<section class="bf-section bf-bg-black">
+  <div class="bf-container">
+    <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2>{{ section.settings.heading }}</h2>
+  </div>
+  <div class="bf-mt-32">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign is_accent = false
+        if block.settings.panel_style == 'accent'
+          assign is_accent = true
+        endif
+        assign reverse = false
+        if forloop.index0 | modulo: 2 == 1
+          assign reverse = true
+        endif
+      -%}
+      <div class="bf-benefit-panel-row {% if reverse %}bf-benefit-panel-row--reverse{% endif %} {% if is_accent %}bf-bg-lime{% else %}bf-bg-charcoal{% endif %}">
+        <div class="bf-benefit-panel-row__media">
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 1000 }}" width="1000" height="{{ 1000 | divided_by: block.settings.image.aspect_ratio | round }}" alt="{{ block.settings.title | escape }}" loading="lazy">
+          {%- else -%}
+            <img src="{{ 'temporary-product-03.webp' | asset_url }}" width="1000" height="1000" alt="{{ block.settings.title | escape }} — temporary placeholder image" loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="bf-benefit-panel-row__content">
+          <h3 style="margin-bottom:12px;">{{ block.settings.title }}</h3>
+          <p style="margin:0;{% if is_accent %}color:#141900;{% endif %}">{{ block.settings.body }}</p>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits — image panels",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Benefits" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built For Every Part Of Your Day" }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Benefit panel",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Panel image — TEMPORARY ASSET, replace before launch" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" },
+        { "type": "select", "id": "panel_style", "label": "Panel background", "options": [
+            { "value": "dark", "label": "Dark photography panel" },
+            { "value": "accent", "label": "Acid-green panel" }
+          ], "default": "dark" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "panel", "settings": { "title": "Energy & Stamina", "body": "Formulated to support steadier daily energy so you're not running on empty by 3pm.", "panel_style": "dark" } },
+      { "type": "panel", "settings": { "title": "Drive & Vitality", "body": "Designed to help support everyday male vitality and drive.", "panel_style": "accent" } },
+      { "type": "panel", "settings": { "title": "Focus & Productivity", "body": "Built to help support mental clarity and staying on task through a demanding day.", "panel_style": "dark" } },
+      { "type": "panel", "settings": { "title": "Strength & Performance", "body": "Part of a daily routine formulated to support training consistency and performance.", "panel_style": "accent" } },
+      { "type": "panel", "settings": { "title": "Recovery & Sleep Support", "body": "Included to help support the body's normal recovery and nightly rest.", "panel_style": "dark" } }
+    ]
+  },
+  "presets": [{ "name": "Benefits — image panels" }]
+}
+{% endschema %}

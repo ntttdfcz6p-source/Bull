@@ -30,7 +30,7 @@
       </button>
     {%- endunless -%}
 
-    <a href="{{ routes.root_url }}" aria-label="BullRush home">
+    <a href="{{ routes.root_url }}" aria-label="BULLRUSH home">
       {% render 'logo-wordmark', background: 'dark', layout: 'horizontal' %}
     </a>
 
@@ -44,10 +44,15 @@
       </nav>
     {%- endunless -%}
 
-    <div class="bf-header__cart">
-      <a href="{{ routes.cart_url }}" aria-label="Cart" class="bf-header__cart-icon">
-        Cart <span data-bf-cart-count>{{ cart.item_count }}</span>
+    <div class="bf-header__actions">
+      <a href="{{ routes.account_url }}" aria-label="Account" class="bf-header__icon-link bf-header__account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke-linecap="round"/></svg>
       </a>
+      <a href="{{ routes.cart_url }}" aria-label="Cart, {{ cart.item_count }} items" class="bf-header__icon-link bf-header__cart-icon" data-bf-cart-drawer-open>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="20" height="20"><path d="M4 7h16l-1.5 12.5a2 2 0 0 1-2 1.5H7.5a2 2 0 0 1-2-1.5L4 7z"/><path d="M8 7a4 4 0 0 1 8 0" stroke-linecap="round"/></svg>
+        <span class="bf-header__cart-count" data-bf-cart-count>{{ cart.item_count }}</span>
+      </a>
+      <a href="{{ section.settings.shop_now_url | default: routes.all_products_collection_url }}" class="bf-btn bf-btn--primary bf-header__shop-now">{{ section.settings.shop_now_label }}</a>
     </div>
   </div>
 </header>
@@ -92,7 +97,9 @@
       "id": "minimal_nav",
       "label": "Minimal header (no nav links) — use on DR landing / offer pages",
       "default": false
-    }
+    },
+    { "type": "text", "id": "shop_now_label", "label": "Shop Now button label", "default": "Shop Now" },
+    { "type": "url", "id": "shop_now_url", "label": "Shop Now button link", "info": "Defaults to the main products collection if left blank" }
   ]
 }
 {% endschema %}

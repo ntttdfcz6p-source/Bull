@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "The Formula",
+        "heading": "8 Ingredients. Zero Guesswork.",
+        "body": "Transparent doses, no proprietary blends. Here's exactly what's in BULLRUSH Testosterone Support Gummies and why each ingredient made the cut.",
+        "bg_word": "FORMULA"
+      }
+    },
+    "ingredients": { "type": "ingredient-education" },
+    "benefit_panels": { "type": "benefit-panels" },
+    "certifications": { "type": "certifications" },
+    "comparison": { "type": "comparison-table" },
+    "faq": {
+      "type": "faq",
+      "settings": { "heading": "Formula Questions" }
+    }
+  },
+  "order": ["hero", "ingredients", "benefit_panels", "certifications", "comparison", "faq"]
+}

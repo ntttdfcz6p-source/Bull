@@ -1,9 +1,10 @@
 {% comment %}
-  "As seen in" press strip. IMPORTANT: only ever list a publication here once
-  a real feature/mention exists — using real outlet names/logos with no
-  actual mention is a false-endorsement claim. Ships with no default blocks
-  for that reason; add real ones as they happen (see
-  strategy/14-facts-placeholders-legal.md).
+  "As seen in" press strip. TEMPORARY PRESS PLACEHOLDER — REPLACE BEFORE
+  LAUNCH. The default blocks below are generic, editable placeholder logo
+  slots ("PUBLICATION 01" etc.) — NOT real outlet names. Do not rename a
+  placeholder to a real publication (Men's Health, GQ, Forbes, etc.) or
+  claim real press coverage until an actual feature/mention exists. See
+  REPLACE-BEFORE-LAUNCH.md.
 {% endcomment %}
 {%- if section.blocks.size > 0 -%}
 <section class="bf-section bf-bg-black" style="padding-top:32px;padding-bottom:32px;">
@@ -11,9 +12,14 @@
     <p class="bf-eyebrow bf-text-center" style="display:block;">{{ section.settings.heading }}</p>
     <div class="bf-press-strip bf-reveal">
       {%- for block in section.blocks -%}
-        <span class="bf-press-strip__logo">{{ block.settings.name }}</span>
+        {%- if block.settings.logo != blank -%}
+          <img src="{{ block.settings.logo | image_url: width: 200 }}" width="140" height="{{ 140 | divided_by: block.settings.logo.aspect_ratio | round }}" alt="{{ block.settings.name | escape }}" loading="lazy" class="bf-press-strip__logo-img">
+        {%- else -%}
+          <span class="bf-press-strip__logo">{{ block.settings.name }}</span>
+        {%- endif -%}
       {%- endfor -%}
     </div>
+    <p class="bf-muted bf-text-center" style="font-size:0.68rem;margin-top:10px;">{{ section.settings.disclosure }}</p>
   </div>
 </section>
 {%- endif -%}
@@ -22,18 +28,34 @@
 {
   "name": "Press mentions",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "As Featured In" }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "As Featured In" },
+    {
+      "type": "textarea",
+      "id": "disclosure",
+      "label": "Disclosure",
+      "default": "TEMPORARY PRESS PLACEHOLDER — REPLACE BEFORE LAUNCH. These are generic placeholder logo slots, not real press coverage."
+    }
   ],
   "blocks": [
     {
       "type": "outlet",
-      "name": "Outlet (only add once a real mention exists)",
+      "name": "Outlet placeholder",
       "settings": [
-        { "type": "text", "id": "name", "label": "Publication name" },
-        { "type": "url", "id": "url", "label": "Link to the actual feature/mention" }
+        { "type": "image_picker", "id": "logo", "label": "Logo (optional — leave blank to show the text label)" },
+        { "type": "text", "id": "name", "label": "Placeholder label" },
+        { "type": "url", "id": "url", "label": "Link to the actual feature/mention (add only once real)" }
       ]
     }
   ],
-  "presets": [{ "name": "Press mentions", "blocks": [] }]
+  "default": {
+    "blocks": [
+      { "type": "outlet", "settings": { "name": "PUBLICATION 01" } },
+      { "type": "outlet", "settings": { "name": "PUBLICATION 02" } },
+      { "type": "outlet", "settings": { "name": "PUBLICATION 03" } },
+      { "type": "outlet", "settings": { "name": "PUBLICATION 04" } },
+      { "type": "outlet", "settings": { "name": "PUBLICATION 05" } }
+    ]
+  },
+  "presets": [{ "name": "Press mentions" }]
 }
 {% endschema %}

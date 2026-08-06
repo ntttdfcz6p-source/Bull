@@ -2,6 +2,8 @@
 (function () {
   'use strict';
 
+  var refreshCartDrawer = function () { /* no-op until the cart drawer block below wires it up, if the drawer is enabled */ };
+
   // ---------- Promo bar countdown (real end date only, never fabricated) ----------
   var promoBar = document.querySelector('[data-bf-promo-bar]');
   if (promoBar && promoBar.dataset.end) {
@@ -94,9 +96,14 @@
         })
           .then(function (res) { if (!res.ok) throw new Error('Add to cart failed'); return res.json(); })
           .then(function () {
-            refreshCartCount();
             if (button) { button.textContent = 'Added ✓'; }
-            window.location.href = '/cart';
+            if (document.querySelector('[data-bf-cart-drawer]')) {
+              refreshCartDrawer(true);
+              refreshCartCount();
+            } else {
+              refreshCartCount();
+              window.location.href = '/cart';
+            }
           })
           .catch(function () {
             if (button) { button.textContent = 'Something went wrong — try again'; }
@@ -109,13 +116,75 @@
   });
 
   function refreshCartCount() {
-    fetch('/cart.js')
+    return fetch('/cart.js')
       .then(function (r) { return r.json(); })
       .then(function (cart) {
         document.querySelectorAll('[data-bf-cart-count]').forEach(function (el) {
           el.textContent = cart.item_count;
         });
+        document.dispatchEvent(new CustomEvent('bf:cart:updated', { detail: { cart: cart } }));
+        return cart;
       });
+  }
+
+  // ---------- Cart drawer (Section Rendering API — always reflects the real `cart` object, no client-side price math) ----------
+  var cartDrawer = document.querySelector('[data-bf-cart-drawer]');
+  if (cartDrawer) {
+    function setCartDrawerOpen(open) {
+      cartDrawer.setAttribute('data-open', String(open));
+      cartDrawer.setAttribute('aria-hidden', String(!open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    refreshCartDrawer = function (openAfter) {
+      var url = window.location.pathname + (window.location.search ? '&' : '?') + 'section_id=cart-drawer';
+      return fetch(url)
+        .then(function (res) { return res.text(); })
+        .then(function (html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var fresh = doc.getElementById('bf-cart-drawer');
+          if (fresh) {
+            cartDrawer.innerHTML = fresh.innerHTML;
+          }
+          if (openAfter) setCartDrawerOpen(true);
+        });
+    };
+
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-bf-cart-drawer-open]')) {
+        e.preventDefault();
+        refreshCartDrawer(true);
+      }
+      if (e.target.closest('[data-bf-cart-drawer-close]')) {
+        setCartDrawerOpen(false);
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setCartDrawerOpen(false);
+    });
+
+    // Quantity steppers + remove — /cart/change.js then re-render the section from the server
+    document.addEventListener('click', function (e) {
+      var line = e.target.closest('[data-bf-cart-line]');
+      if (!line) return;
+      var key = line.getAttribute('data-line-key');
+      var qtyEl = line.querySelector('[data-bf-qty-value]');
+
+      var newQty = null;
+      if (e.target.closest('[data-bf-qty-increase]')) newQty = parseInt(qtyEl.textContent, 10) + 1;
+      if (e.target.closest('[data-bf-qty-decrease]')) newQty = Math.max(0, parseInt(qtyEl.textContent, 10) - 1);
+      if (e.target.closest('[data-bf-cart-remove]')) newQty = 0;
+      if (newQty === null) return;
+
+      line.style.opacity = '0.5';
+      fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: key, quantity: newQty })
+      })
+        .then(function () { return refreshCartDrawer(false); })
+        .then(refreshCartCount);
+    });
   }
 
   // ---------- Sticky mobile CTA ----------
@@ -309,6 +378,24 @@
         note.textContent = template.replace('{amount}', '$' + remaining);
       }
     }
+  });
+
+  // ---------- Gifts section progress bar (live cart total, no fabricated numbers) ----------
+  document.querySelectorAll('[data-bf-gift-progress]').forEach(function (section) {
+    var maxThreshold = parseFloat(section.getAttribute('data-max')) || 0;
+    var fill = section.querySelector('[data-bf-gift-progress-fill]');
+    function update(cartTotalDollars) {
+      var pct = maxThreshold > 0 ? Math.min(100, (cartTotalDollars / maxThreshold) * 100) : 0;
+      if (fill) fill.style.width = pct + '%';
+      section.querySelectorAll('[data-bf-gift-card]').forEach(function (card) {
+        var threshold = parseFloat(card.getAttribute('data-threshold')) || 0;
+        var status = card.querySelector('[data-bf-gift-status]');
+        if (status) status.textContent = cartTotalDollars >= threshold ? 'Unlocked' : 'Locked';
+      });
+    }
+    document.addEventListener('bf:cart:updated', function (e) {
+      update((e.detail && e.detail.cart ? e.detail.cart.total_price : 0) / 100);
+    });
   });
 
   // ---------- Product gallery (thumbnail click swaps main slide; pauses any playing video) ----------

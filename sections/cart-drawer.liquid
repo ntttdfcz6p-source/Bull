@@ -1,0 +1,117 @@
+{% comment %}
+  Cart drawer — a persistent app-shell element rendered directly in
+  theme.liquid (Dawn's own convention for cart chrome: cart-notification /
+  cart-drawer are included as static section tags because they aren't part
+  of the header or footer content areas, they're app UI). Re-rendered via
+  Shopify's Section Rendering API (`?section_id=cart-drawer`) after every
+  add/change/remove so the markup below always reflects the live `cart`
+  object — no client-side cart math, no fabricated progress values.
+{% endcomment %}
+{%- liquid
+  assign threshold_cents = settings.free_shipping_threshold | times: 100
+  assign show_progress = false
+  if settings.free_shipping_threshold > 0
+    assign show_progress = true
+  endif
+  assign progress_pct = 100
+  if show_progress and threshold_cents > 0
+    assign progress_pct = cart.total_price | times: 100 | divided_by: threshold_cents
+    if progress_pct > 100
+      assign progress_pct = 100
+    endif
+  endif
+  assign remaining_cents = threshold_cents | minus: cart.total_price
+-%}
+<div id="bf-cart-drawer" class="bf-cart-drawer" data-bf-cart-drawer aria-hidden="true">
+  <div class="bf-cart-drawer__backdrop" data-bf-cart-drawer-close></div>
+  <div class="bf-cart-drawer__panel" role="dialog" aria-modal="true" aria-label="{{ section.settings.heading }}">
+    <div class="bf-cart-drawer__head">
+      <h2 style="margin:0;font-size:1.1rem;">{{ section.settings.heading }} <span class="bf-muted" style="font-size:0.8rem;">({{ cart.item_count }})</span></h2>
+      <button type="button" class="bf-cart-drawer__close" data-bf-cart-drawer-close aria-label="Close cart">✕</button>
+    </div>
+
+    {%- if show_progress -%}
+      <div class="bf-cart-drawer__progress">
+        <div class="bf-progress-bar" data-bf-shipping-progress data-threshold="{{ threshold_cents }}" data-current="{{ cart.total_price }}">
+          <div class="bf-progress-bar__fill" data-bf-shipping-progress-fill style="width:{{ progress_pct }}%;"></div>
+        </div>
+        <p class="bf-progress-note" data-bf-shipping-progress-note data-met-text="{{ section.settings.free_shipping_met_text }}" data-remaining-text="{{ section.settings.free_shipping_remaining_text }}">
+          {%- if remaining_cents <= 0 -%}
+            {{ section.settings.free_shipping_met_text }}
+          {%- else -%}
+            {{ section.settings.free_shipping_remaining_text | replace: '{amount}', remaining_cents | money }}
+          {%- endif -%}
+        </p>
+      </div>
+    {%- endif -%}
+
+    <div class="bf-cart-drawer__body">
+      {%- if cart.item_count == 0 -%}
+        <p class="bf-muted" style="padding:24px 0;">{{ section.settings.empty_text }}</p>
+        <a href="{{ section.settings.empty_cta_url }}" class="bf-btn bf-btn--primary bf-btn--block" data-bf-cart-drawer-close>{{ section.settings.empty_cta_label }}</a>
+      {%- else -%}
+        <div class="bf-cart-drawer__lines">
+          {%- for item in cart.items -%}
+            <div class="bf-cart-drawer__line" data-bf-cart-line data-line-key="{{ item.key }}">
+              <div class="bf-cart-drawer__line-image">
+                {%- if item.image -%}
+                  <img src="{{ item.image | image_url: width: 160 }}" width="80" height="{{ 80 | divided_by: item.image.aspect_ratio | round }}" alt="{{ item.title | escape }}" loading="lazy">
+                {%- endif -%}
+              </div>
+              <div class="bf-cart-drawer__line-info">
+                <p class="bf-cart-drawer__line-title">{{ item.product.title }}</p>
+                <p class="bf-muted" style="margin:2px 0 0;font-size:0.8rem;">{{ item.variant.title }}</p>
+                {%- if item.selling_plan_allocation -%}
+                  <p style="margin:2px 0 0;font-size:0.75rem;color:var(--bf-accent);">Subscribe &amp; Save — {{ item.selling_plan_allocation.selling_plan.name }}</p>
+                {%- endif -%}
+                <div class="bf-cart-drawer__line-controls">
+                  <div class="bf-qty-stepper" data-bf-qty-stepper>
+                    <button type="button" data-bf-qty-decrease aria-label="Decrease quantity">−</button>
+                    <span data-bf-qty-value>{{ item.quantity }}</span>
+                    <button type="button" data-bf-qty-increase aria-label="Increase quantity">+</button>
+                  </div>
+                  <button type="button" class="bf-cart-drawer__remove" data-bf-cart-remove aria-label="Remove {{ item.title | escape }}">Remove</button>
+                </div>
+              </div>
+              <div class="bf-cart-drawer__line-price">{{ item.final_line_price | money }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="bf-cart-drawer__foot">
+          <div class="bf-cart-drawer__subtotal">
+            <span>{{ section.settings.subtotal_label }}</span>
+            <span data-bf-cart-subtotal>{{ cart.total_price | money }}</span>
+          </div>
+          <p class="bf-muted" style="font-size:0.75rem;">{{ section.settings.disclosure_text }}</p>
+          {%- form 'cart', cart -%}
+            <button type="submit" name="checkout" class="bf-btn bf-btn--primary bf-btn--block">{{ section.settings.checkout_label }}</button>
+          {%- endform -%}
+          <a href="{{ routes.cart_url }}" class="bf-cart-drawer__view-cart">{{ section.settings.view_cart_label }}</a>
+          <div class="bf-cart-drawer__trust">
+            <span>{{ settings.guarantee_text }}</span>
+            <span>{{ settings.shipping_note }}</span>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your Cart" },
+    { "type": "text", "id": "empty_text", "label": "Empty cart message", "default": "Your cart is empty." },
+    { "type": "text", "id": "empty_cta_label", "label": "Empty cart CTA label", "default": "Shop BULLRUSH" },
+    { "type": "url", "id": "empty_cta_url", "label": "Empty cart CTA URL" },
+    { "type": "text", "id": "subtotal_label", "label": "Subtotal label", "default": "Subtotal" },
+    { "type": "text", "id": "checkout_label", "label": "Checkout button label", "default": "Secure Checkout" },
+    { "type": "text", "id": "view_cart_label", "label": "View full cart link label", "default": "View full cart" },
+    { "type": "textarea", "id": "disclosure_text", "label": "Disclosure text", "default": "Taxes and shipping calculated at checkout. Discounts and Subscribe & Save pricing apply automatically." },
+    { "type": "text", "id": "free_shipping_met_text", "label": "Free shipping — threshold met", "default": "You've unlocked free shipping." },
+    { "type": "text", "id": "free_shipping_remaining_text", "label": "Free shipping — remaining (use {amount})", "default": "Add {amount} more for free shipping." }
+  ]
+}
+{% endschema %}

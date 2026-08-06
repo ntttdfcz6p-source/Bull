@@ -1,7 +1,9 @@
 {% comment %}
-  Renders the BullRush wordmark lockup. Uses a merchant-uploaded image if set
-  in Theme settings → Logo for the requested background/orientation;
-  otherwise falls back to the real BullRush lockup bundled with the theme.
+  TEMPORARY LOGO — REPLACE BEFORE LAUNCH. Renders the BULLRUSH wordmark
+  lockup: a simple bold-uppercase text logo bundled with the theme
+  (assets/bullrush-{horizontal,stacked}-*.svg). Uses a merchant-uploaded
+  image if set in Theme settings → Logo for the requested
+  background/orientation instead.
   Params:
     background: "dark" | "light" (default "dark")
     layout: "horizontal" | "stacked" (default "horizontal")
@@ -17,18 +19,18 @@
   if bg == 'light'
     if lay == 'stacked'
       assign logo_image = settings.logo_stacked_light_bg
-      assign fallback_asset = 'bullrush-stacked-light.png'
+      assign fallback_asset = 'bullrush-stacked-light.svg'
     else
       assign logo_image = settings.logo_horizontal_light_bg
-      assign fallback_asset = 'bullrush-horizontal-light.png'
+      assign fallback_asset = 'bullrush-horizontal-light.svg'
     endif
   else
     if lay == 'stacked'
       assign logo_image = settings.logo_stacked_dark_bg
-      assign fallback_asset = 'bullrush-stacked-dark.png'
+      assign fallback_asset = 'bullrush-stacked-dark.svg'
     else
       assign logo_image = settings.logo_horizontal_dark_bg
-      assign fallback_asset = 'bullrush-horizontal-dark.png'
+      assign fallback_asset = 'bullrush-horizontal-dark.svg'
     endif
   endif
   if logo_image != blank
@@ -42,16 +44,16 @@
     src="{{ logo_image | image_url: width: settings.logo_width | times: 2 }}"
     width="{{ settings.logo_width }}"
     height="{{ logo_height }}"
-    alt="BullRush"
+    alt="BULLRUSH"
     loading="eager"
     class="bf-logo bf-logo--{{ lay }}"
   >
 {%- else -%}
   <img
-    src="{{ fallback_asset | asset_img_url: '800x' }}"
+    src="{{ fallback_asset | asset_url }}"
     width="{{ settings.logo_width }}"
     height="{{ logo_height }}"
-    alt="BullRush"
+    alt="BULLRUSH"
     loading="eager"
     class="bf-logo bf-logo--{{ lay }}"
   >

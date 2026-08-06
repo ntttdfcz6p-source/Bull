@@ -1,8 +1,7 @@
 {% comment %}
-  Renders the BullRush bull-head symbol. Uses a merchant-uploaded image if set
-  in Theme settings → Logo; otherwise falls back to the real BullRush symbol
-  bundled with the theme (derived from the supplied logo file — see
-  README.md for how the dark/light variants were produced).
+  TEMPORARY LOGO — REPLACE BEFORE LAUNCH. Renders the BULLRUSH symbol mark.
+  Uses a merchant-uploaded image if set in Theme settings → Logo; otherwise
+  falls back to the bundled temporary abstract symbol (assets/bullrush-symbol-*.svg).
   Params:
     size: px, default 40
     background: "dark" | "light" (default "dark") — picks the color-correct variant
@@ -12,10 +11,10 @@
   assign bg = background | default: 'dark'
   if bg == 'light'
     assign logo_image = settings.logo_symbol_only_light_bg
-    assign fallback_asset = 'bullrush-symbol-light.png'
+    assign fallback_asset = 'bullrush-symbol-light.svg'
   else
     assign logo_image = settings.logo_symbol_only_dark_bg
-    assign fallback_asset = 'bullrush-symbol-dark.png'
+    assign fallback_asset = 'bullrush-symbol-dark.svg'
   endif
 -%}
 {%- if logo_image != blank -%}
@@ -23,16 +22,16 @@
     src="{{ logo_image | image_url: width: icon_size | times: 2 }}"
     width="{{ icon_size }}"
     height="{{ icon_size }}"
-    alt="BullRush"
+    alt="BULLRUSH"
     loading="lazy"
     class="bf-icon-bull"
   >
 {%- else -%}
   <img
-    src="{{ fallback_asset | asset_img_url: '400x' }}"
+    src="{{ fallback_asset | asset_url }}"
     width="{{ icon_size }}"
     height="{{ icon_size }}"
-    alt="BullRush"
+    alt="BULLRUSH"
     loading="lazy"
     class="bf-icon-bull"
     style="object-fit:contain;"

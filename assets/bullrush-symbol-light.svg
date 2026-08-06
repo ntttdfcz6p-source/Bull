@@ -1,0 +1,7 @@
+<!-- TEMPORARY LOGO — REPLACE BEFORE LAUNCH. Simple original abstract forward-motion / horn mark, not modeled on any other brand's bull logo. Editable via Theme Editor → Logo. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="BULLRUSH symbol">
+  <polygon points="70,110 55,105 30,35 48,28 75,95" fill="#293114"/>
+  <polygon points="130,110 145,105 170,35 152,28 125,95" fill="#293114"/>
+  <rect x="70" y="100" width="60" height="85" rx="14" fill="#070707"/>
+  <rect x="70" y="128" width="60" height="10" fill="#BFFF00"/>
+</svg>

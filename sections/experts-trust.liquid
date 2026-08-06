@@ -1,12 +1,11 @@
 {% comment %}
-  "Trusted by experts" cards — layout pattern adapted from the competitor
-  reference at the user's request. IMPORTANT: using a real person's name,
-  photo, or credentials here without their actual, current, documented
-  endorsement is a false-endorsement claim (and in some jurisdictions a
-  regulatory violation for supplement marketing). Ships with zero blocks —
-  do not populate with a placeholder "Dr. Smith" or similar; only add a
-  real expert once a genuine, documented relationship exists. See
-  strategy/14-facts-placeholders-legal.md.
+  Expert endorsement section. Per the brief: generic role placeholders only
+  (e.g. "Men's Performance Advisor") — NEVER a real doctor, athlete, public
+  figure, or an invented named individual with fabricated credentials. Using
+  a real person's name/photo/credentials without their actual, current,
+  documented endorsement is a false-endorsement claim. TEMPORARY PLACEHOLDER
+  — REPLACE BEFORE LAUNCH once genuine, documented advisor relationships
+  exist. See REPLACE-BEFORE-LAUNCH.md.
 {% endcomment %}
 {%- if section.blocks.size > 0 -%}
 <section class="bf-section bf-bg-black bf-text-center">
@@ -18,37 +17,53 @@
         <div class="bf-expert-card">
           <div class="bf-expert-card__photo">
             {%- if block.settings.photo != blank -%}
-              <img src="{{ block.settings.photo | image_url: width: 400 }}" width="400" height="{{ 400 | divided_by: block.settings.photo.aspect_ratio | round }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+              <img src="{{ block.settings.photo | image_url: width: 400 }}" width="400" height="{{ 400 | divided_by: block.settings.photo.aspect_ratio | round }}" alt="{{ block.settings.role_title | escape }}" loading="lazy">
+            {%- else -%}
+              <span class="bf-muted" style="font-size:0.75rem;text-align:center;padding:12px;">Placeholder — advisor photo pending</span>
             {%- endif -%}
           </div>
-          <div class="bf-expert-card__name">{{ block.settings.name }}</div>
-          <div class="bf-expert-card__title">{{ block.settings.title }}</div>
+          <div class="bf-expert-card__name">{{ block.settings.role_title }}</div>
+          <div class="bf-expert-card__title">{{ block.settings.descriptor }}</div>
         </div>
       {%- endfor -%}
     </div>
+    <p class="bf-muted" style="font-size:0.72rem;margin-top:20px;">{{ section.settings.disclosure }}</p>
   </div>
 </section>
 {%- endif -%}
 
 {% schema %}
 {
-  "name": "Experts trust",
+  "name": "Expert advisory panel",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Trust" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Trusted By Real Experts" }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Advisory Panel" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Guided By Performance Expertise" },
+    {
+      "type": "textarea",
+      "id": "disclosure",
+      "label": "Disclosure",
+      "default": "[PLACEHOLDER] Generic advisory roles shown for illustration — replace with real, documented advisor relationships before launch. Never a real doctor, athlete, or public figure without their genuine, current endorsement."
+    }
   ],
   "blocks": [
     {
       "type": "expert",
-      "name": "Expert (only add with a real, documented endorsement)",
+      "name": "Advisor role (generic placeholder only — no real person without a documented endorsement)",
       "settings": [
-        { "type": "image_picker", "id": "photo", "label": "Photo" },
-        { "type": "text", "id": "name", "label": "Name" },
-        { "type": "text", "id": "title", "label": "Title / credentials" },
-        { "type": "url", "id": "proof_url", "label": "Link to documented proof of endorsement" }
+        { "type": "image_picker", "id": "photo", "label": "Photo (optional — leave blank until a real advisor is confirmed)" },
+        { "type": "text", "id": "role_title", "label": "Generic role title" },
+        { "type": "text", "id": "descriptor", "label": "Descriptor", "default": "TEMPORARY PLACEHOLDER — REPLACE BEFORE LAUNCH" },
+        { "type": "url", "id": "proof_url", "label": "Link to documented proof of endorsement (required before using a real name)" }
       ]
     }
   ],
-  "presets": [{ "name": "Experts trust", "blocks": [] }]
+  "default": {
+    "blocks": [
+      { "type": "expert", "settings": { "role_title": "Men's Performance Advisor" } },
+      { "type": "expert", "settings": { "role_title": "Nutrition Specialist" } },
+      { "type": "expert", "settings": { "role_title": "Strength Coach" } }
+    ]
+  },
+  "presets": [{ "name": "Expert advisory panel" }]
 }
 {% endschema %}

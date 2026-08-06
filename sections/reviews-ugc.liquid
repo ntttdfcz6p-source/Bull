@@ -1,52 +1,105 @@
-<section class="bf-section bf-bg-black">
+{% comment %}
+  Reviews section: one large featured review, then the rest of the reviews
+  in a swipeable mobile carousel that becomes a grid on desktop (same
+  markup, CSS-only responsive switch — no separate carousel library).
+  All quotes/names/photos below are FICTIONAL PLACEHOLDER content clearly
+  marked for replacement — do not treat as real customer reviews. Replace
+  with genuine verified-buyer submissions before launch. See
+  REPLACE-BEFORE-LAUNCH.md.
+{% endcomment %}
+{%- liquid
+  assign reviews = section.blocks | where: 'type', 'review'
+  assign featured = reviews | where: 'settings.featured', true | first
+  if featured == blank
+    assign featured = reviews.first
+  endif
+-%}
+<section class="bf-section bf-bg-black" id="reviews">
   <div class="bf-container">
-    <span class="bf-eyebrow">Real Customers</span>
+    <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
     <h2>{{ section.settings.heading }}</h2>
 
-    <div class="bf-grid-3 bf-mt-32" style="margin-bottom:32px;">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'review' -%}
-          <div class="bf-review-card">
-            <div class="bf-review-card__stars">★★★★★</div>
-            <p style="margin:0 0 8px;">{{ block.settings.quote | default: '[PLACEHOLDER — verified review pending launch]' }}</p>
-            <span class="bf-muted" style="font-size:0.8rem;">{{ block.settings.attribution | default: 'Verified Buyer — pending' }}</span>
+    {%- if featured -%}
+      <div class="bf-review-featured bf-reveal">
+        <div class="bf-review-featured__photo">
+          {%- if featured.settings.photo != blank -%}
+            <img src="{{ featured.settings.photo | image_url: width: 300 }}" width="150" height="150" alt="" loading="lazy">
+          {%- else -%}
+            <span class="bf-review-featured__initial">{{ featured.settings.attribution | slice: 0, 1 }}</span>
+          {%- endif -%}
+        </div>
+        <div>
+          <div class="bf-review-card__stars">{% for i in (1..5) %}{% if i <= featured.settings.rating %}★{% else %}☆{% endif %}{% endfor %}</div>
+          <p class="bf-review-featured__quote">“{{ featured.settings.quote }}”</p>
+          <div class="bf-review-card__meta">
+            <span style="font-weight:700;">{{ featured.settings.attribution }}</span>
+            {%- if featured.settings.verified -%}<span class="bf-badge-amount">Verified Buyer</span>{%- endif -%}
+            <span class="bf-muted">{{ featured.settings.review_date }}</span>
           </div>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
+        </div>
+      </div>
+    {%- endif -%}
 
-    <h3 class="bf-muted" style="font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;">Customer stories</h3>
-    <div class="bf-ugc-grid">
-      {%- for i in (1..4) -%}
-        <div class="bf-ugc-grid__slot">Customer stories coming soon</div>
+    <div class="bf-review-strip bf-mt-32">
+      {%- for block in reviews -%}
+        {%- unless block == featured -%}
+          <div class="bf-review-card bf-review-strip__item">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+              <div class="bf-review-card__photo">
+                {%- if block.settings.photo != blank -%}
+                  <img src="{{ block.settings.photo | image_url: width: 120 }}" width="40" height="40" alt="" loading="lazy">
+                {%- else -%}
+                  <span>{{ block.settings.attribution | slice: 0, 1 }}</span>
+                {%- endif -%}
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.85rem;">{{ block.settings.attribution | default: 'Verified Buyer — pending' }}</div>
+                <div class="bf-muted" style="font-size:0.72rem;">{{ block.settings.review_date }}</div>
+              </div>
+            </div>
+            <div class="bf-review-card__stars">{% for i in (1..5) %}{% if i <= block.settings.rating %}★{% else %}☆{% endif %}{% endfor %}</div>
+            <p style="margin:8px 0;">{{ block.settings.quote | default: '[PLACEHOLDER — verified review pending launch]' }}</p>
+            {%- if block.settings.verified -%}<span class="bf-badge-amount">Verified Buyer</span>{%- endif -%}
+          </div>
+        {%- endunless -%}
       {%- endfor -%}
     </div>
+    <p class="bf-muted" style="font-size:0.72rem;margin-top:16px;">{{ section.settings.disclosure }}</p>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Reviews & UGC",
+  "name": "Reviews",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "What customers are saying" }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Real Customers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What Men Are Saying" },
+    { "type": "textarea", "id": "disclosure", "label": "Disclosure", "default": "[PLACEHOLDER] Reviews shown are fictional placeholder content pending real verified-buyer submissions — replace before launch." }
   ],
   "blocks": [
     {
       "type": "review",
       "name": "Review",
       "settings": [
-        { "type": "textarea", "id": "quote", "label": "Quote" },
-        { "type": "text", "id": "attribution", "label": "Attribution" }
+        { "type": "checkbox", "id": "featured", "label": "Show as the large featured review", "default": false },
+        { "type": "image_picker", "id": "photo", "label": "Customer photo placeholder (optional)" },
+        { "type": "text", "id": "attribution", "label": "Name / attribution", "default": "[PLACEHOLDER — fictional, replace before launch]" },
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "checkbox", "id": "verified", "label": "Show \"Verified Buyer\" label", "default": true },
+        { "type": "text", "id": "review_date", "label": "Date (placeholder)", "default": "[PLACEHOLDER date]" },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "[PLACEHOLDER — fictional review text, replace before launch]" }
       ]
     }
   ],
   "default": {
     "blocks": [
-      { "type": "review", "settings": {} },
-      { "type": "review", "settings": {} },
-      { "type": "review", "settings": {} }
+      { "type": "review", "settings": { "featured": true, "attribution": "[PLACEHOLDER name]", "rating": 5, "verified": true, "review_date": "[PLACEHOLDER date]", "quote": "[PLACEHOLDER — fictional featured review text, replace before launch]" } },
+      { "type": "review", "settings": { "rating": 5, "verified": true } },
+      { "type": "review", "settings": { "rating": 4, "verified": true } },
+      { "type": "review", "settings": { "rating": 5, "verified": true } },
+      { "type": "review", "settings": { "rating": 5, "verified": true } }
     ]
   },
-  "presets": [{ "name": "Reviews & UGC" }]
+  "presets": [{ "name": "Reviews" }]
 }
 {% endschema %}

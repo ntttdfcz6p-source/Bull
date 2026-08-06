@@ -1,13 +1,12 @@
 {% comment %}
-  Ingredient accordion cards — icon + name + dose always visible; tap/click
-  (or hover on desktop, via CSS :hover assist) expands a panel with the
-  full description and a study/reference link slot. Dosage amounts are the
-  CONFIRMED per-serving actives from the formula spec (see
-  strategy/14-facts-placeholders-legal.md) — NOT the generic placeholder
-  ingredient list (Tongkat Ali/Shilajit/etc.) from the redesign brief,
-  since that list doesn't match BullRush's actual confirmed formula.
+  Formula / ingredient accordion — icon + name + dose always visible; tap
+  (or hover on desktop) expands a panel with the full description, benefit
+  category, and an optional study/reference link. Every dosage below is a
+  TEMPORARY PLACEHOLDER pending the final, manufacturer-confirmed
+  Supplement Facts panel — do not treat any amount here as final. See
+  REPLACE-BEFORE-LAUNCH.md.
 {% endcomment %}
-<section class="bf-section bf-bg-black bf-grid-overlay">
+<section class="bf-section bf-bg-black bf-grid-overlay" id="formula">
   <div class="bf-container" style="position:relative;z-index:1;">
     <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
     <h2>{{ section.settings.heading }}</h2>
@@ -16,7 +15,7 @@
     {%- endif -%}
     <div class="bf-grid-4 bf-mt-32">
       {%- for block in section.blocks -%}
-        <div class="bf-ing-accordion" data-bf-ing-card>
+        <div class="bf-ing-accordion" data-bf-ing-card style="--bf-ing-accent:{{ block.settings.accent_color | default: settings.color_acid_green }};">
           <button type="button" class="bf-ing-accordion__trigger" data-bf-ing-trigger aria-expanded="false">
             <span class="bf-ing-accordion__icon">
               {%- case block.settings.icon -%}
@@ -28,14 +27,19 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12z"/></svg>
                 {%- when 'bolt' -%}
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+                {%- when 'mineral' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2 4 9l8 13 8-13z"/><path d="M4 9h16M9 9l3 13M15 9l-3 13" stroke-width="1"/></svg>
                 {%- else -%}
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/></svg>
               {%- endcase -%}
             </span>
-            <span class="bf-ing-accordion__name">{{ block.settings.name }}<span class="bf-ing-accordion__dose" style="display:block;">{{ block.settings.amount_placeholder }} / serving</span></span>
+            <span class="bf-ing-accordion__name">{{ block.settings.name }}<span class="bf-ing-accordion__dose" style="display:block;">{{ block.settings.amount_placeholder }} / serving — placeholder</span></span>
             <span class="bf-ing-accordion__chevron">▾</span>
           </button>
           <div class="bf-ing-accordion__panel" data-bf-ing-panel data-open="false">
+            {%- if block.settings.benefit_category != blank -%}
+              <span class="bf-badge-amount" style="margin-bottom:10px;">{{ block.settings.benefit_category }}</span>
+            {%- endif -%}
             <p>{{ block.settings.role }}</p>
             {%- if block.settings.study_url != blank -%}
               <a href="{{ block.settings.study_url }}" target="_blank" rel="noopener">{{ block.settings.study_label | default: 'Reference / study' }} →</a>
@@ -47,23 +51,23 @@
       {%- endfor -%}
     </div>
     <p class="bf-muted" style="margin-top:20px;font-size:0.8rem;">
-      {{ section.settings.footnote }} <a href="/pages/supplement-facts" style="color:var(--bf-white);">View full Supplement Facts panel</a>
+      {{ section.settings.footnote }} <a href="/pages/formula" style="color:var(--bf-white);">View full Supplement Facts panel</a>
     </p>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Ingredient education",
+  "name": "Formula — Ingredients",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Formula" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "4 Ingredients In 1 Focused Formula" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "8 Ingredients. Zero Guesswork." },
     { "type": "text", "id": "subheading", "label": "Subheading", "default": "Transparent Doses, No Proprietary Blends" },
     {
       "type": "textarea",
       "id": "footnote",
       "label": "Footnote",
-      "default": "Amounts per serving are confirmed from the formula specification. Gummies-per-serving and total supply duration are pending the final Nutrition/Supplement Facts panel — do not publish a supply-duration claim until that's confirmed."
+      "default": "[PLACEHOLDER] All amounts per serving shown above are temporary placeholders pending the final, manufacturer-confirmed Supplement Facts panel. Do not publish a supply-duration or dosage claim until confirmed."
     }
   ],
   "blocks": [
@@ -77,10 +81,13 @@
             { "value": "root", "label": "Root" },
             { "value": "droplet", "label": "Droplet / extract" },
             { "value": "bolt", "label": "Energy" },
+            { "value": "mineral", "label": "Mineral" },
             { "value": "circle", "label": "Generic" }
           ], "default": "leaf" },
+        { "type": "color", "id": "accent_color", "label": "Card accent color", "default": "#BFFF00" },
+        { "type": "text", "id": "benefit_category", "label": "Benefit category (e.g. Energy, Drive, Recovery)" },
         { "type": "textarea", "id": "role", "label": "Role / why it's included" },
-        { "type": "text", "id": "amount_placeholder", "label": "Amount per serving", "default": "[PLACEHOLDER amount]" },
+        { "type": "text", "id": "amount_placeholder", "label": "Amount per serving (PLACEHOLDER — pending final label)", "default": "[PLACEHOLDER]" },
         { "type": "url", "id": "study_url", "label": "Study / reference link (optional)" },
         { "type": "text", "id": "study_label", "label": "Study link label", "default": "Reference / study" }
       ]
@@ -88,12 +95,16 @@
   ],
   "default": {
     "blocks": [
-      { "type": "ingredient", "settings": { "name": "Saffron Extract", "icon": "droplet", "role": "Included for its role in everyday mood and wellbeing support.", "amount_placeholder": "30 mg" } },
-      { "type": "ingredient", "settings": { "name": "Panax Ginseng Extract", "icon": "root", "role": "A traditionally used adaptogen included for energy and vitality support.", "amount_placeholder": "100 mg" } },
-      { "type": "ingredient", "settings": { "name": "Maca Root Extract", "icon": "root", "role": "Included for its traditional association with stamina and vitality.", "amount_placeholder": "300 mg" } },
-      { "type": "ingredient", "settings": { "name": "Vitamin B6 (Pyridoxine HCl)", "icon": "bolt", "role": "Supports normal energy-yielding metabolism.", "amount_placeholder": "2 mg" } }
+      { "type": "ingredient", "settings": { "name": "Tongkat Ali", "icon": "root", "benefit_category": "Drive & Vitality", "role": "A traditionally used botanical extract included to help support everyday male vitality and drive.", "amount_placeholder": "200 mg" } },
+      { "type": "ingredient", "settings": { "name": "Shilajit", "icon": "droplet", "benefit_category": "Energy & Stamina", "role": "A mineral-rich resin traditionally used to help support stamina and everyday energy.", "amount_placeholder": "250 mg" } },
+      { "type": "ingredient", "settings": { "name": "Ashwagandha", "icon": "leaf", "benefit_category": "Recovery", "role": "An adaptogenic herb included to help support the body's normal response to everyday stress.", "amount_placeholder": "300 mg" } },
+      { "type": "ingredient", "settings": { "name": "Zinc", "icon": "mineral", "benefit_category": "Male Vitality", "role": "An essential mineral that supports the maintenance of normal testosterone levels in the blood.", "amount_placeholder": "10 mg" } },
+      { "type": "ingredient", "settings": { "name": "Vitamin D", "icon": "bolt", "benefit_category": "Strength & Performance", "role": "Supports normal muscle function and helps maintain normal energy levels as part of daily performance.", "amount_placeholder": "50 mcg" } },
+      { "type": "ingredient", "settings": { "name": "Boron", "icon": "mineral", "benefit_category": "Strength & Performance", "role": "A trace mineral included for its studied role in supporting healthy hormone metabolism.", "amount_placeholder": "3 mg" } },
+      { "type": "ingredient", "settings": { "name": "Fenugreek", "icon": "leaf", "benefit_category": "Performance", "role": "A traditional botanical extract included to help support male performance and vitality.", "amount_placeholder": "500 mg" } },
+      { "type": "ingredient", "settings": { "name": "Magnesium", "icon": "mineral", "benefit_category": "Recovery & Sleep", "role": "Supports normal muscle function and nervous system relaxation as part of daily recovery.", "amount_placeholder": "100 mg" } }
     ]
   },
-  "presets": [{ "name": "Ingredient education" }]
+  "presets": [{ "name": "Formula — Ingredients" }]
 }
 {% endschema %}

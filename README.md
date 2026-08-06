@@ -1,54 +1,62 @@
-# BullRush
+# BULLRUSH — Shopify Theme
 
-BullRush — "Fuel Your Power" — premium men's daily-vitality gummy brand. This repo **is** the Shopify Online Store 2.0 theme for the flagship product, **BullRush Male Vitality Gummies** (bold/aggressive/futuristic identity: acid green + electric cyan on black, rebranded 2026-08-04), plus the full launch strategy package the build is based on.
+BULLRUSH Testosterone Support Gummies — a daily men's performance and vitality supplement. This repository **is** a complete Shopify Online Store 2.0 theme, built on Dawn's architecture (routing, section groups, native product/cart forms, JSON templates, localization, accessibility, responsive images) and visually transformed into an aggressive, dark, high-performance direct-response brand.
 
-The repository root is a valid Shopify theme — `assets/`, `config/`, `layout/`, `locales/`, `sections/`, `snippets/`, and `templates/` all live directly at root, exactly as Shopify's theme structure requires (for the Shopify CLI, `theme push`, or a GitHub-connected theme).
+The repository root is a valid Shopify theme — `assets/`, `config/`, `layout/`, `locales/`, `sections/`, `snippets/`, and `templates/` all live directly at root, exactly as Shopify's theme structure requires (Shopify CLI, `theme push`, or a GitHub-connected theme).
 
-- **`/strategy`** — brand application guide, funnel wireframes, pricing framework, welcome offer, proof/UGC plans, LTV framework, upsell/Klaviyo/A/B-test plans, mockup prompts, and the facts-vs-placeholders-vs-legal-review register. Start at `/strategy/README.md`.
-- **`/preview`** — static HTML reconstructions + screenshots of the homepage for visual review without a live Shopify store.
-- **`/REPLACE-BEFORE-LAUNCH.md`** — the master pre-launch checklist (temporary images, placeholder claims/reviews/pricing/experts/press, legal review items). Read this before treating anything in the theme as launch-ready content.
+**Read `REPLACE-BEFORE-LAUNCH.md` before treating anything in this theme as launch-ready.** Every product image, ingredient dosage, review, expert, press logo, price, gift, certification claim, and legal disclaimer in this build is an explicitly-marked temporary placeholder — that file is the canonical checklist of what must be replaced with real content before public launch.
 
-**Read `/strategy/README.md`'s "Known gaps and updates" note and `/strategy/14-facts-placeholders-legal.md` before treating anything in this repo as launch-ready.** Two things changed after the initial build: the real logo turned out to read BULLRUSH / "Fuel Your Power" (not the BullFuel / Fuel Your Edge name used in the original brief, which is why the repo is named this way now), and real ingredient/manufacturing data was confirmed from the formula supplier. The source transcripts referenced by the original brief were still never attached, so the strategic principles are built from the brief's own description of them — and every unverified figure (pricing, gummies-per-serving, reviews, certifications) is explicitly marked `[PLACEHOLDER]`.
+## Installation
 
-## Setup checklist
-1. **Create the flagship product** "BullRush Male Vitality Gummies" in Shopify Admin with:
+1. **Upload the theme.** Either:
+   - Zip the contents of this repository (the folders `assets/`, `config/`, `layout/`, `locales/`, `sections/`, `snippets/`, `templates/` must be at the ZIP's root, not nested in a subfolder) and upload via **Shopify Admin → Online Store → Themes → Add theme → Upload zip file**; or
+   - Connect this GitHub repository via **Online Store → Themes → Add theme → Connect from GitHub**, or push it with the Shopify CLI: `shopify theme push`.
+2. **Create the flagship product** "BULLRUSH Testosterone Support Gummies" in Shopify Admin with:
    - Option 1 named "Bundle" with values `1 Bottle`, `3 Bottles`, `6 Bottles` (three variants).
-   - Prices matching (or replacing) the placeholders in `/strategy/05-pricing-framework.md`.
-   - A Selling Plan Group named "Subscribe & Save" attached to all three variants (via Shopify's native subscriptions app, or Recharge/Recurpay) for the recurring price shown in the Subscribe tab. Without one, the Subscribe tab still renders using a fallback 15%-off estimate — replace this before launch.
-   - Real product photos/video uploaded to `product.media` — the gallery supports images, video, and 3D models natively.
-2. **Assign templates:**
-   - The product automatically uses `templates/product.json` (identical to `product.offer.json`).
-   - Create pages (Shopify Admin → Pages) and assign templates: DR landing page → `landing-page`, Science/Ingredients → `science`, About → `about`, Contact → `contact`, FAQ → `faq`.
-   - Configure Privacy/Terms/Refund/Shipping text in Admin → Settings → Policies — `templates/policy.json` renders whichever one Shopify routes to automatically.
-3. **Logo:** the real BullRush logo is wired in as the theme's default (`assets/bullrush-*.png` — see `/strategy/01-brand-application-guide.md` §0). Upload improved/vector versions under **Theme settings → Logo** to override.
-4. **Colors:** the acid-green/electric-cyan palette lives in **Theme settings → Colors** — see `/strategy/01-brand-application-guide.md` §9 for the accessibility rules baked into the CSS (raw acid green fails contrast on white; buttons/badges use black text on green, light-background text uses a derived dark-olive shade).
-5. **Fill in every `[PLACEHOLDER]`** you find in section settings and liquid comments — cross-reference `/REPLACE-BEFORE-LAUNCH.md` and `/strategy/14-facts-placeholders-legal.md` before publishing any of them.
-6. **Add the regulatory disclaimer** in the Footer section settings, and point `manage_subscription_url` at your real subscription portal, before public launch.
+   - Real prices (the theme computes savings/per-bottle/per-day math live from whatever prices you set — nothing is hardcoded).
+   - A Selling Plan Group named "Subscribe & Save" attached to all three variants (native Shopify Subscriptions, or an app like Recharge/Recurpay) for the recurring price shown in the Subscribe tab. Without one, the Subscribe tab falls back to an estimated 15%-off price — replace before launch.
+   - Real product photos/video uploaded to the product's media — the gallery supports images, video, and 3D models natively and only shows the bundled placeholder graphics when the product has zero media.
+   - Assign the `product` template (default) or `product.offer` (identical layout) to this product.
+3. **Create pages** (Shopify Admin → Pages) and assign templates: Formula → `formula`, Science → `science`, About → `about`, Contact → `contact`, FAQ → `faq`, Subscription Management → `subscription` (handle `subscription-management` to match the footer's default link).
+4. **Configure policies** at Admin → Settings → Policies (Privacy, Terms, Refund, Shipping) — `templates/policy.json` renders whichever one Shopify routes to automatically.
+5. **Set up navigation**: create a menu (Admin → Navigation) with Shop / Formula / How It Works / Reviews / FAQ / Contact, and assign it to the Header section's "Main menu" setting. "Formula," "How It Works," and "Reviews" can point at the homepage anchors `#formula`, `#how-it-works`, `#reviews` for a single-page nav, or at the standalone Formula/FAQ pages.
+6. **Colors, fonts, logo**: all live in **Theme Settings** — see `config/settings_schema.json`. The bundled logo and product images are temporary (see `REPLACE-BEFORE-LAUNCH.md`).
+7. **Fill in every placeholder** flagged in `REPLACE-BEFORE-LAUNCH.md` before running paid traffic to this store.
 
-## Scope of this build
-In scope: full homepage + DR landing page + product offer page funnels, Science/About/Contact/FAQ pages, legal policy rendering, cart page, generic content-page template, header/footer with newsletter/country-selector/payment icons, plus every other template Shopify's router requires so no storefront URL ever falls through to a broken page: collection, 404, search, blog, article, and password (coming-soon/locked-store) — each backed by a minimal, on-brand `main-*` section (grid/list/message + existing button and card styles, no new visual language introduced).
-Out of scope (would need to be added before a full production launch): customer account templates (login/register/addresses/order/account/activate/reset-password) and the gift card template — this store has no customer-accounts or gift-card flow enabled yet, so these aren't wired up; Shopify's official `theme check` does not flag them as required (only the older, deprecated `theme-check` Ruby gem does, for Theme Store submission purposes).
+## Validation
+
+Shopify's official `theme check` (via the Shopify CLI, `shopify theme check`) should be run against this theme before every deploy. See the repository's latest validation pass notes in `REPLACE-BEFORE-LAUNCH.md` §12 for the environment constraints under which this build was validated (sandboxed, no live store connection).
+
+Routing sanity already verified by inspection:
+- `templates/index.json` renders the real homepage; `templates/404.json` is a fully separate template — the homepage never falls through to it and vice versa.
+- `layout/theme.liquid` contains exactly one `{{ content_for_layout }}`.
+- Header and footer use Online Store 2.0 **section groups** (`sections/header-group.json`, `sections/footer-group.json`, rendered via `{% sections 'header-group' %}` / `{% sections 'footer-group' %}`) — no static `{% section 'header' %}` / `{% section 'footer' %}` tags anywhere.
+- The cart drawer (`sections/cart-drawer.liquid`) is included directly in `theme.liquid` (Dawn's own convention for cart chrome, since it isn't header/footer content) and is re-rendered live via Shopify's Section Rendering API — no fabricated cart totals.
+- Every template Shopify's router can reach resolves to a real, on-brand section: `index`, `product` / `product.offer`, `collection`, `cart`, `search`, `blog`, `article`, `password`, `404`, `page` (generic), plus the named page templates below.
+- All CSS lives in `assets/bullrush.css` (loaded via `stylesheet_tag`); the only inline `<style>` block in `theme.liquid` sets CSS custom properties from theme settings — no raw CSS is printed as page text.
+
+## Colors
+
+Primary Black `#070707` · Deep Charcoal `#121212` · Off-White `#F4F1E9` · Acid Green `#BFFF00` · Electric Lime `#D4FF00` · Dark Olive `#293114` · Muted Gray `#8E8E8E`. Black is the dominant background everywhere; off-white/light sections are used sparingly as a deliberate visual reset, never back-to-back. All defaults live in **Theme Settings → Colors** and are fully merchant-editable.
 
 ## File map
-- `layout/theme.liquid` — shell, loads fonts/CSS/JS, defines the color/font CSS custom properties, renders header/footer/sticky-cta
-- `assets/bullrush.css` — full brand design system: palette, type, buttons/badges, marquee, halftone/dot patterns, tilt cards, ingredient accordion, comparison table, UGC carousel, progress bar, spin badge, split-screen layout, prefers-reduced-motion guard
-- `assets/bullrush.js` — tabs, tier selection, accordion(s), sticky CTA, add-to-cart, mobile nav drawer, animated counters, tilt-hover, cursor-parallax, announcement rotation, free-shipping progress, product gallery swap — all vanilla JS, no dependencies
-- `assets/bullrush-stacked-{light,dark}.png`, `bullrush-horizontal-{light,dark}.png`, `bullrush-symbol-{light,dark}.png` — the real BullRush logo, derived into the lockups/color variants the brand system needs
-- `snippets/purchase-module.liquid` — the one purchase component used on all three funnel surfaces
-- `snippets/hero-visual.liquid` — collage/stat-callout/offer-seal hero graphic (DR landing page)
-- `snippets/logo-wordmark.liquid`, `snippets/icon-bull.liquid` — logo rendering with real-asset/merchant-upload fallback
 
-### Homepage sections (`templates/index.json`)
-`promo-bar` (rotating announcement + optional real countdown), `hero-brand`, `social-ticker` (marquee), `press-mentions` (ships empty), `positioning-statement`, `problem-proof` (split-screen + chart + animated counters), `benefits-list` (6 tilt cards), `product-intro`, `how-it-works` (horizontal/stacked timeline), `ingredient-education` (accordion cards), `comparison-table`, `product-proof`, `certifications`, `experts-trust` (ships empty), `reviews-ugc`, `ugc-carousel`, `pricing-bundles`, `welcome-offer`, `guarantee` (spinning badge), `faq`, `final-cta`.
+- `layout/theme.liquid` — shell: loads fonts/CSS/JS via a valid `<style>` block (never raw CSS as page text), defines the color/font CSS custom properties, renders the header/footer section groups, the sticky mobile CTA, and the cart drawer.
+- `assets/bullrush.css` — full design system: palette, type, buttons/badges, marquee, halftone/dot/grid patterns, tilt cards, ingredient accordion, comparison table, UGC carousel, cart drawer, gift progress bars, benefit image panels, review carousel/grid, guarantee badge, prefers-reduced-motion guard.
+- `assets/bullrush.js` — vanilla JS, no dependencies: tabs, tier selection, accordions, sticky CTA, AJAX add-to-cart + cart drawer (Section Rendering API), mobile nav drawer, animated counters, tilt-hover, cursor-parallax, announcement rotation, live free-shipping/gift progress bars, product gallery swap.
+- `assets/bullrush-{horizontal,stacked,symbol}-{dark,light}.svg` — the temporary text-based BULLRUSH logo (see `REPLACE-BEFORE-LAUNCH.md`).
+- `assets/temporary-product-0{1,2,3}.webp` — original placeholder product graphics (see `REPLACE-BEFORE-LAUNCH.md`).
+- `snippets/purchase-module.liquid` — the one purchase component used on the homepage, product page, and DR landing page (native `{% form 'product', product %}`, live variant/selling-plan pricing).
+- `snippets/logo-wordmark.liquid`, `snippets/icon-bull.liquid` — logo rendering with merchant-upload/bundled-default fallback.
 
-### DR landing page (`templates/page.landing-page.json`)
-Same component library as the homepage, minimal header/footer, `dr-hero`, `dr-proof-stack`, `dr-offer-stack`, `dr-objections`, `dr-final-cta`.
+### Homepage (`templates/index.json`)
+`header-group` (announcement bar + sticky header with Shop/Formula/How It Works/Reviews/FAQ/Contact nav, account, cart, Shop Now button) → `hero-brand` → `social-ticker` → `press-mentions` → `ingredient-education` (Formula, 8 ingredients) → `certifications` (trust badges) → `problem-proof` → `benefits-list` (Solution, 6 cards) → `benefit-panels` (5 large image panels) → `how-it-works` (Day 1/Week 2/Month 1/Month 3 timeline) → `pricing-bundles` (purchase module: 1/3/6-bottle bundles, Subscribe & Save, cart drawer) → `gifts` (cart-progress unlock) → `comparison-table` → `product-proof` → `reviews-ugc` (featured + carousel/grid) → `ugc-carousel` → `experts-trust` → `guarantee` → `faq` → `final-cta` → `footer-group`.
 
 ### Product page (`templates/product.json` / `product.offer.json`)
-`main-product-offer` (gallery with image/video/model support, purchase module, supplement facts/usage/warnings), `ingredient-education`, `comparison-table`, `product-proof`, `certifications`, `faq`.
+`main-product-offer` (gallery with image/video/model support via native `product.media`, purchase module, Supplement Facts/Usage/Warnings) → `ingredient-education` → `comparison-table` → `product-proof` → `certifications` → `faq`.
 
 ### Other pages
-`page-hero` (reusable oversized-bg content hero) + `brand-story` for About (`page.about.json`); `page-hero` + `ingredient-education` + `comparison-table` for Science (`page.science.json`); `contact-form` (native Shopify contact form) for Contact (`page.contact.json`); full 12-question `faq` for the FAQ page (`page.faq.json`); `main-policy` for Privacy/Terms/Refund/Shipping (`policy.json`, intentionally light background — the one deliberate exception to the no-white-sections rule, since legal text needs maximum readability).
+`page.about.json` (brand story, benefits, certifications, guarantee, final CTA) · `page.formula.json` (ingredients, benefit panels, certifications, comparison, FAQ) · `page.science.json` (ingredients, comparison, certifications, FAQ) · `page.contact.json` (native Shopify contact form) · `page.faq.json` (11-question FAQ) · `page.subscription.json` (Subscription Management placeholder) · `policy.json` (Privacy/Terms/Refund/Shipping, rendered from Admin → Policies) · `page.json` (generic content page) · `page.landing-page.json` (a bonus direct-response landing page carried over from an earlier iteration of this build — not part of the core spec, safe to ignore or delete if unused) · `cart.json`, `collection.json`, `search.json`, `blog.json`, `article.json`, `password.json`, `404.json` — every standard Online Store 2.0 route Shopify's router needs, so no storefront URL falls through to a broken page.
 
-### Supporting
-`main-cart.liquid`, `main-page.liquid`, `sticky-mobile-cta.liquid`, `header.liquid` (with mobile nav drawer), `footer.liquid` (newsletter, Learn/Support/Legal columns, country selector, payment icons).
+### Supplementary (not required, carried over from an earlier build iteration)
+`/strategy` — brand/marketing planning docs from an earlier phase of this project; useful background reading but not part of the Shopify theme deliverable and not guaranteed to reflect the current build (e.g. it predates the current color palette and ingredient list — `REPLACE-BEFORE-LAUNCH.md` and this README are the current source of truth). `/preview` — a static HTML reconstruction + screenshots of the homepage for visual review without a live Shopify store (see `preview/README.md` for methodology and limitations).

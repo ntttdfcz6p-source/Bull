@@ -1,0 +1,10 @@
+<!-- TEMPORARY LOGO — REPLACE BEFORE LAUNCH. Simple original text-based BULLRUSH wordmark + abstract horn/forward-motion symbol, bold uppercase typography. Not modeled on any other brand's mark. Editable via Theme Editor → Logo. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 340" role="img" aria-label="BULLRUSH">
+  <g transform="translate(110,0) scale(1)">
+    <polygon points="70,110 55,105 30,35 48,28 75,95" fill="#293114"/>
+    <polygon points="130,110 145,105 170,35 152,28 125,95" fill="#293114"/>
+    <rect x="70" y="100" width="60" height="85" rx="14" fill="#070707"/>
+    <rect x="70" y="128" width="60" height="10" fill="#BFFF00"/>
+  </g>
+  <text x="210" y="290" text-anchor="middle" font-family="Arial Black, Helvetica, sans-serif" font-weight="900" font-size="60" letter-spacing="1" fill="#070707">BULLRUSH</text>
+</svg>

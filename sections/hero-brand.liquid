@@ -1,11 +1,18 @@
 {% comment %}
-  Two-column hero per the redesign brief: headline left, product visual
-  right on a cyan panel with an acid-green dot pattern, oversized cropped
-  background typography, and subtle cursor-parallax on the product image
-  (desktop pointer only; disabled under prefers-reduced-motion — see
-  assets/bullrush.js).
+  Homepage hero: oversized headline + benefit statement + trust indicators
+  on the left, a large floating product shot with an acid-green glow on
+  the right, over an optional dark photographic background. TEMPORARY
+  PRODUCT IMAGE — the bundled fallback (assets/temporary-product-01.webp)
+  is an original placeholder graphic, not real packaging — replace before
+  launch via this section's "Hero product image" setting.
 {% endcomment %}
 <section class="bf-section bf-bg-black bf-hero" data-bf-hero style="position:relative;overflow:hidden;">
+  {%- if section.settings.bg_image != blank -%}
+    <div style="position:absolute;inset:0;z-index:0;">
+      <img src="{{ section.settings.bg_image | image_url: width: 1800 }}" width="1800" height="{{ 1800 | divided_by: section.settings.bg_image.aspect_ratio | round }}" alt="" loading="eager" style="width:100%;height:100%;object-fit:cover;">
+      <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(7,7,7,0.96) 35%,rgba(7,7,7,0.55) 100%);"></div>
+    </div>
+  {%- endif -%}
   <div class="bf-oversized-bg" aria-hidden="true">{{ section.settings.bg_word }}</div>
   <div class="bf-container bf-hero__grid" style="position:relative;z-index:1;">
     <div>
@@ -14,31 +21,25 @@
       <p style="max-width:480px;">{{ section.settings.subheadline }}</p>
 
       <div class="bf-hero__rating" style="margin-top:16px;">
-        <span class="bf-badge-placeholder">★★★★★ — reviews pending launch</span>
+        <span class="bf-accent" style="font-family:var(--bf-font-display);font-size:1rem;">★★★★★ {{ section.settings.rating }}</span>
+        <span class="bf-muted">({{ section.settings.review_count }} reviews — placeholder)</span>
       </div>
 
-      {%- if section.settings.chip_1 != blank or section.settings.chip_2 != blank or section.settings.chip_3 != blank -%}
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
-          {%- if section.settings.chip_1 != blank -%}<span class="bf-badge-amount">{{ section.settings.chip_1 }}</span>{%- endif -%}
-          {%- if section.settings.chip_2 != blank -%}<span class="bf-badge-amount">{{ section.settings.chip_2 }}</span>{%- endif -%}
-          {%- if section.settings.chip_3 != blank -%}<span class="bf-badge-amount">{{ section.settings.chip_3 }}</span>{%- endif -%}
-        </div>
-      {%- endif -%}
-
       <div class="bf-cta-row">
-        <a href="#bf-purchase" class="bf-btn bf-btn--primary bf-btn--arrow">{{ section.settings.cta_label }} <span class="bf-btn__arrow">→</span></a>
-        <a href="{{ section.settings.secondary_url }}" class="bf-btn bf-btn--outline-dark">{{ section.settings.secondary_label }}</a>
+        <a href="{{ section.settings.primary_url | default: '#bf-purchase' }}" class="bf-btn bf-btn--primary bf-btn--arrow">{{ section.settings.cta_label }} <span class="bf-btn__arrow">→</span></a>
+        <a href="{{ section.settings.secondary_url | default: '#formula' }}" class="bf-btn bf-btn--outline-dark">{{ section.settings.secondary_label }}</a>
       </div>
 
       <p class="bf-muted" style="font-size:0.78rem;margin-top:18px;margin-bottom:0;">{{ section.settings.guarantee_text }} · {{ section.settings.shipping_text }}</p>
     </div>
 
-    <div class="bf-hero__media bf-bg-cyan bf-pattern-dots" data-bf-cursor-zone style="aspect-ratio:1/1;position:relative;">
-      <div class="bf-cursor-parallax" style="width:60%;">
+    <div class="bf-hero__media bf-glow" data-bf-cursor-zone style="aspect-ratio:1/1;position:relative;background:none;overflow:visible;">
+      <div class="bf-cursor-parallax bf-float" style="width:62%;position:relative;z-index:1;">
+        {%- comment -%} TEMPORARY PRODUCT IMAGE — REPLACE BEFORE LAUNCH {%- endcomment -%}
         {%- if section.settings.hero_image != blank -%}
-          <img src="{{ section.settings.hero_image | image_url: width: 900 }}" width="900" height="{{ 900 | divided_by: section.settings.hero_image.aspect_ratio | round }}" alt="BullRush Male Vitality Gummies" loading="eager">
+          <img src="{{ section.settings.hero_image | image_url: width: 900 }}" width="900" height="{{ 900 | divided_by: section.settings.hero_image.aspect_ratio | round }}" alt="BULLRUSH Testosterone Support Gummies" loading="eager">
         {%- else -%}
-          {% render 'icon-bull', size: 280, background: 'light' %}
+          <img src="{{ 'temporary-product-01.webp' | asset_url }}" width="900" height="900" alt="BULLRUSH Testosterone Support Gummies — temporary placeholder image" loading="eager">
         {%- endif -%}
       </div>
     </div>
@@ -49,25 +50,26 @@
 {
   "name": "Hero — Brand",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FUEL YOUR POWER" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "BUILT FOR MEN WHO REFUSE TO SLOW DOWN" },
     {
       "type": "text",
       "id": "headline",
       "label": "Headline",
       "info": "Wrap a word in <span class=\"bf-accent\">word</span> to highlight it in acid green.",
-      "default": "POWER YOUR <span class=\"bf-accent\">DRIVE</span>."
+      "default": "UNLEASH YOUR <span class=\"bf-accent\">DRIVE.</span>"
     },
-    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "Daily gummies with saffron, Panax ginseng, maca, and vitamin B6 — formulated to support male vitality, energy, and everyday performance." },
-    { "type": "text", "id": "bg_word", "label": "Oversized background word (decorative)", "default": "POWER" },
-    { "type": "text", "id": "chip_1", "label": "Benefit chip 1", "default": "Daily Energy" },
-    { "type": "text", "id": "chip_2", "label": "Benefit chip 2", "default": "Focus" },
-    { "type": "text", "id": "chip_3", "label": "Benefit chip 3", "default": "Male Vitality" },
+    { "type": "textarea", "id": "subheadline", "label": "Subheadline", "default": "A powerful daily formula built to support energy, focus, strength, recovery and male vitality." },
+    { "type": "text", "id": "bg_word", "label": "Oversized background word (decorative)", "default": "BULLRUSH" },
+    { "type": "image_picker", "id": "bg_image", "label": "Background photo — TEMPORARY ASSET, replace before launch", "info": "Dark gym / male lifestyle photography. Optional; a plain black background is used if left blank." },
+    { "type": "text", "id": "rating", "label": "Rating (placeholder until real reviews exist)", "default": "4.8/5" },
+    { "type": "text", "id": "review_count", "label": "Review count (placeholder)", "default": "1,200+" },
     { "type": "text", "id": "cta_label", "label": "Primary CTA label", "default": "Shop Now" },
-    { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "Explore The Formula" },
-    { "type": "url", "id": "secondary_url", "label": "Secondary CTA link" },
-    { "type": "text", "id": "guarantee_text", "label": "Guarantee text", "default": "90-day guarantee" },
-    { "type": "text", "id": "shipping_text", "label": "Shipping note", "default": "Free shipping on Subscribe & Save" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero product image — TEMPORARY ASSET, replace before launch" }
+    { "type": "url", "id": "primary_url", "label": "Primary CTA link", "info": "Defaults to the purchase module on this page if left blank" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "See The Formula" },
+    { "type": "url", "id": "secondary_url", "label": "Secondary CTA link", "info": "Defaults to the Formula section on this page if left blank" },
+    { "type": "text", "id": "guarantee_text", "label": "Guarantee text", "default": "90-day money-back guarantee" },
+    { "type": "text", "id": "shipping_text", "label": "Shipping note", "default": "Free shipping on multi-bottle orders" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero product image — TEMPORARY ASSET, replace before launch", "info": "Defaults to the bundled original placeholder graphic (assets/temporary-product-01.webp) if left blank. Not real packaging — replace before launch." }
   ],
   "presets": [{ "name": "Hero — Brand" }]
 }

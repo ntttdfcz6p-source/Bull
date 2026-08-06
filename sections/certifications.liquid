@@ -1,9 +1,10 @@
 {% comment %}
-  Trust/certification icon row. Defaults only include claims already
-  confirmed in strategy/14-facts-placeholders-legal.md (EU manufacturing,
-  GMP available on request) — anything else (e.g. "Non-GMO", "Third-Party
-  Tested") must not be turned on until the underlying document is actually
-  in hand, not just requested.
+  Trust badge strip. VERIFY CLAIM BEFORE LAUNCH — every badge below (Third-
+  Party Tested, Transparent Formula, Manufactured to Quality Standards,
+  Non-GMO Option, 90-Day Guarantee) is a TEMPORARY placeholder claim. Do not
+  present any of these as a verified fact in a live store until the
+  underlying certificate/document (COA, GMP cert, non-GMO documentation) is
+  actually in hand and legal has signed off. See REPLACE-BEFORE-LAUNCH.md.
 {% endcomment %}
 <div class="bf-cert-row bf-reveal {% if section.settings.dark %}bf-bg-black{% else %}bf-bg-white{% endif %}">
   {%- for block in section.blocks -%}
@@ -51,10 +52,11 @@
   ],
   "default": {
     "blocks": [
-      { "type": "cert", "settings": { "icon": "leaf", "label": "Made in the EU" } },
-      { "type": "cert", "settings": { "icon": "shield", "label": "GMP Standard (cert. on request)" } },
-      { "type": "cert", "settings": { "icon": "truck", "label": "Fast, Discreet Shipping" } },
-      { "type": "cert", "settings": { "icon": "flask", "label": "[PLACEHOLDER — Third-Party Tested, pending COA]" } }
+      { "type": "cert", "settings": { "icon": "flask", "label": "Third-Party Tested" } },
+      { "type": "cert", "settings": { "icon": "leaf", "label": "Transparent Formula" } },
+      { "type": "cert", "settings": { "icon": "shield", "label": "Manufactured to Quality Standards" } },
+      { "type": "cert", "settings": { "icon": "circle", "label": "Non-GMO Option" } },
+      { "type": "cert", "settings": { "icon": "shield", "label": "90-Day Guarantee" } }
     ]
   },
   "presets": [{ "name": "Certifications row" }]

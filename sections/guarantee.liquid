@@ -1,9 +1,10 @@
 {% comment %}
-  Guarantee badge banner — circular rotating badge over a dark, textured
-  panel with oversized background typography (per the 2026-08-04 rebrand
-  brief: "oversized typography over a dark product photograph" / "circular
-  badge animation"). Kept strictly to a satisfaction/refund guarantee —
-  never an outcome-specific promise (no "guaranteed results" language).
+  Guarantee badge banner — large rotating circular badge + product image
+  over a dark, textured panel with oversized background typography. Kept
+  strictly to a satisfaction/refund guarantee — never an outcome-specific
+  promise (no "guaranteed results" language). TEMPORARY PRODUCT IMAGE —
+  the bundled fallback is an original placeholder graphic, replace before
+  launch via this section's "Product image" setting.
 {% endcomment %}
 <section class="bf-section bf-bg-black bf-pattern-dots-corner" style="position:relative;overflow:hidden;">
   <div class="bf-oversized-bg" aria-hidden="true">{{ section.settings.days }}</div>
@@ -12,7 +13,7 @@
       <div class="bf-guarantee-banner__badge bf-badge-spin">
         <svg viewBox="0 0 120 120">
           <circle cx="60" cy="60" r="56" fill="none" stroke="var(--bf-accent)" stroke-width="2"/>
-          <circle cx="60" cy="60" r="46" fill="none" stroke="var(--bf-cyan)" stroke-width="1"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="var(--bf-lime)" stroke-width="1"/>
           <text x="60" y="52" text-anchor="middle" font-family="{{ settings.font_display.family }}" font-size="20" fill="var(--bf-white)">{{ section.settings.days }}</text>
           <text x="60" y="70" text-anchor="middle" font-family="{{ settings.font_display.family }}" font-size="9" letter-spacing="1" fill="var(--bf-accent)">DAY</text>
           <text x="60" y="84" text-anchor="middle" font-family="{{ settings.font_display.family }}" font-size="8" letter-spacing="0.5" fill="var(--bf-muted-gray)">GUARANTEE</text>
@@ -23,6 +24,13 @@
         <p style="color:var(--bf-light-gray);margin-bottom:20px;">{{ section.settings.body }}</p>
         <a href="/pages/guarantee" class="bf-btn bf-btn--outline-dark">{{ section.settings.link_label }}</a>
       </div>
+      <div class="bf-guarantee-banner__product">
+        {%- if section.settings.product_image != blank -%}
+          <img src="{{ section.settings.product_image | image_url: width: 400 }}" width="180" height="{{ 180 | divided_by: section.settings.product_image.aspect_ratio | round }}" alt="BULLRUSH Testosterone Support Gummies" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'temporary-product-01.webp' | asset_url }}" width="180" height="180" alt="BULLRUSH Testosterone Support Gummies — temporary placeholder image" loading="lazy">
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </section>
@@ -32,9 +40,10 @@
   "name": "Guarantee",
   "settings": [
     { "type": "text", "id": "days", "label": "Guarantee length (number)", "default": "90" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "90-Day Guarantee" },
-    { "type": "textarea", "id": "body", "label": "Body", "default": "If BullRush isn't right for you, contact us within 90 days of delivery for a refund on your first order. Full terms at /pages/guarantee." },
-    { "type": "text", "id": "link_label", "label": "Link label", "default": "Full Guarantee Terms" }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "90-Day BULLRUSH Guarantee" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "If BULLRUSH isn't right for you, contact us within 90 days of delivery for a refund on your first order. Full terms at /pages/guarantee." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Full Guarantee Terms" },
+    { "type": "image_picker", "id": "product_image", "label": "Product image — TEMPORARY ASSET, replace before launch" }
   ],
   "presets": [{ "name": "Guarantee" }]
 }

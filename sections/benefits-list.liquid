@@ -1,12 +1,9 @@
 {% comment %}
-  Six interactive benefit cards (tilt-on-hover, acid-green icon highlight) —
-  serves both the "product solution" benefit cards and the "Benefits
-  section" from the redesign brief (consolidated into one component rather
-  than building two near-identical grids). Copy stays in compliant
-  "support/helps maintain" language throughout — see
-  strategy/14-facts-placeholders-legal.md and the compliance rules in the
-  brief itself (no "treats," "guarantees," "cures," "increases hormone
-  levels" claims).
+  Solution section — "one daily habit, multiple performance benefits."
+  Six interactive tilt-hover cards. Copy stays in compliant "supports /
+  formulated to support / helps maintain" language throughout — never
+  "treats," "cures," "guarantees," or "increases testosterone/hormone
+  levels." See REPLACE-BEFORE-LAUNCH.md.
 {% endcomment %}
 <section class="bf-section bf-bg-black">
   <div class="bf-container">
@@ -43,10 +40,10 @@
 
 {% schema %}
 {
-  "name": "Benefits list",
+  "name": "Solution — benefit cards",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Why It Matters" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Built To Support The Daily Grind" }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Solution" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One Daily Habit. Multiple Performance Benefits." }
   ],
   "blocks": [
     {
@@ -59,7 +56,7 @@
             { "value": "plus", "label": "Vitality" },
             { "value": "flame", "label": "Drive / strength" },
             { "value": "moon", "label": "Recovery" },
-            { "value": "shield", "label": "Hormone support" }
+            { "value": "shield", "label": "Daily performance" }
           ], "default": "bolt" },
         { "type": "text", "id": "title", "label": "Title" },
         { "type": "text", "id": "subtitle", "label": "Subtitle" }
@@ -68,14 +65,14 @@
   ],
   "default": {
     "blocks": [
-      { "type": "benefit", "settings": { "icon": "bolt", "title": "Daily Energy", "subtitle": "Formulated to support steadier energy through the day" } },
+      { "type": "benefit", "settings": { "icon": "bolt", "title": "Energy Support", "subtitle": "Formulated to support steadier energy through the day" } },
       { "type": "benefit", "settings": { "icon": "flame", "title": "Strength Support", "subtitle": "Part of a daily routine built to support training consistency" } },
       { "type": "benefit", "settings": { "icon": "target", "title": "Focus", "subtitle": "Helps support staying sharp and on task" } },
       { "type": "benefit", "settings": { "icon": "moon", "title": "Recovery", "subtitle": "[PLACEHOLDER — pending substantiation for a recovery-specific claim]" } },
-      { "type": "benefit", "settings": { "icon": "plus", "title": "Male Vitality", "subtitle": "Formulated to support overall vitality" } },
-      { "type": "benefit", "settings": { "icon": "shield", "title": "Hormone Support", "subtitle": "Formulated to help support the body's normal hormonal balance — not a treatment for low testosterone" } }
+      { "type": "benefit", "settings": { "icon": "plus", "title": "Male Vitality", "subtitle": "Formulated to support overall male vitality" } },
+      { "type": "benefit", "settings": { "icon": "shield", "title": "Daily Performance", "subtitle": "Designed for consistent, everyday performance — not a one-off boost" } }
     ]
   },
-  "presets": [{ "name": "Benefits list" }]
+  "presets": [{ "name": "Solution — benefit cards" }]
 }
 {% endschema %}

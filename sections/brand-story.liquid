@@ -4,7 +4,7 @@
   placeholder until real brand photography exists.
 {% endcomment %}
 <div class="bf-split">
-  <div class="bf-split__content bf-bg-graphite">
+  <div class="bf-split__content bf-bg-charcoal">
     <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
     <h2>{{ section.settings.heading }}</h2>
     <div class="bf-muted" style="font-size:1rem;">{{ section.settings.body }}</div>
@@ -13,7 +13,7 @@
     {%- if section.settings.image != blank -%}
       <img src="{{ section.settings.image | image_url: width: 1000 }}" width="1000" height="{{ 1000 | divided_by: section.settings.image.aspect_ratio | round }}" alt="" loading="lazy">
     {%- else -%}
-      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--bf-muted-gray);font-size:0.85rem;text-align:center;padding:24px;background:var(--bf-soft-black);">
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--bf-muted-gray);font-size:0.85rem;text-align:center;padding:24px;background:var(--bf-charcoal);">
         TEMPORARY ASSET — REPLACE BEFORE LAUNCH<br>{{ section.settings.image_caption }}
       </div>
     {%- endif -%}

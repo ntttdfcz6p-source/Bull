@@ -1,0 +1,36 @@
+{% comment %}
+  Subscription Management Placeholder. This page exists so
+  /pages/subscription-management always resolves to something useful
+  (footer link target) before a real subscriptions app/customer-portal is
+  wired up. Point the "Portal URL" setting at your subscriptions app's
+  real customer portal (native Shopify Subscriptions, Recharge, Recurpay,
+  etc.) once configured — this section will link out to it automatically.
+{% endcomment %}
+<section class="bf-section bf-bg-black">
+  <div class="bf-container bf-max-640">
+    <span class="bf-eyebrow">{{ section.settings.eyebrow }}</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <p class="bf-muted">{{ section.settings.body }}</p>
+    {%- if section.settings.portal_url != blank -%}
+      <a href="{{ section.settings.portal_url }}" class="bf-btn bf-btn--primary">{{ section.settings.cta_label }}</a>
+    {%- else -%}
+      <p class="bf-placeholder-note">[PLACEHOLDER] No subscription management portal is configured yet. In the meantime, customers can manage subscriptions from {{ section.settings.fallback_note }}</p>
+      <a href="{{ routes.account_url }}" class="bf-btn bf-btn--outline-dark">View Account</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Subscription management",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Your Subscription" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Manage Your Subscription" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Skip, pause, swap, or cancel your Subscribe & Save order anytime." },
+    { "type": "url", "id": "portal_url", "label": "Subscriptions app portal URL", "info": "[PLACEHOLDER] Point this at your subscriptions app's real customer portal once configured (native Shopify Subscriptions, Recharge, Recurpay, etc.)." },
+    { "type": "text", "id": "cta_label", "label": "Portal CTA label", "default": "Manage Subscription" },
+    { "type": "text", "id": "fallback_note", "label": "Fallback note (shown until a portal URL is set)", "default": "their account page, or by contacting support directly." }
+  ],
+  "presets": [{ "name": "Subscription management placeholder" }]
+}
+{% endschema %}

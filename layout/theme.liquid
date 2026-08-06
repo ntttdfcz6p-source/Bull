@@ -13,11 +13,11 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
-  {%- comment -%} Favicon: derived from the symbol-only mark (merchant upload if set, else the bundled real BullRush symbol). {%- endcomment -%}
+  {%- comment -%} Favicon: derived from the symbol-only mark (merchant upload if set, else the bundled temporary BULLRUSH symbol). {%- endcomment -%}
   {%- if settings.logo_symbol_only_light_bg != blank -%}
     <link rel="icon" type="image/png" href="{{ settings.logo_symbol_only_light_bg | image_url: width: 32 }}">
   {%- else -%}
-    <link rel="icon" type="image/png" href="{{ 'bullrush-symbol-light.png' | asset_img_url: '64x' }}">
+    <link rel="icon" type="image/svg+xml" href="{{ 'bullrush-symbol-light.svg' | asset_url }}">
   {%- endif -%}
 
   {{ content_for_header }}
@@ -25,13 +25,13 @@
   <style>
     :root{
       --bf-black: {{ settings.color_primary_black }};
-      --bf-graphite: {{ settings.color_soft_black }};
+      --bf-charcoal: {{ settings.color_deep_charcoal }};
       --bf-dark-surface: {{ settings.color_dark_surface }};
       --bf-accent: {{ settings.color_acid_green }};
       --bf-accent-deep: {{ settings.color_acid_green_deep }};
-      --bf-cyan: {{ settings.color_electric_cyan }};
-      --bf-cyan-deep: {{ settings.color_electric_cyan_deep }};
-      --bf-accent-on-light: #4A6100; /* derived, WCAG-AAA-safe (7.0:1) dark-olive shade of acid green for legible text on white/light-gray backgrounds -- raw acid green is 1.18:1 on white and fails outright */
+      --bf-lime: {{ settings.color_electric_lime }};
+      --bf-olive: {{ settings.color_dark_olive }};
+      --bf-accent-on-light: {{ settings.color_dark_olive }}; /* dark olive stands in for acid green wherever accent text sits on the off-white/light-gray reset sections -- raw acid green is ~1.2:1 on off-white and fails contrast outright; dark olive on off-white clears WCAG AAA */
       --bf-white: {{ settings.color_white }};
       --bf-light-gray: {{ settings.color_light_gray }};
       --bf-muted-gray: {{ settings.color_muted_gray }};
@@ -57,6 +57,11 @@
 
   {% if settings.enable_sticky_cta %}
     {% section 'sticky-mobile-cta' %}
+  {% endif %}
+
+  {%- comment -%} Cart drawer chrome: not header/footer content, so it's included directly per Dawn's own convention for cart-notification/cart-drawer. Re-rendered live via the Section Rendering API. {%- endcomment -%}
+  {% if settings.enable_cart_drawer %}
+    {% section 'cart-drawer' %}
   {% endif %}
 
   <script src="{{ 'bullrush.js' | asset_url }}" defer></script>

@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "eyebrow": "Account",
+        "heading": "Subscription Management",
+        "body": "Manage your Subscribe & Save order — skip, pause, swap, or cancel anytime.",
+        "bg_word": "SUBSCRIBE"
+      }
+    },
+    "management": { "type": "subscription-management" },
+    "faq": {
+      "type": "faq",
+      "settings": { "heading": "Subscription Questions" }
+    }
+  },
+  "order": ["hero", "management", "faq"]
+}

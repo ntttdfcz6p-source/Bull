@@ -1,8 +1,8 @@
 {% comment %}
-  BullRush purchase module — shared across the homepage, the DR landing page,
+  BULLRUSH purchase module — shared across the homepage, the DR landing page,
   and the product offer page so pricing logic only lives in one place.
 
-  Expects `product` (the BullRush Male Vitality Gummies product object) with:
+  Expects `product` (the BULLRUSH Testosterone Support Gummies product object) with:
     - Variants using Option 1 = "Bundle" with values "1 Bottle" / "3 Bottles" / "6 Bottles"
     - A selling plan group (native Shopify Subscriptions or an app like Recharge)
       named "Subscribe & Save" attached to each variant, so
@@ -23,8 +23,8 @@
 <div class="bf-purchase" data-bf-purchase>
   <div class="bf-purchase__head">
     <div>
-      <h3>{{ heading_override | default: product.title | default: 'BullRush Male Vitality Gummies' }}</h3>
-      <p class="bf-muted" style="margin:0;font-size:0.85rem;">Premium male vitality support in a daily gummy format.</p>
+      <h3>{{ heading_override | default: product.title | default: 'BULLRUSH Testosterone Support Gummies' }}</h3>
+      <p class="bf-muted" style="margin:0;font-size:0.85rem;">Formulated to support energy, focus, strength, recovery and male vitality — one daily gummy.</p>
     </div>
     <div class="bf-purchase__rating">
       {% comment %} [PLACEHOLDER — awaiting verified reviews at launch] {% endcomment %}

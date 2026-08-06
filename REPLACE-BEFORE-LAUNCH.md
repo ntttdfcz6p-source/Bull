@@ -1,56 +1,80 @@
 # REPLACE BEFORE LAUNCH
 
-This is the master pre-launch checklist for the BullRush storefront (rebranded 2026-08-04 to the acid-green/electric-cyan aggressive/futuristic identity, per the redesign brief). Nothing on this list should reach a live, ad-spend-backed store without being resolved. Cross-reference `strategy/14-facts-placeholders-legal.md` for the full legal/claims discipline this list assumes.
+This is the master pre-launch checklist for the BULLRUSH Shopify theme. Nothing on this list should reach a live, ad-spend-backed store without being resolved. Every item below is also flagged inline in the relevant `.liquid`/`.json` file with a `TEMPORARY` / `PLACEHOLDER` / `VERIFY CLAIM BEFORE LAUNCH` comment or on-screen label — search the codebase for those strings to find every instance.
 
-## 1. Temporary product images (all marked `TEMPORARY ASSET — REPLACE BEFORE LAUNCH` in code)
-| Asset | Location | Status |
+## 1. Temporary product images
+
+**Network access to the reference site (mengotomars.com) was blocked by this build environment's outbound-traffic policy**, so the required "download reference images as temporary placeholders" step could not be done literally. Scraping a competitor's live product photography into another brand's public codebase would also be its own copyright/legal risk. Instead, three **original, hand-generated placeholder graphics** (not photos of any real product) were created and bundled:
+
+| Asset | Used as fallback in | Status |
 |---|---|---|
-| Hero product image | `sections/hero-brand.liquid`, `sections/dr-hero.liquid` (`hero_image` setting) | Falls back to the bull symbol mark if blank — needs a real product bottle render |
-| Product gallery images/video | `sections/main-product-offer.liquid` (via `product.media`) | Upload real product photography + at least one video/model to the product in Shopify Admin |
-| Ingredient "texture" backgrounds | Removed in the ingredient-accordion redesign — see `strategy/13-product-mockup-prompts.md` Prompt 6 for real macro-photography direction if a photo-card treatment is wanted instead of the current icon-based accordion |
-| Lifestyle/problem-section image | `sections/problem-proof.liquid` (`lifestyle_image` setting) | Ships as a plain dark placeholder box until uploaded |
-| Brand story image (About page) | `sections/brand-story.liquid` (`image` setting) | Ships as a plain dark placeholder box until uploaded |
-| UGC carousel clips | `sections/ugc-carousel.liquid` (6 blocks: gym clip, morning routine, unboxing, gummy close-up, founder message, customer reaction) | All 6 ship empty/placeholder-labeled |
+| `assets/temporary-product-01.webp` | Hero (`hero-brand.liquid`), Guarantee badge (`guarantee.liquid`), Final CTA (`final-cta.liquid`) | Original placeholder bottle render — REPLACE with real product photography |
+| `assets/temporary-product-02.webp` | DR landing hero visual (`hero-visual.liquid`) | Original placeholder 3-bottle bundle render — REPLACE |
+| `assets/temporary-product-03.webp` | Benefit panels fallback (`benefit-panels.liquid`) | Original placeholder macro/texture graphic — REPLACE |
 
-**Minimum asset counts from the brief, not yet met:** 3 product images (currently 0 real), 4 lifestyle images (currently 0), 4 ingredient images (currently 0 — using icons instead), 3 UGC/video placeholders (6 slots exist, 0 populated), 2 abstract pattern backgrounds (covered by CSS-generated halftone/dot patterns — no photographic pattern assets exist).
+Every one of these ships with a burned-in "TEMPORARY PLACEHOLDER — REPLACE BEFORE LAUNCH" watermark in the image itself (not just code comments), so it can never be mistaken for a final asset even if it reaches production. **Do not** present any of these as the final BULLRUSH product, and do not alter/fake an actual product label with them.
 
-## 2. Placeholder claims (compliance-sensitive — see §5 before publishing any of these)
-- Every ingredient's role/description is written in "support/help maintain" language already — do not strengthen to "treats," "cures," "increases," or "guarantees" without legal review.
-- `sections/benefits-list.liquid` — "Recovery" and "Hormone Support" cards are the two highest-scrutiny claims; "Hormone Support" copy currently reads "helps support the body's normal hormonal balance — not a treatment for low testosterone" — do not shorten this in a way that drops the qualifier.
-- `sections/how-it-works.liquid` — every stage body beyond the Day 1 routine-building copy is marked `[PLACEHOLDER — subjective/long-term claim pending real customer survey data]`.
-- `sections/problem-proof.liquid` — **the "With BullRush" dashed chart line is the single highest legal-risk element in this theme.** It ships labeled `[PLACEHOLDER, unsubstantiated]`. Do not make it solid or remove the label without real clinical substantiation and legal sign-off. If substantiation never materializes, delete the line — don't quietly stop labeling it.
-- `sections/main-product-offer.liquid` — Supplement Facts, Usage Instructions, and Warnings are all `[PLACEHOLDER]` pending the final label and legal review.
+To replace: upload real photography to each section's `image_picker` setting (hero product image, guarantee product image, final CTA product/background image, benefit panel images) via the Theme Editor, and upload real product media to the flagship product in Shopify Admin — the product page gallery (`main-product-offer.liquid`) automatically uses `product.media` once it exists and only falls back to the placeholder graphics when the product has zero media.
 
-## 3. Placeholder reviews
-- `sections/reviews-ugc.liquid` — 3 review cards, all `[PLACEHOLDER — verified review pending launch]`. Do not populate with fabricated reviews; wait for real verified-buyer submissions (see `strategy/08-review-ugc-plan.md`).
-- Star ratings site-wide render as `★★★★★ — reviews pending launch` badges, not a real aggregate score. Do not hardcode a star count until a real minimum sample size exists (recommended ~25–50 verified reviews per `strategy/08-review-ugc-plan.md`).
+**Logo:** `assets/bullrush-{horizontal,stacked,symbol}-{dark,light}.svg` are simple, original, generic bold-uppercase text-based BULLRUSH marks with an abstract horn/forward-motion symbol — not modeled on any other brand's logo. Replace via **Theme Settings → Logo** once a real logo exists.
 
-## 4. Temporary ingredient dosages
-**These are actually confirmed, not placeholders** — per the manufacturer (DAT Supply) formula spec reviewed 2026-08-04: Saffron Extract 30mg, Panax Ginseng Extract 100mg, Maca Root Extract 300mg, Vitamin B6 (Pyridoxine HCl) 2mg per serving. What's still genuinely unresolved:
-- **Gummies per serving** (1 vs. 2) — determines every supply-duration and per-day-price claim. Gated in the manufacturer's Nutrition/Supplement Facts document.
-- Vegan status, sugar content, exact serving frequency — all pending the same gated document.
-- Study/reference links on each ingredient accordion card (`study_url` setting) — all ship blank.
+## 2. Temporary formula & dosages
 
-## 5. Temporary pricing
-All figures in `strategy/05-pricing-framework.md` and hardcoded as variant-price-driven defaults in `snippets/purchase-module.liquid` are illustrative pending confirmed COGS/landed cost. Do not treat any dollar amount in this theme as final. Compare-at / "you save" math is computed live from actual Shopify variant prices — it will self-correct once real prices are entered, but the reference price itself still needs to be a real decision, not left at the placeholder.
+The ingredient list (`sections/ingredient-education.liquid`) — Tongkat Ali, Shilajit, Ashwagandha, Zinc, Vitamin D, Boron, Fenugreek, Magnesium — and every per-serving amount shown are **placeholders**, not a confirmed manufacturer spec. Do not publish any dosage, "gummies per serving," supply-duration, vegan/sugar-content claim, or Supplement Facts panel value (`main-product-offer.liquid`'s Supplement Facts / Usage / Warnings cards) until the final label is confirmed by the manufacturer and reviewed.
 
-## 6. Temporary expert content
-`sections/experts-trust.liquid` ships with **zero blocks by default** — this is intentional, not an oversight. Do not populate with a fabricated "Men's Health Advisor" or similar generic placeholder person; only add a real name/photo/credential once a genuine, documented endorsement relationship exists (see the section's own schema comment and `strategy/14-facts-placeholders-legal.md`).
+## 3. Temporary claims
 
-## 7. Temporary press logos
-`sections/press-mentions.liquid` ships with **zero blocks by default**. Do not add "Men's Health," "GQ," "Forbes," or any other outlet's name/logo until an actual feature or mention exists. This section is empty everywhere it's included (homepage, DR landing page) until then.
+- All ingredient role/benefit copy uses compliant "supports / formulated to support / helps maintain" language — do not strengthen to "treats," "cures," "increases," "guarantees," or "permanently changes hormone levels" without legal review. Zinc's copy ("supports the maintenance of normal testosterone levels") mirrors an actual EU/UK-authorized structure/function claim for zinc specifically — do not copy that exact phrasing onto other ingredients that don't have the same regulatory basis.
+- `sections/problem-proof.liquid` — the oversized stat counters ship blank (they never animate a fabricated number), and the two "Statistic" blocks ship with `[PLACEHOLDER — insert a credible, cited statistic]` text requiring a real source citation before publishing.
+- Trust badges (`sections/certifications.liquid`: Third-Party Tested, Transparent Formula, Manufactured to Quality Standards, Non-GMO Option, 90-Day Guarantee) are marked `VERIFY CLAIM BEFORE LAUNCH` in the section's code comment. **Do not present any of these as verified facts** until the underlying COA / GMP certificate / non-GMO documentation is actually in hand.
+- Footer regulatory disclaimer (`sections/main-footer.liquid`, `regulatory_disclaimer` setting) is a placeholder describing what needs to go there — needs real legal/regulatory copy for your market before launch.
+- Warnings copy (`main-product-offer.liquid`, `warnings` setting) needs a real legal/regulatory pass.
 
-## 8. Legal items requiring review before public launch
-- **Regulatory disclaimer** (`sections/footer.liquid`, `regulatory_disclaimer` setting) — currently a placeholder describing what needs to go there (e.g. the FDA-style "not evaluated" disclaimer). Must be worded per your actual regulatory counsel for your specific market(s) before launch.
-- **Privacy Policy, Terms of Service, Refund Policy, Shipping Policy** — the theme renders whatever is configured in Shopify Admin → Settings → Policies via `templates/policy.json` / `sections/main-policy.liquid`. No policy text is drafted here; write and legally review each one in Admin before launch.
-- **Warnings copy** (`sections/main-product-offer.liquid`, `warnings` setting) — placeholder language needs a real legal/regulatory pass, especially interaction warnings specific to the confirmed ingredients (Panax ginseng and saffron both have known interaction considerations that a qualified reviewer should address).
-- **"Is it third-party tested?" FAQ answer** (`templates/page.faq.json`) — currently says the COA is available on request but not yet in hand. Do not change this to an unqualified "yes" until the COA is actually received and reviewed.
-- **Compare-at / competitor claims** in `sections/comparison-table.liquid` — ships with reasonable, mostly-placeholder defaults; do not present unverified claims about named or generic competitor categories as fact.
-- Every claim discipline point already logged in `strategy/14-facts-placeholders-legal.md` still applies in full — that document is the canonical claims register, this file is the asset/content checklist.
+## 4. Temporary reviews
 
-## 9. Functional/integration items (not content, but required before this is a working store)
-- Attach a Shopify Selling Plan Group ("Subscribe & Save") to the flagship product's variants — the purchase module falls back to an estimated 15%-off price if none exists, which is not a real subscription price.
-- Confirm the free-shipping progress bar's threshold (once wired into the cart drawer) matches the actual free-shipping policy — it's currently a documented pattern (`data-threshold`/`data-current` in cents) but not yet bound to a live cart total anywhere in the templates.
-- Point `manage_subscription_url` (footer setting) at the real subscription-management portal once a subscriptions app is chosen (native Shopify Subscriptions, Recharge, Recurpay, etc.).
-- Newsletter signup uses Shopify's native customer form with a `newsletter` tag — confirm this matches your actual email platform's tagging/sync setup (e.g. Klaviyo) before relying on it.
-- **`config/settings_schema.json`'s `theme_info` block** (`theme_documentation_url`, `theme_support_email`) currently holds placeholder values on the reserved `.example` domain (RFC 2606 — guaranteed non-functional, not a real or spoofed address). Shopify's schema validator requires both fields to be present and well-formed, but they're internal metadata only (shown in the theme editor's "About this theme" panel, never to customers) — replace with your real docs URL/support email before launch, but there's no functional urgency.
+`sections/reviews-ugc.liquid` ships with fictional placeholder reviews (names, quotes, dates, star ratings) clearly marked `[PLACEHOLDER — fictional, replace before launch]` in every field, plus a visible on-page disclosure. **Do not treat these as real customer reviews.** Replace every block with genuine verified-buyer submissions before launch, and replace the homepage hero's "4.8/5 (1,200+ reviews)" and the final CTA's matching rating line with a real aggregate once a credible sample size exists.
+
+## 5. Temporary experts
+
+`sections/experts-trust.liquid` ships with three **generic role placeholders** (Men's Performance Advisor, Nutrition Specialist, Strength Coach) — intentionally generic, no invented names, photos, or credentials. **Never** replace a placeholder with a real doctor, athlete, or public figure without their actual, current, documented endorsement — that's a false-endorsement claim and, in some jurisdictions, a regulatory violation for supplement marketing.
+
+## 6. Temporary press logos
+
+`sections/press-mentions.liquid` ships with five generic "PUBLICATION 0X" placeholder slots, explicitly labeled `TEMPORARY PRESS PLACEHOLDER — REPLACE BEFORE LAUNCH` in the section's disclosure line. **Do not** rename a placeholder to a real outlet (Men's Health, GQ, Forbes, etc.) or imply real press coverage until an actual feature/mention exists.
+
+## 7. Temporary prices
+
+All bundle/subscription pricing is driven live from real Shopify variant prices via `snippets/purchase-module.liquid` (`{{ variant.price }}`, `{{ sub_allocation.price }}`) — there are no hardcoded dollar amounts in the theme. What's still required before launch:
+- Create the flagship product with Option 1 "Bundle" = `1 Bottle` / `3 Bottles` / `6 Bottles` and real prices.
+- Attach a "Subscribe & Save" Selling Plan Group to all three variants — without one, the Subscribe tab estimates a 15%-off price, which is **not** a real subscription price and must not go live.
+- `config/settings_schema.json`'s `free_shipping_threshold` (default $75) is an illustrative default — confirm against your real shipping policy.
+
+## 8. Temporary gifts
+
+`sections/gifts.liquid` ships with four placeholder bonus items (Digital Performance Guide, Travel Case, Training Plan, Bonus Product) at illustrative unlock thresholds ($50/$75/$100/$150). Confirm real bonus items, stock availability, and that the checkout/order flow actually fulfills them (this section only displays progress/eligibility — it does not auto-add a gift line item to the cart; wire that up via a Shopify app or a free-gift discount rule before relying on it).
+
+## 9. Temporary certifications & guarantees
+
+- See §3 above for the trust badge strip.
+- `sections/guarantee.liquid` ships a 90-day money-back guarantee framed strictly as a satisfaction/refund policy — never an outcome-specific "guaranteed results" promise. Confirm 90 days is your real policy window (it must match `/policies/refund-policy`).
+
+## 10. Temporary legal content
+
+- **Privacy Policy, Terms of Service, Refund Policy, Shipping Policy** — `templates/policy.json` / `sections/main-policy.liquid` render whatever is configured in **Shopify Admin → Settings → Policies**. No policy text is drafted here; write and legally review each one before launch.
+- **Subscription Management page** (`templates/page.subscription.json`) is an intentional **placeholder** page — it links to `routes.account_url` until a real subscriptions-app customer portal URL is set in `sections/subscription-management.liquid`'s `portal_url` setting.
+- **Theme metadata** — `config/settings_schema.json`'s `theme_documentation_url` / `theme_support_email` are on the reserved `.example` domain (RFC 2606, guaranteed non-functional) — internal-only (Theme Editor "About this theme" panel), replace before launch but no functional urgency.
+
+## 11. Functional/integration items (not content, but required before this is a working store)
+
+- Attach the Subscribe & Save Selling Plan Group (see §7).
+- Point `manage_subscription_url` (Footer section setting) at your real subscription-management portal once a subscriptions app is chosen.
+- Newsletter signup uses Shopify's native customer form with a `newsletter` tag — confirm this matches your email platform's tagging/sync setup.
+- UGC carousel (`sections/ugc-carousel.liquid`) ships with 6 empty video/image slots (gym clip, morning routine, unboxing, gummy close-up, founder message, customer reaction) — upload Shopify-hosted MP4s or fallback images.
+- Social links (Instagram/TikTok/YouTube) are blank in `config/settings_data.json` — add real URLs in Theme Settings.
+
+## 12. Known limitation of this build
+
+This theme was built and validated in a sandboxed environment with no live Shopify store connection and no general internet access (only a small set of allow-listed hosts, e.g. GitHub/npm/PyPI). That means:
+- It was **not** possible to install a real product, click through the Theme Editor, or screenshot an actual Shopify render.
+- `preview/` contains a **static HTML reconstruction** of the homepage's default settings (see `preview/README.md`) rendered with the theme's real CSS/JS in headless Chromium — useful for a rough visual gut-check, but not a substitute for a real Theme Editor pass.
+- Shopify's official `theme check` was run for static Liquid/JSON validation (see `README.md`'s "Validation" section for the result), but **before going live you must still**: install the theme on a development store, create the flagship product, click through every template listed in `README.md`'s setup checklist, and test the cart/checkout flow with real variants.

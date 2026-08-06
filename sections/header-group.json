@@ -2,10 +2,14 @@
   "type": "header",
   "name": "Header",
   "sections": {
+    "promo_bar": {
+      "type": "promo-bar",
+      "settings": {}
+    },
     "header": {
       "type": "header",
       "settings": {}
     }
   },
-  "order": ["header"]
+  "order": ["promo_bar", "header"]
 }

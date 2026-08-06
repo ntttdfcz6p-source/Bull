@@ -16,7 +16,7 @@
             <input type="hidden" name="contact[tags]" value="newsletter">
             <div style="display:flex;gap:8px;margin-top:16px;">
               <input type="email" name="contact[email]" placeholder="{{ section.settings.newsletter_placeholder }}" required
-                style="flex:1;min-width:0;padding:10px 12px;border-radius:4px;border:1px solid var(--bf-dark-surface);background:var(--bf-soft-black);color:var(--bf-white);">
+                style="flex:1;min-width:0;padding:10px 12px;border-radius:4px;border:1px solid var(--bf-dark-surface);background:var(--bf-charcoal);color:var(--bf-white);">
               <button type="submit" class="bf-btn bf-btn--primary" style="padding:10px 16px;font-size:0.75rem;">{{ section.settings.newsletter_cta }}</button>
             </div>
             {%- if form.posted_successfully? -%}
@@ -33,16 +33,17 @@
         <div>
           <h3>Shop</h3>
           <ul>
-            <li><a href="{{ section.settings.product_url }}">Male Vitality Gummies</a></li>
+            <li><a href="{{ section.settings.product_url }}">Testosterone Support Gummies</a></li>
             <li><a href="/pages/subscription-terms">Subscription Terms</a></li>
-            <li><a href="{{ section.settings.manage_subscription_url | default: '#' }}">Manage Subscription</a></li>
+            <li><a href="{{ section.settings.manage_subscription_url | default: '/pages/subscription-management' }}">Manage Subscription</a></li>
           </ul>
         </div>
         <div>
           <h3>Learn</h3>
           <ul>
+            <li><a href="/pages/formula">The Formula</a></li>
             <li><a href="/pages/science">The Science</a></li>
-            <li><a href="/pages/about">About BullRush</a></li>
+            <li><a href="/pages/about">About BULLRUSH</a></li>
             <li><a href="/pages/faq">FAQ</a></li>
           </ul>
         </div>
@@ -67,11 +68,11 @@
     {%- endunless -%}
 
     <div class="bf-footer__legal" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-      <p style="margin:0;">&copy; {{ 'now' | date: '%Y' }} BullRush. All rights reserved.</p>
+      <p style="margin:0;">&copy; {{ 'now' | date: '%Y' }} BULLRUSH. All rights reserved.</p>
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
         {%- if localization.available_countries.size > 1 -%}
           {%- form 'localization' -%}
-            <select name="country_code" onchange="this.form.submit()" style="background:var(--bf-soft-black);color:var(--bf-white);border:1px solid var(--bf-dark-surface);border-radius:4px;padding:6px 8px;font-size:0.75rem;">
+            <select name="country_code" onchange="this.form.submit()" style="background:var(--bf-charcoal);color:var(--bf-white);border:1px solid var(--bf-dark-surface);border-radius:4px;padding:6px 8px;font-size:0.75rem;">
               {%- for country in localization.available_countries -%}
                 <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }})</option>
               {%- endfor -%}
@@ -105,7 +106,7 @@
       "type": "textarea",
       "id": "footer_blurb",
       "label": "Footer blurb",
-      "default": "Premium male vitality support in a daily gummy format."
+      "default": "Daily performance gummies formulated to support energy, focus, strength, recovery and male vitality."
     },
     {
       "type": "url",

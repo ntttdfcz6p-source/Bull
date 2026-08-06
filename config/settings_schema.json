@@ -1,9 +1,9 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "BullRush",
+    "theme_name": "BULLRUSH",
     "theme_version": "0.1.0",
-    "theme_author": "BullRush",
+    "theme_author": "BULLRUSH",
     "theme_documentation_url": "https://example.com/bullrush-theme-docs",
     "theme_support_email": "support@bullrush.example"
   },
@@ -16,43 +16,43 @@
       },
       {
         "type": "paragraph",
-        "content": "Upload each lockup to override the theme's built-in default (derived from the real BullRush logo). Every section pulls the correct version automatically based on its background."
+        "content": "TEMPORARY LOGO — REPLACE BEFORE LAUNCH. The bundled default is a simple generic bold-uppercase BULLRUSH text mark with an abstract original symbol (not modeled on any other brand's logo). Upload your real lockups here to override it — every section pulls the correct version automatically based on its background."
       },
       {
         "type": "image_picker",
         "id": "logo_horizontal_dark_bg",
         "label": "Horizontal logo — for dark backgrounds",
-        "info": "Defaults to bullrush-horizontal-dark.png (bundled) if left blank"
+        "info": "Defaults to bullrush-horizontal-dark.svg (bundled) if left blank"
       },
       {
         "type": "image_picker",
         "id": "logo_horizontal_light_bg",
         "label": "Horizontal logo — for light backgrounds",
-        "info": "Defaults to bullrush-horizontal-light.png (bundled) if left blank"
+        "info": "Defaults to bullrush-horizontal-light.svg (bundled) if left blank"
       },
       {
         "type": "image_picker",
         "id": "logo_stacked_dark_bg",
         "label": "Stacked logo — for dark backgrounds",
-        "info": "Defaults to bullrush-stacked-dark.png (bundled) if left blank"
+        "info": "Defaults to bullrush-stacked-dark.svg (bundled) if left blank"
       },
       {
         "type": "image_picker",
         "id": "logo_stacked_light_bg",
         "label": "Stacked logo — for light backgrounds",
-        "info": "Defaults to bullrush-stacked-light.png (bundled) if left blank"
+        "info": "Defaults to bullrush-stacked-light.svg (bundled) if left blank"
       },
       {
         "type": "image_picker",
         "id": "logo_symbol_only_dark_bg",
-        "label": "Symbol only (bull head) — for dark backgrounds",
-        "info": "Defaults to bullrush-symbol-dark.png (bundled) if left blank"
+        "label": "Symbol only (abstract mark) — for dark backgrounds",
+        "info": "Defaults to bullrush-symbol-dark.svg (bundled) if left blank"
       },
       {
         "type": "image_picker",
         "id": "logo_symbol_only_light_bg",
-        "label": "Symbol only (bull head) — for light backgrounds / favicon source",
-        "info": "Defaults to bullrush-symbol-light.png (bundled) if left blank"
+        "label": "Symbol only (abstract mark) — for light backgrounds / favicon source",
+        "info": "Defaults to bullrush-symbol-light.svg (bundled) if left blank"
       },
       {
         "type": "range",
@@ -71,22 +71,22 @@
     "settings": [
       {
         "type": "header",
-        "content": "BullRush palette (rebrand 2026-08-04)"
+        "content": "BULLRUSH palette"
       },
       {
         "type": "paragraph",
-        "content": "Bold/aggressive/futuristic direction: acid green + electric cyan on black, replacing the earlier red/black palette. See strategy/01-brand-application-guide.md §9."
+        "content": "Aggressive, masculine, high-performance direction: acid green + electric lime on black. Black is the dominant background everywhere; off-white and dark olive are used sparingly for contrast panels and light resets — never large white sections."
       },
-      { "type": "color", "id": "color_primary_black", "label": "Primary Black", "default": "#080808" },
-      { "type": "color", "id": "color_soft_black", "label": "Soft Black", "default": "#151515" },
-      { "type": "color", "id": "color_dark_surface", "label": "Dark Surface (internal, card borders on dark bg)", "default": "#202020" },
-      { "type": "color", "id": "color_acid_green", "label": "Acid Green (primary accent — CTAs, badges, emphasis)", "default": "#C8FF00" },
-      { "type": "color", "id": "color_acid_green_deep", "label": "Acid Green Deep (hover/pressed shade, derived)", "default": "#A0CC00" },
-      { "type": "color", "id": "color_electric_cyan", "label": "Electric Cyan (secondary accent — panels, patterns)", "default": "#66D9E8" },
-      { "type": "color", "id": "color_electric_cyan_deep", "label": "Electric Cyan Deep (hover shade, derived)", "default": "#52AEBA" },
-      { "type": "color", "id": "color_white", "label": "White", "default": "#FFFFFF" },
-      { "type": "color", "id": "color_light_gray", "label": "Light Gray (short visual reset only — never several sections in a row)", "default": "#F2F2F2" },
-      { "type": "color", "id": "color_muted_gray", "label": "Muted Gray", "default": "#8B8B8B" }
+      { "type": "color", "id": "color_primary_black", "label": "Primary Black", "default": "#070707" },
+      { "type": "color", "id": "color_deep_charcoal", "label": "Deep Charcoal", "default": "#121212" },
+      { "type": "color", "id": "color_dark_surface", "label": "Dark Surface (internal, card borders on dark bg)", "default": "#1A1A1A" },
+      { "type": "color", "id": "color_acid_green", "label": "Acid Green (primary accent — CTAs, price highlights, badges, underlines, trust strips)", "default": "#BFFF00" },
+      { "type": "color", "id": "color_acid_green_deep", "label": "Acid Green Pressed (hover/pressed shade, derived)", "default": "#96CC00" },
+      { "type": "color", "id": "color_electric_lime", "label": "Electric Lime (secondary accent — panels, patterns, hover states)", "default": "#D4FF00" },
+      { "type": "color", "id": "color_dark_olive", "label": "Dark Olive (deep accent panels, on-light-background text)", "default": "#293114" },
+      { "type": "color", "id": "color_white", "label": "White (text on dark backgrounds)", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_light_gray", "label": "Off-White (short visual reset only — never several sections in a row)", "default": "#F4F1E9" },
+      { "type": "color", "id": "color_muted_gray", "label": "Muted Gray", "default": "#8E8E8E" }
     ]
   },
   {
@@ -116,16 +116,29 @@
         "default": true
       },
       {
+        "type": "checkbox",
+        "id": "enable_cart_drawer",
+        "label": "Open a cart drawer on Add to Cart (instead of going to the cart page)",
+        "default": true
+      },
+      {
         "type": "text",
         "id": "guarantee_text",
         "label": "Guarantee note shown in purchase module",
-        "default": "30-day satisfaction guarantee"
+        "default": "90-day money-back guarantee"
       },
       {
         "type": "text",
         "id": "shipping_note",
         "label": "Shipping note shown in purchase module",
-        "default": "Free shipping on Subscribe & Save orders"
+        "default": "Free shipping on multi-bottle orders"
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold ($)",
+        "info": "Used by the cart drawer's and the Gifts section's progress bars. Set to 0 to hide the free-shipping progress bar entirely.",
+        "default": 75
       }
     ]
   },
