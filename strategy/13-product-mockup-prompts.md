@@ -2,7 +2,7 @@
 
 These are image-generation / mockup-design prompts to produce **temporary** packaging renders until real photography exists. None of the resulting images should be treated as final, regulator-compliant label layouts — supplement labels have mandatory disclosure requirements (Supplement Facts panel, net weight, manufacturer info, warnings) that a generated mockup will not correctly include.
 
-**Logo note:** the real BullRush logo (bull-head mark + BULLRUSH wordmark + "FUEL YOUR POWER" tagline) was supplied on 2026-08-04 and now lives in `shopify-theme/assets/` (see `01-brand-application-guide.md` §0). Every prompt below should composite the *actual supplied bull-head mark*, not an invented one — use `bullrush-symbol-light.png` (or a proper vector redraw of it) as the reference image for any image-generation tool capable of image-conditioning; for tools that only take text, describe it precisely: a squared-off geometric bull head facing forward, red horns curving outward and up, black head with a light muzzle notch, no snout ring, no aggressive/charging pose.
+**Logo note:** the real BullRush logo (bull-head mark + BULLRUSH wordmark + "FUEL YOUR POWER" tagline) was supplied on 2026-08-04 and now lives in `assets/` (see `01-brand-application-guide.md` §0). Every prompt below should composite the *actual supplied bull-head mark*, not an invented one — use `bullrush-symbol-light.png` (or a proper vector redraw of it) as the reference image for any image-generation tool capable of image-conditioning; for tools that only take text, describe it precisely: a squared-off geometric bull head facing forward, red horns curving outward and up, black head with a light muzzle notch, no snout ring, no aggressive/charging pose.
 
 **Gummy colour note (confirmed 2026-08-04):** the manufacturer's private-label program (DAT Supply) explicitly allows customizing gummy flavour, colour, and shape ("Make It Yours") on this formula. The red/dark-red gummy direction below is therefore a real, orderable choice, not just an aspiration — request that customization when placing the formula order, and update these mockups with the actual gummy colour once a sample is received.
 
@@ -22,7 +22,7 @@ These are image-generation / mockup-design prompts to produce **temporary** pack
 "Flat-lay photograph of the BullRush jar next to a small matte-black branded travel case (same bull-head mark embossed subtly on the lid) and a folded printed insert card reading MEN'S DAILY PERFORMANCE GUIDE, arranged on a dark surface with soft top lighting. Clean, premium unboxing aesthetic. TEMPORARY MOCKUP — travel case and guide are conceptual pending final sourcing."
 
 ## Prompt 6 — Ingredient macro photography (replaces the CSS gradient placeholders)
-`shopify-theme/sections/ingredient-education.liquid` currently uses CSS gradient "textures" as stand-ins for real photography behind each ingredient card (see `01-brand-application-guide.md` §7). Replace each with a macro photograph once available:
+`sections/ingredient-education.liquid` currently uses CSS gradient "textures" as stand-ins for real photography behind each ingredient card (see `01-brand-application-guide.md` §7). Replace each with a macro photograph once available:
 - **Saffron Extract:** close-up of dried saffron threads, warm red-orange tones, shallow depth of field.
 - **Panax Ginseng Extract:** close-up of ginseng root, warm neutral tones, visible root texture.
 - **Maca Root Extract:** close-up of maca root slices or powder, warm golden-brown tones.
@@ -30,4 +30,4 @@ These are image-generation / mockup-design prompts to produce **temporary** pack
 All four: consistent lighting/color grade across the set, cropped for a 4:5 card, dark vignette toward the bottom third so the overlaid ingredient name/dose stay legible — matching the existing card's gradient scrim.
 
 ## Favicon (already shipped)
-No prompt needed — `shopify-theme/assets/bullrush-symbol-light.png` (the real cropped bull-head mark, transparent background) is wired in as the theme's default favicon (`shopify-theme/layout/theme.liquid`), and is legible down to the 16–32px range. Replace it in Theme settings → Logo → "Symbol only" if a designer produces a hand-tuned favicon-specific crop.
+No prompt needed — `assets/bullrush-symbol-light.png` (the real cropped bull-head mark, transparent background) is wired in as the theme's default favicon (`layout/theme.liquid`), and is legible down to the 16–32px range. Replace it in Theme settings → Logo → "Symbol only" if a designer produces a hand-tuned favicon-specific crop.

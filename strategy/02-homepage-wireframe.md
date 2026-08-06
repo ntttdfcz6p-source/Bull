@@ -1,6 +1,6 @@
 # Homepage Wireframe — Brand Storefront
 
-Full navigation present. Purpose: establish the brand, educate, build trust, then lead toward the single purchase decision. Maps directly to `shopify-theme/templates/index.json`.
+Full navigation present. Purpose: establish the brand, educate, build trust, then lead toward the single purchase decision. Maps directly to `templates/index.json`.
 
 ```
 ┌───────────────────────────────────────────────────────────┐

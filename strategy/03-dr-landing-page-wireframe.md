@@ -1,6 +1,6 @@
 # Direct-Response Landing Page Wireframe
 
-For Meta / TikTok / influencer / affiliate / email traffic. Maps to `shopify-theme/templates/page.landing-page.json`. Minimal nav, one offer, repeated CTAs, sticky mobile bar. Several components below borrow layout patterns from a competitor reference (mengotomars.com) at the user's request — see `01-brand-application-guide.md` §7 for exactly what was adapted vs. deliberately left out.
+For Meta / TikTok / influencer / affiliate / email traffic. Maps to `templates/page.landing-page.json`. Minimal nav, one offer, repeated CTAs, sticky mobile bar. Several components below borrow layout patterns from a competitor reference (mengotomars.com) at the user's request — see `01-brand-application-guide.md` §7 for exactly what was adapted vs. deliberately left out.
 
 ```
 ┌───────────────────────────────────────────────────────────┐

@@ -15,4 +15,4 @@ Differences from a real Shopify render to be aware of:
 - No real Shopify objects (cart, product variants, customer, checkout) are present — the purchase module's tier prices are the placeholder figures from `strategy/05-pricing-framework.md`, not live variant data.
 - Fonts are pulled from Google Fonts directly rather than through Shopify's CDN — visually identical, different source.
 
-For an authoritative render, upload `shopify-theme` to a real store (see the theme's own `README.md` for the two ways to do that) and use Shopify's theme preview.
+For an authoritative render, upload this repository's root (see the root `README.md` for the two ways to do that) to a real store and use Shopify's theme preview.

@@ -1,6 +1,6 @@
 # Product Offer Page — Focused Decision Page
 
-Maps to `shopify-theme/templates/product.offer.json` + `sections/main-product-offer.liquid`. This is the page a visitor lands on after clicking "Choose Your Supply" from either the homepage or the DR landing page. Job: help them pick a quantity/commitment level and complete Add to Cart with minimal friction.
+Maps to `templates/product.offer.json` + `sections/main-product-offer.liquid`. This is the page a visitor lands on after clicking "Choose Your Supply" from either the homepage or the DR landing page. Job: help them pick a quantity/commitment level and complete Add to Cart with minimal friction.
 
 ```
 ┌───────────────────────────────────────────────────────────┐
